@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IWantTo = void 0;
+const protractor_1 = require("protractor");
+exports.IWantTo = {
+    IWantTo: protractor_1.element(protractor_1.by.cssContainingText('div.nav-item', ' I Want To')),
+    BreedGreyhound: protractor_1.element(protractor_1.by.cssContainingText('div.level-one-title', 'BREED GREYHOUND')),
+    ManageGreyhound: protractor_1.element(protractor_1.by.cssContainingText('div.level-one-title', 'MANAGE GREYHOUND')),
+    NoticeOfIntent: protractor_1.element(protractor_1.by.cssContainingText('div.level-two-title', ' Notice of Intent to Euthanase ')),
+    TransferManagement: protractor_1.element(protractor_1.by.cssContainingText('div.level-two-title', ' Transfer Management ')),
+    TransferOwnership: protractor_1.element(protractor_1.by.cssContainingText('div.level-three-title', 'Transfer Ownership')),
+    AcceptTransferOfOwnership: protractor_1.element(protractor_1.by.cssContainingText('div.level-three-title', 'Accept transfer of Ownership')),
+    TransferDogToBreeder: protractor_1.element(protractor_1.by.cssContainingText('div.level-two-title', ' Transfer dog to a breeder ')),
+    IssueBreedingAuthority: protractor_1.element(protractor_1.by.cssContainingText('div.level-three-title', 'Issue Breeding Authority')),
+    AcceptBreedingAuthority: protractor_1.element(protractor_1.by.cssContainingText('div.level-three-title', 'Accept Breeding Authority')),
+    SelectDog: protractor_1.element(protractor_1.by.css('app-dog-card-header.dog-card-header')),
+    ClubTrials: protractor_1.element(protractor_1.by.xpath("//div[contains(text(),'CLUB TRIALS')]")),
+    SelectTrack: protractor_1.element(protractor_1.by.css('mat-grid-tile')),
+    MakeABooking: protractor_1.element(protractor_1.by.css('a.mat-tab-label-active')),
+    TrackList: protractor_1.element.all(protractor_1.by.css('mat-grid-tile')),
+    AvailableBookingList: protractor_1.element(protractor_1.by.css('app-available-booking.ng-star-inserted/div')),
+    Status: protractor_1.element(protractor_1.by.css('span.item-right.club-status')),
+    TrialLeft: protractor_1.element(protractor_1.by.xpath('//app-session-card[1]/mat-card[1]/div[2]/div[2]/span[2]')),
+    MyBookings: protractor_1.element(protractor_1.by.cssContainingText('span.mat-button-wrappers', ' My Booking ')),
+    SelectTrial: protractor_1.element(protractor_1.by.css('app-session-card')),
+    BookTrial: protractor_1.element(protractor_1.by.css('div.book-trial-div')),
+    ClubTrialBooking: protractor_1.element(protractor_1.by.css('mat-card.mat-card.mat-focus-indicator.available-booking-card')),
+    UnavaliablSlot: protractor_1.element(protractor_1.by.cssContainingText('div.book-trial-heading', 'UNAVAILABLE')),
+    UnavaliableTimeSlot: protractor_1.element(protractor_1.by.css('div.blocked-time-container')).element(protractor_1.by.css('div.blocked-time-sub-container.ng-star-inserted')),
+    BookedText: protractor_1.element(protractor_1.by.css('div.session-info.stripe-booked')).element(protractor_1.by.css('div.book-trial-heading')),
+    BookedTimeSlot: protractor_1.element(protractor_1.by.css('div.session-info.stripe-booked')).element(protractor_1.by.css('div.booked-time.ng-star-inserted')),
+    BookTimeSlotTime: protractor_1.element(protractor_1.by.css('div.book-trial-div')).element(protractor_1.by.css('div.avl-time-to-book.ng-star-inserted')),
+    MyBookedTrails: protractor_1.element(protractor_1.by.css('div.my-booking-trails-container.ng-star-inserted')).element(protractor_1.by.css('mat-card')),
+    ViewMyBooking: protractor_1.element(protractor_1.by.cssContainingText('span.mat-button-wrapper', ' View My Booking ')),
+    NOICheckbox1: protractor_1.element(protractor_1.by.cssContainingText('span.mat-checkbox-label', 'Confirm: Yes')),
+    OptionACheckBox: protractor_1.element(protractor_1.by.cssContainingText('span.Textmat-radio-label-content', 'Confirm: Yes')),
+    BreedingService: protractor_1.element(protractor_1.by.cssContainingText('div.level-two-title', ' Breeding Service ')),
+    RegisterAService: protractor_1.element(protractor_1.by.cssContainingText('div.level-three-title', 'Register A Service')),
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSVdhbnRUby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL1NwZWNzL3VpL0lXYW50VG8udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsMkNBQXlDO0FBRTVCLFFBQUEsT0FBTyxHQUFHO0lBRW5CLE9BQU8sRUFBRSxvQkFBTyxDQUFDLGVBQUUsQ0FBQyxpQkFBaUIsQ0FBQyxjQUFjLEVBQUUsWUFBWSxDQUFDLENBQUM7SUFDcEUsY0FBYyxFQUFFLG9CQUFPLENBQUMsZUFBRSxDQUFDLGlCQUFpQixDQUFDLHFCQUFxQixFQUFFLGlCQUFpQixDQUFDLENBQUM7SUFDdkYsZUFBZSxFQUFFLG9CQUFPLENBQUMsZUFBRSxDQUFDLGlCQUFpQixDQUFDLHFCQUFxQixFQUFFLGtCQUFrQixDQUFDLENBQUM7SUFDekYsY0FBYyxFQUFFLG9CQUFPLENBQUMsZUFBRSxDQUFDLGlCQUFpQixDQUFDLHFCQUFxQixFQUFFLGlDQUFpQyxDQUFDLENBQUM7SUFDdkcsa0JBQWtCLEVBQUUsb0JBQU8sQ0FBQyxlQUFFLENBQUMsaUJBQWlCLENBQUMscUJBQXFCLEVBQUUsdUJBQXVCLENBQUMsQ0FBQztJQUNqRyxpQkFBaUIsRUFBRSxvQkFBTyxDQUFDLGVBQUUsQ0FBQyxpQkFBaUIsQ0FBQyx1QkFBdUIsRUFBRSxvQkFBb0IsQ0FBQyxDQUFDO0lBQy9GLHlCQUF5QixFQUFFLG9CQUFPLENBQUMsZUFBRSxDQUFDLGlCQUFpQixDQUFDLHVCQUF1QixFQUFFLDhCQUE4QixDQUFDLENBQUM7SUFDakgsb0JBQW9CLEVBQUUsb0JBQU8sQ0FBQyxlQUFFLENBQUMsaUJBQWlCLENBQUMscUJBQXFCLEVBQUUsNkJBQTZCLENBQUMsQ0FBQztJQUN6RyxzQkFBc0IsRUFBRSxvQkFBTyxDQUFDLGVBQUUsQ0FBQyxpQkFBaUIsQ0FBQyx1QkFBdUIsRUFBRSwwQkFBMEIsQ0FBQyxDQUFDO0lBQzFHLHVCQUF1QixFQUFFLG9CQUFPLENBQUMsZUFBRSxDQUFDLGlC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
