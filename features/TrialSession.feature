@@ -1,4 +1,4 @@
-Feature: FT2-870 Participant can view active trial sessoion
+Feature: FT2-870 Participant can view active trial session
 
     @test
     Scenario: FT2-870 Participant can view active trial sessions

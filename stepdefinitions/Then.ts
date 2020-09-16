@@ -9,6 +9,7 @@ import { IWantTo } from "../Specs/ui/IWantTo";
 import { COP } from "../Specs/ui/COP";
 import { Alert } from 'selenium-webdriver';
 import { protractor } from "protractor/built/ptor";
+import { DogDetails } from "../Specs/ui/DogDetails";
 var expect = require('chai').expect;
 
 Then('user should be able to land on {string} page and should see {string}', async (string, string2) => {
@@ -189,10 +190,17 @@ Then('user should get a popup for the payment confirmation', function () {
 });
 
 
-Then('user is able to land on {string} Page', function (bank) {
-  /* expect(Account.BankDetails.getText().then(async(text)=>{
-     console.log(text)
-   })).to.be.equal(bank); */
+Then('user is able to land on {string} Page', function (landPage) {
+  /* if(landPage=='Bank Details'){
+   expect(Account.BankDetails.getText().then(async(text)=>{
+      console.log(text)
+    })).to.be.equal(landPage); 
+   }*/
+  if (landPage == 'My Account') {
+    expect(Account.MyAccount.getText().then(async (text) => {
+      console.log(text)
+    })).to.be.equal(landPage);
+  }
 });
 
 
@@ -236,7 +244,7 @@ Then('verify that member is addeed to the {string} list', function (string) {
 Then('user should be able to see himself as owner', function (string) {
 })
 
-Then('user should be able to validate the injury event added by him test', async()=> {
+Then('user should be able to validate the injury event added by him test', async () => {
   /* COP.VerifyInjuryList.getText().then(function (val) {
     console.log("list of injuries:" + val)
   })
@@ -252,38 +260,38 @@ Then('user should be able to validate the injury event added by him test', async
 
 });
 
-Then('user should be able to validate the illness event added by him test', async()=> {
+Then('user should be able to validate the illness event added by him test', async () => {
   browser.driver.sleep(2000);
-//  var EC = protractor.ExpectedConditions;
-//  browser.wait(EC.alertIsPresent(), 5000, "Alert is not getting present :(");
- // browser.driver.sleep(2000);
+  //  var EC = protractor.ExpectedConditions;
+  //  browser.wait(EC.alertIsPresent(), 5000, "Alert is not getting present :(");
+  // browser.driver.sleep(2000);
   await (await browser.switchTo().alert()).accept();
   browser.driver.sleep(2000);
 
-/*COP.VerifyIllnessList.getText().then(function (val) {
-    console.log("list of injuries:" + val)
-  })
-  COP.VerifyIllnessDate.getText().then(function (val) {
-    expect(val).to.equal(' Thursday, 6 August 2020 ')
-  })
-    COP.VerifyIllnessType.getText().then(function (val) {
-      expect(val).to.equal('Bone')
+  /*COP.VerifyIllnessList.getText().then(function (val) {
+      console.log("list of injuries:" + val)
     })
-      COP.VerifyIllnessTreatmentType.getText().then(function (val) {
-        expect(val).to.equal('Ultrasound')
-      })*/
+    COP.VerifyIllnessDate.getText().then(function (val) {
+      expect(val).to.equal(' Thursday, 6 August 2020 ')
+    })
+      COP.VerifyIllnessType.getText().then(function (val) {
+        expect(val).to.equal('Bone')
+      })
+        COP.VerifyIllnessTreatmentType.getText().then(function (val) {
+          expect(val).to.equal('Ultrasound')
+        })*/
 })
 
-Then('User verifies the record', async()=> {
+Then('User verifies the record', async () => {
+})
 
-  })
+Then('User navigates to {string}', async (tab) => {
+  if (tab == 'Breeding And Litter') {
+    expect(Racing.Breeding).to.equal('Breeding & Litters')
+  }
+})
 
-  Then('User navigates to {string}', async(tab)=> {
-    if(tab=='Breeding And Litter')
-    {
-      expect(Racing.Breeding).to.equal('Breeding & Litters')
-    }
+Then('user should be able to verify the dog details', async () => {
+  // expect(DogDetails.DogName.to.not.be.null)   
+})
 
-  })
-  
-  

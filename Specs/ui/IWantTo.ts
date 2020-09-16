@@ -32,12 +32,9 @@ export const IWantTo = {
     BookTimeSlotTime: element(by.css('div.book-trial-div')).element(by.css('div.avl-time-to-book.ng-star-inserted')),
     MyBookedTrails: element(by.css('div.my-booking-trails-container.ng-star-inserted')).element(by.css('mat-card')),
     ViewMyBooking: element(by.cssContainingText('span.mat-button-wrapper', ' View My Booking ')),
-    NOICheckbox1: element(by.cssContainingText('span.mat-checkbox-label', 'Confirm: Yes')),  
+    NOICheckbox1: element(by.cssContainingText('span.mat-checkbox-label', 'Confirm: Yes')),
     OptionACheckBox: element(by.cssContainingText('span.Textmat-radio-label-content', 'Confirm: Yes')),
 
     BreedingService: element(by.cssContainingText('div.level-two-title', ' Breeding Service ')),
     RegisterAService: element(by.cssContainingText('div.level-three-title', 'Register A Service')),
-
-
-
 }

@@ -1,19 +1,20 @@
 Feature: FT2-599-Account Management - A participant can update their address details
 
-@p
+@testp
 Scenario: QA-70- Verify if the participant is able to update his address details
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And    user navigates to 'Account' -> 'MyAccount' tab and clicks 'Update account details' tab
 When   user is able to add or update the address details
+
 Then   user is able to land on ' Bank Details ' Page
 
-@p
+@testp
 Scenario: QA-82-Verify if the updates in the address details are not saved when the participant clicks on the Cancel button.
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And   user navigates to 'Account' -> 'MyAccount' tab and clicks 'Update account details' tab
 When   user is able to add or update the address details
 And   User clicks on 'cancel' button
-Then  user is able to land on ' Bank Details ' Page
+Then  user is able to land on ' My Account ' Page
 
 @test
 Scenario: QA-69 Verify if the participant is able to update his bank details 

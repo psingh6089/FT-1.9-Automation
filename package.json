@@ -7,7 +7,8 @@
     "test": "protractor JSFiles/conf.js",
     "pretest": "tsc",
     "protractor": "./node_modules/protractor/built/cli.js",
-    "webdriver-update": "./node_modules/.bin/webdriver-manager update"
+    "webdriver-update": "./node_modules/.bin/webdriver-manager update",
+    "build-serve": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve"
   },
   "author": "Priti",
   "license": "ISC",
@@ -16,7 +17,7 @@
     "@types/jasmine": "^3.3.5",
     "@types/jasminewd2": "2.0.6",
     "@types/node": "^14.0.1",
-    "chai": "^4.2.0",
+    "chai": "^4.2.0", 
     "chai-as-promised": "^7.1.1",
     "cucumber": "^5.1.0",
     "jasmine": "~3.3.1",
@@ -25,6 +26,7 @@
     "typescript": "3.9.2",
     "cucumber-html-report": "0.6.5",
     "cucumber-html-reporter": "5.2.0"
+    
   },
   "devDependencies": {
     "protractor": "7.0.0",

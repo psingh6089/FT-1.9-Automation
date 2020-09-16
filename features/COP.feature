@@ -1,7 +1,7 @@
 
 Feature: User should be able to validate the COP with respect to health, illness, injury of Dog
 
-@p
+@test
 Scenario: FT2-1072	CoP - Injury Management Create and submit 
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And user navigates to 'My Dogs' -> 'Dog Details' tab and clicks 'GreyHound Record' tab
@@ -19,7 +19,7 @@ When   user is able to add Injury Event
 And  User clicks on 'cancel' button
 Then   user should be able to validate the injury event added by him test
 
-@p
+@test
 Scenario: FT2-1068	CoP - Illness Management Create and submit
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And user navigates to 'My Dogs' -> 'Dog Details' tab and clicks 'GreyHound Record' tab
@@ -29,7 +29,7 @@ And  User clicks on 'cancel' button
 Then   user should be able to validate the illness event added by him test
 
 
-@p
+@test
 Scenario:FT2-1068	CoP - Illness Management Create and click cancel
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And user navigates to 'My Dogs' -> 'Dog Details' tab and clicks 'GreyHound Record' tab
@@ -38,7 +38,7 @@ When   user is able to add Illness details
 And  User clicks on 'cancel' button
 Then   user should be able to validate the illness event added by him test
 
-@p
+@test
 Scenario: FT2-1065	CoP - Health Management Create and submit
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And user navigates to 'My Dogs' -> 'Dog Details' tab and clicks 'GreyHound Record' tab
@@ -47,7 +47,7 @@ When   user is able to add Health Management details
 And  User clicks on 'cancel' button
 Then   user should be able to validate the Health event added by him test
 
-@p
+@test
 Scenario: FT2-1065	CoP - Health Management Create and click cancel
 Given  A participant "William Mcmahon" logged in to FastTrack application
 And user navigates to 'My Dogs' -> 'Dog Details' tab and clicks 'GreyHound Record' tab

@@ -6,6 +6,7 @@ export let config: Config = {
    // framework: 'jasmine',
    //seleniumAddress: 'http://localhost:4444/wd/hub',
    //baseUrl: 'https://test-ft19.devgrv.org.au/',
+   
     directConnect: true,
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),    
@@ -20,7 +21,7 @@ export let config: Config = {
           format: 'json:./cucumberreport.json',
         require: [
                    './stepDefinitions/*.js',
-                 ]  
+                 ]    
                   },
  /*capabilities: {
         'browserName': 'firefox',

@@ -20,13 +20,14 @@ Given('User navigates to the Home page of FT1.9 application', async () => {
 Given('A participant {string} logged in to FastTrack application', async (user) => {
   _w.logIn(user);
   await browser.driver.sleep(2000);
-  Home.GotIt.isPresent().then(function (result) {
+  Home.SkipOverlay.isPresent().then(function (result) {
     if (result) {
-      Home.GotIt.click().then(function () { });
-    } else { }
+      Home.SkipOverlay.click().then(function () { });
+    } else { console.error }
   });
 });
 
+/*
 Given(/^user selects '(.*)'/, async (select) => {
   if (select == "Issue Breeding Authority") {
     browser.executeScript('window.scrollTo(0,5000)');
@@ -41,46 +42,17 @@ Given(/^user selects '(.*)'/, async (select) => {
     await IWantTo.AcceptBreedingAuthority.click();
     await browser.driver.sleep(5000);
   }
-})
+})*/
 
 Given('user navigates to {string} -> {string} tab and clicks {string} tab', async (menu, tab, button) => {
-  // Write code here that turns the phrase above into concrete actions
   _w.Navigate(menu, tab, button)
   await browser.driver.sleep(1000);
 })
 
-Given('user navigates to the Apply to Participate and selects owner', async () => {
-  await browser.driver.sleep(1000);
-  await Menu.Menu.click();
-  await browser.driver.sleep(1000);
-  await Menu.ApplyToParticipate.click();
-  await browser.driver.sleep(5000);
-  /* var EC = protractor.ExpectedConditions;
-  var isClickable = EC.elementToBeClickable(Menu.ClickPage);
-  await browser.wait(isClickable, 5000);
-  await Menu.ClickPage.click();
-    await Menu.Owner.click();
-    await browser.executeScript('window.scrollTo(68,823);');
-    await Menu.Begin.click();
-    await Menu.Checkbox1.click();
-    await browser.executeScript('window.scrollTo(68,823);');
-    await Menu.Checkbox2.click();
-    await Menu.Continue.click();
-    await browser.driver.sleep(2000);
-    await browser.executeScript('window.scrollTo(68,823);');
-    Menu.EnterPhone.sendKeys('1234567891');
-    await browser.executeScript('window.scrollTo(0,5000);');
-    await Menu.Continue.click();
-    await browser.driver.sleep(8000);
-    await Menu.Continue.click();*/
-
-})
-
-
 Given('user navigates to {string} -> {string} tab and clicks {string} tab button', async (menu, tab, button) => {
   await browser.get('https://test-ft19.devgrv.org.au/health-record/114215504/injury');
-   await COP.Injury.click();
-   await COP.AddInjuryEvent.click();
+  await COP.Injury.click();
+  await COP.AddInjuryEvent.click();
 })
 
 

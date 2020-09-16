@@ -22,7 +22,7 @@ Feature: FT2-689 Existing owner initiates ownership transfer
   Scenario: FT 669 Verify New owner accepts ownership transfer
     Given  A participant "Paul Westerveld" logged in to FastTrack application
     And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Accept Transfer of Ownership' tab
-      When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership'
+    When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership'
     And  user proceeds with the payment option
     Then user should be navigated to the confirmation page
 
