@@ -15,6 +15,7 @@ import { BreedingAndLitters } from "../Specs/ui/BreedingAndLitters";
 import { DogDetails } from "../Specs/ui/DogDetails";
 import { S_IFSOCK } from "constants";
 import { Menu } from "../Specs/ui/Menu";
+import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 let EC = protractor.ExpectedConditions;
 
 var expect = require('chai').expect;
@@ -354,10 +355,10 @@ When('enter the syndicate name', async () => {
 });
 
 When('user selects the role as {string}', async (role) => {
-  await browser.driver.sleep(1000);
-  //browser.wait(EC.elementToBeClickable(Account.ParticipantList), 5000).then(function () { });
+  await browser.driver.sleep(2000);
+  browser.wait(EC.elementToBeClickable(Account.RoleList), 5000).then(function () { });
   Account.RoleList.getText().then(function (text) {
-    console.log(text)
+  console.log(text)
   })
   if (role == 'owner') { }
   else if (role == 'Attendant') {
@@ -366,7 +367,7 @@ When('user selects the role as {string}', async (role) => {
   }
   else if (role == 'Catcher') {
     Account.SelectCatcher.click();
-    await browser.driver.sleep(10000);
+    await browser.driver.sleep(1000);
   }
   else if (role == 'Owner Trainer') {
     Account.SelectOwnerTrainer.click();
@@ -379,14 +380,14 @@ When('user selects the role as {string}', async (role) => {
   }
   await browser.executeScript('window.scrollTo(0,5000);')
   await Racing.Begin.click();
-  browser.wait(EC.elementToBeClickable(Menu.ProgressStatus), 4000).then(function () { });
+ /* browser.wait(EC.elementToBeClickable(Menu.ProgressStatus), 4000).then(function () { });
   Menu.ProgressStatus.getAttribute('div').then(function (text) {
     console.log('progress of the status:-   ' + text)
   })
   Menu.CurrentStatus.getAttribute('div').then(function (text) {
     console.log('Current status is at step:-   ' + text)
     expect(text).to.equal('Terms')
-  })
+  })*/
 });
 
 When('work bench user confirms the request in FT 1.0', async () => {
@@ -619,3 +620,60 @@ When('user see the details of a dog with toggle to table view', async () => {
   })
 })
 
+
+When('user accepts the declarations on the Term Page', async () => {
+  browser.wait(EC.elementToBeClickable(Account.AcceptDeclaration), 1000).then(function () { });
+  await browser.executeScript('window.scrollTo(188, 788);')
+  await Account.AcceptDeclaration.click();
+  await browser.executeScript('window.scrollTo(0, 5000);')
+  await Account.AcceptDeclaration2.click();
+})
+
+When('user enters the Contact details on Contact Page', async () => {
+  browser.wait(EC.elementToBeClickable(Account.ContactDetails), 5000).then(function () { });
+Account.ContactDetails.getText().then(function (text) {
+  console.log(text)
+ });
+  await browser.executeScript('window.scrollTo(188, 788);')
+  Account.EnterPhoneNo.clear().then(function(){
+    Account.EnterPhoneNo.sendKeys('9874563210')
+  })
+  await browser.executeScript('window.scrollTo(0, 5000);')
+})
+
+When('user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page', async () => {
+  browser.wait(EC.elementToBeClickable(Account.CriminalHistory), 5000).then(function () { });
+  Account.CriminalHistory.getText().then(function (text) {
+    console.log(text)
+   });
+   Account.RacingHistory.getText().then(function (text) {
+    console.log(text)
+   });
+   Account.SpousePartner.getText().then(function (text) {
+    console.log(text)
+   });
+     Account.Declaration.getText().then(function (text) {
+    console.log(text)
+   });
+  
+   Account.NationalPoliceCheck.getText().then(function (text) {
+    console.log(text)
+   });
+   await browser.executeScript('window.scrollTo(188, 1000);')
+   await Account.AcceptDeclaration3.click();
+   await browser.driver.sleep(5000);
+})
+
+When('user selects retirement status as {string} -> {string}', async (status, retiredTo) => {
+  await browser.executeScript('window.scrollTo(0, 5000);')
+  browser.wait(EC.elementToBeClickable(RetireGreyhound.RetirementStatusDropdown), 2000).then(function () { });
+   await RetireGreyhound.RetirementStatusDropdown.click();
+    RetireGreyhound.RetirementStatusList.getText().then(function(text){
+     console.log(text)
+   });
+   await RetireGreyhound.SelectPet.click();
+   await RetireGreyhound.RetiredToOwner.click();
+   await RetireGreyhound.RetiredDate.click()
+   await RetireGreyhound.SelectRetiredDate.click()
+
+})

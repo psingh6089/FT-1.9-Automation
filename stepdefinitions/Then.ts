@@ -244,7 +244,12 @@ Then('verify that member is addeed to the {string} list', function (string) {
 Then('user should be able to see himself as owner', function (string) {
 })
 
-Then('user should be able to validate the injury event added by him test', async () => {
+Then('user should be able to validate the injury event added by him ', async () => {
+  var EC = protractor.ExpectedConditions;
+  browser.wait(EC.alertIsPresent(), 5000);
+  let ale:Alert = browser.switchTo().alert();
+ale.accept();
+ 
   /* COP.VerifyInjuryList.getText().then(function (val) {
     console.log("list of injuries:" + val)
   })

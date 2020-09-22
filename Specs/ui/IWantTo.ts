@@ -37,4 +37,10 @@ export const IWantTo = {
 
     BreedingService: element(by.cssContainingText('div.level-two-title', ' Breeding Service ')),
     RegisterAService: element(by.cssContainingText('div.level-three-title', 'Register A Service')),
+
+    RetireGreyhound: element(by.cssContainingText('div.level-one-title', 'RETIRE GREYHOUND')),
+    RetireAsPet: element(by.cssContainingText('div.level-two-title', ' Retire as a Pet ')),
+
+
+
 }

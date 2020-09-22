@@ -71,7 +71,7 @@ export const Account = {
     VerifyAltManager: element(by.xpath("//app-syndicate-member-card[2]/div[1]/div[1]")),
     ModifyFinancialDetails: element(by.cssContainingText('span.mat-button-wrapper', 'Modify Finance Details')),
 
-    RoleList: element(by.css('div.column.ng-tns-c252-1')),
+    RoleList: element(by.css('div.column.ng-tns-c219-0')),
     MemberNo: element(by.css('div.account-data-item')),
     ParticipantRole: element(by.css('div.account-data-item')),
     ExpiryDate: element(by.css('div.account-data-item')),
@@ -85,6 +85,16 @@ export const Account = {
     SelectOwnerTrainer: element(by.cssContainingText('div.mat-radio-label-content', 'Owner Trainer')),
     SelectCatcher: element(by.cssContainingText('div.mat-radio-label-content', 'Catcher')),
     SelectPublicTrainer: element(by.cssContainingText('div.mat-radio-label-content', 'Public Trainer')),
+    AcceptDeclaration: element(by.cssContainingText('span.mat-checkbox-label', 'I am aware of and agree to be bound by the declaration above.')),
+    AcceptDeclaration2: element(by.cssContainingText('span.mat-checkbox-label', 'I am aware of and agree to be bound by the conditions of ownership above.')),
+    ContactDetails: element(by.css('app-details.details.registration-theme.ng-star-inserted')),
+    EnterPhoneNo: element(by.id('mat-input-4')),
+    CriminalHistory: element(by.xpath('//app-declarations//section[1]')),
+    RacingHistory: element(by.xpath('//section[2]')),
+    SpousePartner: element(by.xpath('//section[3]')),
+    Declaration: element(by.xpath('//section[4]')),
+    AcceptDeclaration3: element(by.cssContainingText('span.mat-checkbox-label', 'I declare that the information I have provided in my application, including the attachments, is true and correct')),
+    NationalPoliceCheck: element(by.css('section.npc.black-on-white.ng-star-inserted')),
 
 }
 

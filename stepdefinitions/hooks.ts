@@ -1,7 +1,8 @@
 
 import { After, Before, Status, BeforeAll } from "cucumber";
-import { browser } from "protractor";
+import { browser, protractor } from "protractor";
 import { Home } from "../Specs/ui/Home";
+import { Alert } from 'selenium-webdriver';
 
 /*BeforeAll(async function (){
 
@@ -13,6 +14,10 @@ import { Home } from "../Specs/ui/Home";
 
 After({ tags: "@test" }, async (scenario) => {
   await Home.Logout.click();
+  var EC = protractor.ExpectedConditions;
+browser.wait(EC.alertIsPresent(), 5000);
+  let ale:Alert = browser.switchTo().alert();
+ale.accept();
 });
 
 After(async function (scenario) {

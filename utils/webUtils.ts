@@ -198,9 +198,24 @@ export class webUtils {
     }
 
     static
+    SkipOverlay(){
+        Home.SkipOverlay.isPresent().then(function (result) {
+            if (result) {
+              Home.SkipOverlay.click().then(function () { });
+            } else {  }
+          });
+}
+    static
         Navigate(menu: string, tab: string, button: string) {
-        if (menu == "My Dogs") {
-            webUtils.clickOn(Racing.MyDogs);
+        if (menu == "My Dogs") {                
+           webUtils.clickOn(Racing.MyDogs);
+           browser.driver.sleep(2000).then(function () { });
+           browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 5000).then(function () { });
+           Home.SkipOverlay.isPresent().then(function (result) {
+            if (result) {
+              Home.SkipOverlay.click().then(function () { });
+            } else {  }
+          });
             if (tab == "Non Racing") {
                 webUtils.clickOn(NonRacing.NonRacing);
                 if (button == "UnNamed Dog") {
@@ -277,9 +292,19 @@ export class webUtils {
         else if (menu == "I Want To") {
             browser.wait(EC.elementToBeClickable(IWantTo.IWantTo), 5000).then(function () { });
             webUtils.clickOn(IWantTo.IWantTo);
+            browser.driver.sleep(1000).then(function () { });
+            webUtils.SkipOverlay()
             if (tab == "Club Trials") {
                 browser.wait(EC.elementToBeClickable(IWantTo.ClubTrials), 5000).then(function () { });
                 webUtils.clickOn(IWantTo.ClubTrials);
+            }
+            else  if (tab == "Retire Greyhound") {
+                browser.executeScript('window.scrollTo(0,5000);').then(function () { }) 
+                webUtils.clickOn(IWantTo.RetireGreyhound);
+                if (button == "Retire as a Pet") {
+                    webUtils.clickOn(IWantTo.RetireAsPet);
+                    webUtils.clickOn(Racing.Dog1);
+                }
             }
             if (tab == "Breed GreyHound") {
                 webUtils.clickOn(IWantTo.BreedGreyhound);
@@ -337,6 +362,7 @@ export class webUtils {
         }
         else if (menu == "Account") {
             webUtils.clickOn(Account.Account);
+            webUtils.SkipOverlay()
             if (tab == "MyAccount") {
                 browser.wait(EC.elementToBeClickable(Account.MyAccount), 2000).then(function () { });
                 webUtils.clickOn(Account.MyAccount);
