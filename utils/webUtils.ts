@@ -15,16 +15,19 @@ import { COP } from "../Specs/ui/COP";
 import { Alert } from 'selenium-webdriver';
 import { BreedingAndLitters } from "../Specs/ui/BreedingAndLitters";
 import { DogDetails } from "../Specs/ui/DogDetails";
-
+import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
+import { DogLocation } from "../Specs/ui/DogLocation";
+var expect = require('chai').expect;
 let EC = protractor.ExpectedConditions;
-
+var DogEarbrand: string;
 var fs = require('fs');
-function writeScreenShot(png, filename) {
+function writeScreenShot(png: string, filename: string) {
     var stream = fs.createWriteStream(filename);
     stream.write(new Buffer(png, 'base64'));
     stream.end();
 }
 export class webUtils {
+    static DogEarbrand: string;
     static
         logIn(User: string) {
         if (User == "Paul Westerveld") {
@@ -69,12 +72,13 @@ export class webUtils {
             Home.Password.sendKeys(testData.data.Password);
             webUtils.clickOn(Home.LoginContinue);
         }
+        browser.driver.sleep(5000).then(function(){})
     }
 
     static
-        registerService(User) {
+        registerService(User: any) {
         Racing.MyDogs.click();
-        Racing.DogAction.click();
+        Racing.Dog.click();
         Racing.RegisterService.getWebElement().then(function (elm) {
             return browser.executeScript("(arguments[0]).click();", elm)
         });
@@ -173,13 +177,13 @@ export class webUtils {
     static
         clickOn(obj) {
         webUtils.waitForObj(obj);
-        return obj.isPresent().then(result => {
-            result ? obj.isDisplayed().then(res => {
+        return obj.isPresent().then((result: any) => {
+            result ? obj.isDisplayed().then((res: any) => {
                 obj.click().then(function () {
                 })
             }) : logError(obj);
-            function logError(obj) {
-                obj.getAttribute('name').then(name => {
+            function logError(obj: { getAttribute: (arg0: string) => Promise<any>; }) {
+                obj.getAttribute('name').then((name: string) => {
                     console.error(name + "clickOn: Object is currently not visible to click");
                 });
             }
@@ -192,8 +196,7 @@ export class webUtils {
     }
     static
         waitForLoader() {
-        return browser.wait(function () { },
-            5000);
+        return browser.wait(function (){},5000);
         //  return browser.wait(EC.invisibilityOf(element(by.css('div#mainContentArea>div#loader>div.loading-panel'))), 5000 );
     }
 
@@ -201,29 +204,34 @@ export class webUtils {
     SkipOverlay(){
         Home.SkipOverlay.isPresent().then(function (result) {
             if (result) {
-              Home.SkipOverlay.click().then(function () { });
+              webUtils.clickOn(Home.SkipOverlay)
             } else {  }
           });
 }
+
+static
+ValidateDog(){
+    webUtils.clickOn(Racing.MyDogs);
+    webUtils.clickOn(Home.NonRacing);
+    RetireGreyhound.DogEarbrand.getText().then(function(DogList) {
+        expect(DogList).toContain(DogEarbrand);
+        console.log(DogList)
+    })
+}
     static
-        Navigate(menu: string, tab: string, button: string) {
+        Navigate(menu: string, tab: string, button: string) {           
         if (menu == "My Dogs") {                
            webUtils.clickOn(Racing.MyDogs);
-           browser.driver.sleep(2000).then(function () { });
-           browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 5000).then(function () { });
-           Home.SkipOverlay.isPresent().then(function (result) {
-            if (result) {
-              Home.SkipOverlay.click().then(function () { });
-            } else {  }
-          });
-            if (tab == "Non Racing") {
+           browser.driver.sleep(10000).then(function () { });
+           webUtils.SkipOverlay();
+           if (tab == "Non Racing") {
                 webUtils.clickOn(NonRacing.NonRacing);
                 if (button == "UnNamed Dog") {
                     //  browser.wait(EC.elementToBeClickable(Racing.Dog2), 5000).then(function () { });
                     webUtils.clickOn(Racing.Dog2);
                     //    browser.driver.sleep(5000).then(function () { });
                     browser.executeScript('window.scrollTo(100,1200);').then(function () { });
-                    browser.wait(EC.elementToBeClickable(NonRacing.ApplyDogName), 5000);
+               //     browser.wait(EC.elementToBeClickable(NonRacing.ApplyDogName), 5000);
                     webUtils.clickOn(NonRacing.ApplyDogName);
                 }
             }
@@ -269,6 +277,32 @@ export class webUtils {
                     webUtils.clickOn(DogDetails.RacingOffences);
                 }
             }
+            else if (tab == "Select Dog Action") {      
+               webUtils.clickOn(Racing.Dog)   
+                           
+           /*     Racing.DogAction.count().then(function(size){
+                    console.log(size)  Change Dog Activity
+                    for (var i = 0; i <= size; i++) {
+                        Racing.DogAction.get(i).click();
+                        Racing.SelectActions.count().then(function(size2){
+                         //   console.log(size2)  
+                        for (var j = 0; j < size2; j++) {                                                
+                          Racing.SelectActions.get(j).getText().then(function (text) {
+                    //          console.log(text)
+                            if(text == " Change Dog Activity ")  {
+                            Racing.SelectActions.get(j).click().then(function (){});}
+                            else{}       
+                          })
+                                     
+                        }
+                            })
+                        }
+                     })*/
+                if (button == "Change Dog Activity") {  
+                    browser.executeScript('window.scrollTo(0,5000);').then(function () { });      
+                    webUtils.clickOn(DogLocation.SelectActionAsChangeDogLocation)               
+                }
+            }
             else if (tab == "Dog to Accept Breeding") {
                 //   browser.driver.sleep(5000).then(function () { });
                 browser.executeScript('window.scrollTo(600,600);').then(function () { });
@@ -282,7 +316,7 @@ export class webUtils {
             }
             else if (tab == "Dog to check active authority key") {
                 //    browser.driver.sleep(5000).then(function () { });
-                webUtils.clickOn(Racing.DogCheckTransferKey).getText().then(function (text) {
+                (Racing.DogCheckTransferKey).getText().then(function (text: any) {
                     console.log(text);
                 })
                 browser.driver.sleep(1000).then(function () { });
@@ -298,12 +332,26 @@ export class webUtils {
                 browser.wait(EC.elementToBeClickable(IWantTo.ClubTrials), 5000).then(function () { });
                 webUtils.clickOn(IWantTo.ClubTrials);
             }
+            else  if (tab == "Kennel") {
+                webUtils.clickOn(DogLocation.Kennel);
+                if (button == "Add dog to Kennel") {
+                    webUtils.clickOn(DogLocation.AddToKennel);
+            }
+            else if (button == "Remove from Kennel") {
+                webUtils.clickOn(DogLocation.RemoveFromKennel);
+                browser.driver.sleep(2000).then(function () { });  
+                webUtils.SkipOverlay();
+        }
+    }
             else  if (tab == "Retire Greyhound") {
                 browser.executeScript('window.scrollTo(0,5000);').then(function () { }) 
                 webUtils.clickOn(IWantTo.RetireGreyhound);
                 if (button == "Retire as a Pet") {
                     webUtils.clickOn(IWantTo.RetireAsPet);
+                    webUtils.SkipOverlay();
                     webUtils.clickOn(Racing.Dog1);
+                    browser.driver.sleep(2000).then(function () { });  
+                    webUtils.SkipOverlay();
                 }
             }
             if (tab == "Breed GreyHound") {
@@ -440,7 +488,7 @@ export class webUtils {
         }
     }
     static
-        DogDetails(tab) {
+        DogDetails(tab: string) {
         if (tab == 'Form') {
             browser.executeScript('window.scrollTo(0,800);').then(function () { });
             browser.driver.sleep(1000).then(function () { })
@@ -512,10 +560,81 @@ export class webUtils {
         }
         else (console.log("nothing is selected"))
     }
+    static
+    DogLocation(status: string, retiredTo: string, action: string){
+        browser.executeScript('window.scrollTo(0, 5000);').then(function () { })
+        browser.driver.sleep(1000).then(function () { })      
+        webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+        expect(RetireGreyhound.RetirementStatusList.count()).to.be.equal(5);
+         if(status='Pet'){
+    //    webUtils.clickOn(RetireGreyhound.SelectPet)     
+        if(retiredTo=='Owner'){
+            webUtils.clickOn(RetireGreyhound.RetiredToOwner)
+            webUtils.clickOn(RetireGreyhound.RetiredDate)
+            webUtils.clickOn(RetireGreyhound.SelectRetiredDate)
+     }
+     else if(retiredTo=='A Third Party'){
+        webUtils.clickOn(RetireGreyhound.RetiredToThirdParty)
+       expect(RetireGreyhound.EnterFirstName.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterFirstName.sendKeys('Testingaaa');
+       expect(RetireGreyhound.EnterLastName.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterLastName.sendKeys('Testingbbb')
+       browser.executeScript('window.scrollTo(0, 600);').then(function () { })
+       expect(RetireGreyhound.EnterContact.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterContact.sendKeys(9874563210)  
+       browser.executeScript('window.scrollTo(0, 800);').then(function () { })
+       expect(RetireGreyhound.EnterEmail.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterEmail.sendKeys('abc@gmail.conm');
+       expect(RetireGreyhound.EnterStreet.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterStreet.sendKeys('15, abc street')
+       expect(RetireGreyhound.EnterSuburb.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterSuburb.sendKeys('abctest')
+       browser.executeScript('window.scrollTo(0, 1200);').then(function () { })
+       webUtils.clickOn(RetireGreyhound.SelectStateDropDown)
+       webUtils.clickOn(RetireGreyhound.EnterState)
+       expect(RetireGreyhound.EnterPostcode.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterPostcode.sendKeys('1234')
+       expect(RetireGreyhound.EnterAlternateName.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterAlternateName.sendKeys('Testing')
+       expect(RetireGreyhound.EnterAlternateNo.getAttribute("required").then(function(){})).to.be.equal('true');
+       RetireGreyhound.EnterAlternateNo.sendKeys(12336547891)
+       browser.executeScript('window.scrollTo(0, 1500);').then(function () { })
+       webUtils.clickOn(RetireGreyhound.SameAsPhysicalAdd)
+       browser.executeScript('window.scrollTo(0, 5000);').then(function () { })
+       webUtils.clickOn(RetireGreyhound.RetiredDate)
+       webUtils.clickOn(RetireGreyhound.SelectRetiredDate)
+     }  
+        if(action=='submit'){
+            //Racing.Submit.click().then(function () { })
+        //Racing.Yes.click().then(function () { })
+        }
+        else if(action=='cancel'){
+         Racing.Cancel.click().then(function () { })
+        }   
+    }
+    if(status='Breeding Animal'){
+        webUtils.clickOn(RetireGreyhound.SelectBreedingAnimal)     
+        if(retiredTo=='Owner'){
+            webUtils.clickOn(RetireGreyhound.RetiredToOwner)
+            webUtils.clickOn(RetireGreyhound.RetiredDate)
+            webUtils.clickOn(RetireGreyhound.SelectRetiredDate)
+     }
+     else if(retiredTo=='A Third Party'){
+        webUtils.clickOn(RetireGreyhound.RetiredToThirdParty)
+        webUtils.clickOn(RetireGreyhound.RetiredDate)
+        webUtils.clickOn(RetireGreyhound.SelectRetiredDate)
 }
+    }
+    if(status='Euthanised'){
+        webUtils.clickOn(RetireGreyhound.SelectEuthanised)     
+      //  expect(RetireGreyhound.DisposalMethod.getAttribute("required")).to.be.equal('true');
+        webUtils.clickOn(RetireGreyhound.DisposalMethod) 
+        expect(RetireGreyhound.SelectDisposalMethodVet.count()).to.be.equal(3); 
+        webUtils.clickOn(RetireGreyhound.SelectDisposalMethodVet)  
+        webUtils.clickOn(RetireGreyhound.ReasonOfEuthanasia)  
+        expect(RetireGreyhound.SelectReasonOfEuthanasiaInjury.count()).to.be.equal(5); 
+        webUtils.clickOn(RetireGreyhound.SelectReasonOfEuthanasiaEmergency)  
 
-
-
-
-
-
+    }
+}
+}

@@ -1,7 +1,7 @@
 Feature: FT2-619 An account holder can track a dog
 
     @test
-    Scenario: FT2-619 An account holder can track a dog
+    Scenario: FT2-619 An account holder can track a dog with option 'A'
         Given  A participant "Glenn Campbell" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Notice of Intent Euthanase' tab
         When user selects the dog and selects all the checkboxes with option 'A'
@@ -9,7 +9,7 @@ Feature: FT2-619 An account holder can track a dog
         Then User should be able to view the message pop up for the cofirmation
 
      @pending
-    Scenario: FT2-619 An account holder can track a dog
+    Scenario: FT2-619 An account holder can track a dog with option 'B'
         Given  A participant "Glenn Campbell" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Notice of Intent Euthanase' tab
         When user selects the dog

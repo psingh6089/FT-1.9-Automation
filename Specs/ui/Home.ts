@@ -10,7 +10,7 @@ export const Home = {
     Logout: element(by.cssContainingText('span.mat-button-wrapper', ' Log Out ')),
 
     MyDogs: element(by.cssContainingText('div.nav-item', ' My Dogs')),
-    NonRacing: element(by.cssContainingText('a.mat-tab-label-active', ' Non Racing Dogs ')),
+    NonRacing: element(by.cssContainingText('a.mat-tab-link.mat-focus-indicator.ng-star-inserted', ' Non Racing Dogs ')),
     Breeding: element(by.cssContainingText('a.mat-tab-label-active', ' Breeding & Litters ')),
     BlackBook: element(by.cssContainingText('a.mat-tab-label-active', ' Blackbook ')),
     Racing: element(by.cssContainingText('a.mat-tab-label-active', ' Racing Dogs ')),

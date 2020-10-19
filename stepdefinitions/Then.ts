@@ -10,8 +10,9 @@ import { COP } from "../Specs/ui/COP";
 import { Alert } from 'selenium-webdriver';
 import { protractor } from "protractor/built/ptor";
 import { DogDetails } from "../Specs/ui/DogDetails";
+import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 var expect = require('chai').expect;
-
+let EC = protractor.ExpectedConditions;
 Then('user should be able to land on {string} page and should see {string}', async (string, string2) => {
   await Home.WelcomeText.getText().then(function (val) {
     expect(val).to.equal('Welcome to Fast Track')
@@ -196,8 +197,14 @@ Then('user is able to land on {string} Page', function (landPage) {
       console.log(text)
     })).to.be.equal(landPage); 
    }*/
+   browser.driver.sleep(2000).then(function () { })
   if (landPage == 'My Account') {
     expect(Account.MyAccount.getText().then(async (text) => {
+      console.log(text)
+    })).to.be.equal(landPage);
+  }
+  else if (landPage == ' My Dogs->Racing ') {
+    expect(Racing.Racing.getText().then(async (text) => {
       console.log(text)
     })).to.be.equal(landPage);
   }
@@ -298,5 +305,31 @@ Then('User navigates to {string}', async (tab) => {
 
 Then('user should be able to verify the dog details', async () => {
   // expect(DogDetails.DogName.to.not.be.null)   
+
+  await browser.driver.sleep(10000);
+})
+
+Then('user is able to verify the dog on on {string} -> {string} Page', async (NonRacing, History) => {
+  //w.ValidateDog();
+  browser.wait(EC.elementToBeClickable(Racing.MyDogs), 5000).then(function () { })
+await Racing.MyDogs.click();
+browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 10000).then(function () { })
+Home.SkipOverlay.isPresent().then(function (result) {
+  if (result) {
+    Home.SkipOverlay.click().then(function () { });
+  } else {  }
+});
+browser.wait(EC.elementToBeClickable(Home.NonRacing), 10000).then(function () { })
+await Home.NonRacing.click();
+await browser.driver.sleep(10000);
+console.log(w.DogEarbrand)
+
+ /* RetireGreyhound.DogEarbrand.getText().then(function(DogList) {
+    console.log("list is"+DogList) 
+    expect(DogList).toContain(w.DogEarbrand);    
+  })*/
+})
+
+Then('user is able to verify the dog on', async () => {
 })
 

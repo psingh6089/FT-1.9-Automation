@@ -14,7 +14,9 @@ export const Racing = {
     Dog2: element(by.xpath('//app-dog-card[2]//app-dog-card-header[1]//div[1]//button[1]//span[1]//mat-icon[1]')),
     NavigateBackPage: element(by.xpath('//i[contains(text(), " navigate_before")]')),
     DogList: element.all(by.css('.dog-card.ng-star-inserted')),
-    DogAction: element(by.cssContainingText('mat-icon', 'subject')),
+   
+    SelectActions: element.all(by.xpath("//mat-bottom-sheet-container/div/div/button/span")),
+    
     LoadMore: element(by.cssContainingText('span.mat-button-wrapper', 'Load more')),
 
     EndBreedingAuthority: element(by.cssContainingText('span.mat-button-wrapper', ' End breeding authority ')),
@@ -49,6 +51,9 @@ export const Racing = {
     Validate: element(by.cssContainingText('span.mat-button-wrapper', ' Validate ')),
     SaveChanges: element(by.cssContainingText('span.mat-button-wrapper', ' Save Changes ')),
     Begin: element(by.cssContainingText('span.mat-button-wrapper', ' Begin ')),
+    Yes: element(by.cssContainingText('span.mat-button-wrapper', ' Yes ')),
+
+
 
     AcceptBreeding: element(by.cssContainingText('span.mat-button-wrapper', ' Accept breeding authority ')),
     AddAuthorityKey: element(by.id('mat-input-0')),

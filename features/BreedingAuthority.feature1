@@ -11,7 +11,7 @@ Feature: FT2-590 Breeding Registration - An owner can initiate breeding lease an
 
 
     @test
-    Scenario: QA-104 Verify if the owner can initiate the breeding lease to a Victorian resident"
+    Scenario: QA-104 Verify if the owner can initiate the breeding lease to a Victorian resident
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab
         When user clicks on 'Victoria' Transfer tab and enter the Name details of the new person to be authorised
@@ -30,7 +30,7 @@ Feature: FT2-590 Breeding Registration - An owner can initiate breeding lease an
         Then user should be navigated to the confirmation page 
         
     @test
-    Scenario: QA-84-Verify functionality of Cancel button in Accept breeding authority page"
+    Scenario: QA-84-Verify functionality of Cancel button in Accept breeding authority page
         Given  A participant "Paul Westerveld" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Accept Breeding Authority' tab
         When user enters the Authority Key and Ear brand details of dog for 'Breeding Authority'

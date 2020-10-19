@@ -16,6 +16,7 @@ import { DogDetails } from "../Specs/ui/DogDetails";
 import { S_IFSOCK } from "constants";
 import { Menu } from "../Specs/ui/Menu";
 import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
+import { DogLocation } from "../Specs/ui/DogLocation";
 let EC = protractor.ExpectedConditions;
 
 var expect = require('chai').expect;
@@ -44,8 +45,15 @@ When('User clicks on {string} button', function (button) {
     })
   }
   else if (button == "submit") {
-    browser.executeScript('window.scrollTo(0,5000)').then(async () => { });
-    Racing.Submit.click().then(function () { })
+    browser.driver.sleep(2000).then(function () { })
+    Racing.Submit.isPresent().then(function (boolean) {
+      if (boolean) {
+        Racing.Submit.click().then(function () { })
+      } else {
+        browser.executeScript('window.scrollTo(0,5000)').then(async () => { });
+       Racing.Submit.click().then(function () { })
+      }
+    })
   }
   else if (button == "continue") {
     browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { })
@@ -63,6 +71,10 @@ When('User clicks on {string} button', function (button) {
     browser.wait(EC.elementToBeClickable(Racing.Back), 5000).then(function () { })
     Racing.SaveChanges.click().then(function () { })
   }
+  else if (button == "yes") {
+    browser.driver.sleep(2000).then(function () { })
+    Racing.Yes.click().then(function () { })
+      }
 });
 
 When('Bitch details are entered and validated', async () => {
@@ -664,16 +676,202 @@ When('user enters the Questions for Criminal History, Racing, Spouse or Domestic
    await browser.driver.sleep(5000);
 })
 
-When('user selects retirement status as {string} -> {string}', async (status, retiredTo) => {
+When('user selects retirement status as {string} -> {string} and clicks {string}', async (status, retiredTo, action) => {
+  RetireGreyhound.DogEarbrand.getText().then(function(earbrand){
+    w.DogEarbrand =earbrand
+  })
   await browser.executeScript('window.scrollTo(0, 5000);')
-  browser.wait(EC.elementToBeClickable(RetireGreyhound.RetirementStatusDropdown), 2000).then(function () { });
-   await RetireGreyhound.RetirementStatusDropdown.click();
-    RetireGreyhound.RetirementStatusList.getText().then(function(text){
-     console.log(text)
-   });
-   await RetireGreyhound.SelectPet.click();
-   await RetireGreyhound.RetiredToOwner.click();
-   await RetireGreyhound.RetiredDate.click()
-   await RetireGreyhound.SelectRetiredDate.click()
-
+//   webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+  // expect(RetireGreyhound.RetirementStatusList.count()).to.be.equal(5);
+  if(status=='Pet'){
+    webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+    await browser.driver.sleep(1000);
+   webUtils.clickOn(RetireGreyhound.SelectPet)
+   if(retiredTo=='Owner'){
+    await RetireGreyhound.RetiredToOwner.click();
+}
+else if(retiredTo=='A Third Party'){
+  browser.wait(EC.elementToBeClickable(RetireGreyhound.RetiredToThirdParty), 2000).then(function () { });
+  await RetireGreyhound.RetiredToThirdParty.click();
+  expect(await RetireGreyhound.EnterFirstName.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterFirstName.sendKeys('Testingaaa');
+  expect(await RetireGreyhound.EnterLastName.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterLastName.sendKeys('Testingbbb')
+  await browser.executeScript('window.scrollTo(0, 600);')
+  expect(await RetireGreyhound.EnterContact.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterContact.sendKeys(9874563210)  
+  await browser.executeScript('window.scrollTo(0, 800);')
+  expect(await RetireGreyhound.EnterEmail.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterEmail.sendKeys('abc@gmail.conm');
+  expect(await RetireGreyhound.EnterStreet.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterStreet.sendKeys('15, abc street')
+  expect(await RetireGreyhound.EnterSuburb.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterSuburb.sendKeys('abctest')
+  await browser.executeScript('window.scrollTo(0, 1200);')
+  browser.wait(EC.elementToBeClickable(RetireGreyhound.SelectStateDropDown), 2000).then(function () { })
+  await RetireGreyhound.SelectStateDropDown.click();
+  await RetireGreyhound.EnterState.click();
+  expect(await RetireGreyhound.EnterPostcode.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterPostcode.sendKeys('1234')
+  expect(await RetireGreyhound.EnterAlternateName.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterAlternateName.sendKeys('Testing')
+  expect(await RetireGreyhound.EnterAlternateNo.getAttribute("required")).to.be.equal('true');
+  await RetireGreyhound.EnterAlternateNo.sendKeys(12336547891)
+  await browser.executeScript('window.scrollTo(0, 1500);')
+  await RetireGreyhound.SameAsPhysicalAdd.click();
+  await browser.executeScript('window.scrollTo(0, 5000);')
+}
+await browser.driver.sleep(1000);
+browser.wait(EC.elementToBeClickable(RetireGreyhound.RetiredDate), 2000).then(function () { })
+await RetireGreyhound.RetiredDate.click()
+await RetireGreyhound.SelectRetiredDate.click()
+}  
+else if(status=='Breeding Animal'){
+  webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+  await browser.driver.sleep(1000);
+  webUtils.clickOn(RetireGreyhound.SelectBreedingAnimal)  
+  if(retiredTo=='Owner'){
+    await RetireGreyhound.RetiredToOwner.click()  
+}
+else if(retiredTo=='A Third Party'){
+  await RetireGreyhound.RetiredToThirdParty.click()     
+  await RetireGreyhound.RetiredDate.click()     
+  await RetireGreyhound.SelectRetiredDate.click()     
+}
+await browser.driver.sleep(1000);
+browser.wait(EC.elementToBeClickable(RetireGreyhound.RetiredDate), 2000).then(function () { })
+await RetireGreyhound.RetiredDate.click()
+await RetireGreyhound.SelectRetiredDate.click()
+}
+else if(status=='Euthanised'){
+  webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+  await browser.driver.sleep(1000);
+  webUtils.clickOn(RetireGreyhound.SelectEuthanised)   
+  await RetireGreyhound.DisposalMethod.click()     
+  if(retiredTo=='Vet'){
+    await browser.executeScript('window.scrollTo(187, 900);')
+    await browser.driver.sleep(1000);
+    webUtils.clickOn(RetireGreyhound.SelectDisposalMethodVet)   
+    webUtils.clickOn(RetireGreyhound.ReasonOfEuthanasia) 
+    await browser.driver.sleep(1000);  
+    webUtils.clickOn(RetireGreyhound.SelectReasonOfEuthanasiaEmergency)
+  RetireGreyhound.VetName.sendKeys("Testing")
+  RetireGreyhound.DateContactedForVet.sendKeys("Testing")
+  RetireGreyhound.TimeContactedForVet.sendKeys("01:01 AM")
+  RetireGreyhound.EnterDetails.sendKeys("Testing")
+  }
+  else if(retiredTo=='Animal Cremation'){
+    await browser.driver.sleep(1000);  
+    await RetireGreyhound.SelectDisposalMethodAnimalCremation.click()     
+    await RetireGreyhound.ReasonOfEuthanasia.click()    
+    await browser.driver.sleep(1000);   
+    await RetireGreyhound.SelectReasonOfEuthanasiaInjury.click()  
+}
+else if(retiredTo=='other'){
+  await browser.driver.sleep(1000);  
+  await RetireGreyhound.SelectMethodOther.click() 
+  await browser.driver.sleep(1000);   
+  await RetireGreyhound.EnterDisposalAsOther.sendKeys('Testing other details') 
+  await browser.driver.sleep(1000);   
+  await RetireGreyhound.ReasonOfEuthanasia.click() 
+  await browser.driver.sleep(1000);   
+  await RetireGreyhound.SelectReasonOfEuthanasiaInjury.click()  
+}
+await browser.driver.sleep(1000);
+browser.wait(EC.elementToBeClickable(RetireGreyhound.RetiredDate), 2000).then(function () { })
+await RetireGreyhound.RetiredDate.click()
+await RetireGreyhound.SelectRetiredDate.click()
+}
+else if(status=='Exported'){
+  webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+  await browser.driver.sleep(1000);
+  webUtils.clickOn(RetireGreyhound.SelectExported)  
+  await browser.driver.sleep(1000);
+  RetireGreyhound.PassportNo.sendKeys('ABCD1234X'),
+  RetireGreyhound.DestinationCountry.sendKeys('Testing'),
+  await browser.driver.sleep(1000);
+  await browser.executeScript('window.scrollTo(0, 5000);')
+  RetireGreyhound.Agree.click()
+  await browser.driver.sleep(1000);
+browser.wait(EC.elementToBeClickable(RetireGreyhound.RetiredDate), 2000).then(function () { })
+await RetireGreyhound.RetiredDate.click()
+await RetireGreyhound.SelectRetiredDate.click()
+}
+else if(status=='Other'){
+  webUtils.clickOn(RetireGreyhound.RetirementStatusDropdown)
+  await browser.driver.sleep(1000);
+  webUtils.clickOn(RetireGreyhound.SelectOther)  
+RetireGreyhound.EnterOtherOtherDetails.sendKeys('Testing othe details')
+await browser.driver.sleep(1000);
+browser.wait(EC.elementToBeClickable(RetireGreyhound.RetiredDate), 2000).then(function () { })
+await RetireGreyhound.RetiredDate.click()
+await RetireGreyhound.SelectRetiredDate.click()
+}
+await browser.driver.sleep(1000);
+if(action=='submit'){
+       //Racing.Submit.click().then(function () { })
+   //Racing.Yes.click().then(function () { })
+   }
+   else if(action=='cancel'){
+    Racing.Cancel.click().then(function () { })
+   }   
 })
+
+When('user enters the {string} -> {string} and selects dog activity as {string}', async (dogAction, activity, location) => {
+  if(dogAction== "Dog details"){
+    browser.wait(EC.elementToBeClickable(DogLocation.DogName), 2000).then(function () { })
+  DogLocation.DogName.sendKeys('FABRIOLA CITRUS')
+  browser.wait(EC.elementToBeClickable(DogLocation.EarBrand), 2000).then(function () { })
+  DogLocation.EarBrand.sendKeys('VHNWC')
+  browser.wait(EC.elementToBeClickable(DogLocation.MicrochipNo), 2000).then(function () { })
+  DogLocation.MicrochipNo.sendKeys('7382')
+  w.clickOn(Racing.Validate)
+ // else if(action == 'cancel')
+ // w.clickOn(Racing.Cancel)
+}
+  w.clickOn(DogLocation.DogActivity)
+  await browser.executeScript('window.scrollTo(187, 900);')
+  await browser.driver.sleep(1000);
+  if(activity == 'Breeding')
+  w.clickOn(DogLocation.SelectActivityAsBreeding)
+  else if(activity == 'Educating') 
+  w.clickOn(DogLocation.SelectActivityAsEducating)
+  else if(activity == 'Rearing')
+  w.clickOn(DogLocation.SelectActivityAsRearing)
+  else if(activity == 'Spelling')
+  w.clickOn(DogLocation.SelectActivityAsSpelling)
+  else if(activity == 'Training') 
+  w.clickOn(DogLocation.SelectActivityAsTraining)
+  else if(activity == 'Whelping') 
+  w.clickOn(DogLocation.SelectActivityAsWhelping)
+  await browser.driver.sleep(1000);
+  w.clickOn(DogLocation.DogLocation)
+  if(location == 'Same Location')
+  w.clickOn(DogLocation.SelectDogLocation)
+  else   if(location == 'Interstate Location'){
+    await browser.driver.sleep(1000);
+  w.clickOn(DogLocation.InterstateLocation)
+  DogLocation.EnterName.sendKeys('Testing123')
+  DogLocation.EnterStreet.sendKeys('15, Test')
+  DogLocation.EnterSuburb.sendKeys('TestSubrb')
+  DogLocation.EnterPostcode.sendKeys('3214')
+  await browser.executeScript('window.scrollTo(0, 5000);')
+  w.clickOn(DogLocation.SelectStateDropDown)
+  w.clickOn(DogLocation.EnterState)
+  await browser.driver.sleep(1000);
+  DogLocation.EnterPhone.sendKeys('1236547891')
+  }
+  await browser.driver.sleep(5000);
+})
+
+
+When('user selects the dog and clicks agree to remove dog from kennel', async () => {
+  browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 10000).then(function () { })
+   await Home.SkipOverlay.click()
+ // await w.clickOn(DogLocation.SelectDog)
+ await browser.driver.sleep(1000);
+DogLocation.Search.sendKeys("FABRIOLA CITRUS")
+await DogLocation.FindDogFabriolaCitrus.click()
+await w.clickOn(Racing.IAgree)
+})
+  

@@ -11,6 +11,7 @@ var expect = require('chai').expect;
 import testData from "../testData/DataInput.json"
 import { Menu } from "../Specs/ui/Menu";
 import { COP } from "../Specs/ui/COP";
+import { DogLocation } from "../Specs/ui/DogLocation";
 let EC = protractor.ExpectedConditions;
 
 Given('User navigates to the Home page of FT1.9 application', async () => {
@@ -54,6 +55,13 @@ Given('user navigates to {string} -> {string} tab and clicks {string} tab button
   await COP.Injury.click();
   await COP.AddInjuryEvent.click();
 })
+
+Given('user selects the dog for the Dog activity', async () => {
+  DogLocation.Doglist.getSize().then(function(size: any){
+    console.log(size)
+    DogLocation.Doglist.click()
+  })
+  })
 
 
 

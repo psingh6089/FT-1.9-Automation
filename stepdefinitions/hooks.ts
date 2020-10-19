@@ -14,10 +14,10 @@ import { Alert } from 'selenium-webdriver';
 
 After({ tags: "@test" }, async (scenario) => {
   await Home.Logout.click();
-  var EC = protractor.ExpectedConditions;
+ /* var EC = protractor.ExpectedConditions;
 browser.wait(EC.alertIsPresent(), 5000);
   let ale:Alert = browser.switchTo().alert();
-ale.accept();
+ale.accept();*/
 });
 
 After(async function (scenario) {
