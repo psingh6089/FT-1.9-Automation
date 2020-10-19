@@ -1,0 +1,96 @@
+Feature: Participants login credentials to the FT1.9 
+
+    @test
+    Scenario: Verify if the participant can login with correct memberid and password
+    Given A participant logs in with 'correct memberid' and 'correct password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on Home page
+
+    @test
+    Scenario: Verify if the participant can login with correct memberid and wrong password
+    Given A participant logs in with 'correct memberid' and 'wrong password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on 'login' error
+
+    @test
+    Scenario: Verify if the participant can login with wrong memberid and correct password
+    Given A participant logs in with 'wrong memberid' and 'correct password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on 'login' error
+
+    @test
+    Scenario: Verify if the participant can login with wrong memberid and wrong password
+    Given A participant logs in with 'wrong memberid' and 'wrong password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on 'login' error
+
+    @test
+    Scenario: Verify if the participant can login with correct email and wrong password
+    Given A participant logs in with 'correct email' and 'wrong password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on 'login' error
+
+    @test
+    Scenario: Verify if the participant can login with wrong email and correct password
+    Given A participant logs in with 'wrong email' and 'correct password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on 'login' error
+
+    @test
+    Scenario: Verify if the participant can login with wrong email and wrong password
+    Given A participant logs in with 'wrong email' and 'wrong password'
+    When  user clicks 'continue' button to login
+    Then  user should be able to land on 'login' error
+
+    @testp
+    Scenario: Verify if the suspended participant cannot login 
+    Given A participant "David Long" logged in to FastTrack application
+    When  user clicks 'continue' button to login
+    Then  user should be able to login successfully to FT1.9
+
+    @testp
+    Scenario: Verify if the disqualified participant cannot login 
+    Given A participant "David Long" logged in to FastTrack application
+    When  user clicks 'continue' button to login
+    Then  user should be able to login successfully to FT1.9
+
+    @test
+    Scenario: Verify if the participant can login with correct email and password
+    Given A participant logs in with 'correct email' and 'correct password'
+    When  user clicks 'continue' button to login
+    Then   user should be able to land on Home page
+
+    @test
+    Scenario: Verify if the inactive participant cannot login 
+    Given A participant "Glenn Campbell" logged in to FastTrack application
+    When  User logs in as User
+    Then  user should be able to land on Home page
+
+    @testp
+    Scenario: Verify 'Forgot Password' link on the Login Page with correct mail id
+    Given  A participant logs in with 'wrong email' and 'wrong password'
+    When  user clicks 'forgot password' button to login
+    And User enters the correct mail
+    And user clicks 'continue' button to login
+    Then  user should be able to login successfully to FT1.9
+
+    @testp
+    Scenario: Verify 'Forgot Password' link on the Login Page with incorrect mail id
+    Given  A participant logs in with 'wrong email' and 'wrong password'
+    When  user clicks 'forgot password' button to login
+    And User enters the incorrect mail
+    Then  user should be able to land on forgot 'email' error
+
+    @testp
+    Scenario: Verify 'Forgot Password' link on the Login Page with blank mail id
+    Given  A participant logs in with 'wrong email' and 'wrong password'
+    When  user clicks 'forgot password' button to login
+    Then  user should be able to land on forgot 'email' error
+
+    @testp
+    Scenario: Verify  'Back to Fast Track' link on 'Forgot Password'
+    Given  A participant logs in with 'wrong email' and 'wrong password'
+    When  user clicks 'forgot password' button to login
+    And user clicks 'Back to Fast Track' button to login
+    Then  user is able to verify the dog on
+

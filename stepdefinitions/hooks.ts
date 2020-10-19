@@ -22,11 +22,10 @@ ale.accept();*/
 
 After(async function (scenario) {
   // This hook will be executed before scenarios tagged with @foo
-  if (scenario.result.status === Status.FAILED) {
+ // if (scenario.result.status === Status.FAILED) {
     //code to take screesnhot
     const screenshot = await browser.takeScreenshot();
-    this.attach(screenshot, "image/png");
-  }
+    this.attach(screenshot, "image/png");  
 });
 
 

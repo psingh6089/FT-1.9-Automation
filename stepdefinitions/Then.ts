@@ -14,15 +14,14 @@ import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 var expect = require('chai').expect;
 let EC = protractor.ExpectedConditions;
 Then('user should be able to land on {string} page and should see {string}', async (string, string2) => {
-  await Home.WelcomeText.getText().then(function (val) {
+  Home.WelcomeText.getText().then(function (val) {
     expect(val).to.equal('Welcome to Fast Track')
   });
 });
 
 Then(/^Studmaster should be able to record a service/, async () => {
   console.log("Register service is succesful");
-  // expect(text).to.equal("Confirmed")      
-
+  // expect(text).to.equal("Confirmed")
 })
 
 Then('User is redirected to the list of racing dogs', async () => {
@@ -30,7 +29,6 @@ Then('User is redirected to the list of racing dogs', async () => {
     expect(list).to.not.be.null;
     console.log("No. of Dogs in list is:", list);
   })
-
 })
 
 Then('User should be able to confirm the transfer ownership of dog to another user', async () => {
@@ -332,4 +330,36 @@ console.log(w.DogEarbrand)
 
 Then('user is able to verify the dog on', async () => {
 })
+
+Then('user should be able to land on Home page', async () => {
+  await browser.driver.sleep(20000);
+  //browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 30000).then(function () { })
+  w.SkipOverlay()
+  await browser.driver.sleep(2000);
+  Home.Home.getText().then(function (text) {
+    expect(text).to.equal('home-line\nHome')
+  });
+})
+
+Then('user should be able to land on {string} error', async (text) => {
+  if(text == 'login'){
+Home.LoginError.getText().then(function (text) {
+  expect(text).to.equal('Wrong email or password.')
+});
+}
+else  if(text == 'email'){
+Home.EmailError.getText().then(function (text) {
+  expect(text).to.equal('Email is not valid.')
+});
+}
+})
+
+Then('user should be able to see the {string} details', async (page) => {
+if(page=='Registration status'){
+  Account.Title.getText().then(function (text) {
+    expect(text).to.equal('Registration: Public Trainer')
+})
+}
+else if(page=='Member history'){}
+});
 

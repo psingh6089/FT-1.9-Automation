@@ -28,7 +28,7 @@ function writeScreenShot(png, filename) {
 }
 
 When('User logs in as User', async () => {
-  browser.driver.sleep(2000);
+  browser.driver.sleep(1000);
 });
 
 When('User clicks on {string} button', function (button) {
@@ -206,6 +206,8 @@ When('user fills and submits the Interstate Authority to Breed form', async () =
   browser.wait(EC.elementToBeClickable(Racing.Dog1), 8000).then(function () { });
   await Racing.Dog1.click();
   browser.wait(EC.elementToBeClickable(Racing.Interstate), 2000).then(function () { });
+  w.SkipOverlay()
+  browser.wait(EC.elementToBeClickable(Racing.Interstate), 2000).then(function () { });
   await Racing.Interstate.click();
   await Racing.IAgree.click();
   Racing.InputFirstName.sendKeys('Paul');
@@ -320,6 +322,15 @@ When('user selects filter for the transaction history', async () => {
     console.log(text)
   })
   await Account.TransactionDownArrow.click();
+});
+
+When('user clicks {string} button to login', async (action) => {
+  if(action=="continue")
+ await Home.LoginContinue.click()
+ if(action=="forgot password")
+ await Home.ForgotPassword.click()
+ if(action=="Back to Fast Track")
+ await Home.BackToFT.click()
 });
 
 When('user selects {string} and {string} for the statement', function (string, string2) {
@@ -875,3 +886,53 @@ await DogLocation.FindDogFabriolaCitrus.click()
 await w.clickOn(Racing.IAgree)
 })
   
+When('user views the {string} details', async (page) => {
+  await browser.driver.sleep(1000);
+  if (page == 'Registration History'){
+    browser.takeScreenshot().then(function (png) {
+      writeScreenShot(png, 'MemHistoryRegistration.png');
+    });
+}
+else if (page == 'Competencies held'){
+  browser.takeScreenshot().then(function (png) {
+    writeScreenShot(png, 'MemHisgtoryCompetencies.png');
+  });
+}
+else if (page == 'Request New Card'){
+  browser.takeScreenshot().then(function (png) {
+    writeScreenShot(png, 'RequestNewCard.png');
+  });
+  var path = require('path');
+  var fileToUpload = "C://Users//psingh//Desktop//Priti//Automation1.9//TestAutomationFramework-FT1.9//images.jpg";
+  var absolutePath = path.resolve(__dirname, fileToUpload);
+    await Account.UploadNewPhoto.click();
+  //  element(by.css('input[type="file"]')).sendKeys(absolutePath);  --click->upload->select image->open- check the console and goto Event->Target->File
+}
+else if (page == 'Registration status'){
+  browser.takeScreenshot().then(function (png) {
+    writeScreenShot(png, 'RegistrationStatus.png');
+  });
+}
+  else if (page == 'Activities'){
+    browser.takeScreenshot().then(function (png) {
+      writeScreenShot(png, 'Activities.png');
+    });
+  }
+    else if (page == 'Calender & Meeting'){
+      await browser.executeScript('window.scrollTo(187, 900);')
+      browser.takeScreenshot().then(function (png) {
+        writeScreenShot(png, 'CalenderMeeting.png');
+      });
+    }
+      else if (page == 'Important Announcements'){
+        await browser.executeScript('window.scrollTo(0, 5000);')
+        browser.takeScreenshot().then(function (png) {
+          writeScreenShot(png, 'ImportantAnnouncements.png');
+        });
+      }
+      else
+      {
+           console.log(" no selection")
+           DogLocation.Search.sendKeys("FABRIOLA CITRUS")
+      }
+})

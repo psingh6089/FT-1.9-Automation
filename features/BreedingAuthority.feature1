@@ -1,6 +1,6 @@
 Feature: FT2-590 Breeding Registration - An owner can initiate breeding lease and FT2-590 Breeding Registration - An owner can accept breeding lease
     @test
-    Scenario: QA-103 Verify if the owner can send a breeding authority key through email to a Interstate resident
+    Scenario: QA-103 Verify if the owner can initiate issue breeding authority to a Interstate resident
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab
         When user fills and submits the Interstate Authority to Breed form

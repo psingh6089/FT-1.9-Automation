@@ -5,17 +5,19 @@ export const Account = {
 
     Account: element(by.css('[routerlink="/account')),
     MyAccount: element(by.cssContainingText('a.mat-tab-link.mat-focus-indicator', ' My Account ')),
+    RequestNewCard: element(by.cssContainingText('button', 'Request a New Card')),
     Finance: element(by.css('[href*="/account/finances"]')),
     Syndicate: element(by.xpath('.//*[.=" Syndicates "]')),
     //Syndicate:   element(by.cssContainingText('a.mat-tab-link.mat-focus-indicator.ng-star-inserted.mat-tab-label-active', ' Syndicates ')),
     BankDetails: element(by.css('a.mat-tab-link.mat-focus-indicator.ng-star-inserted.mat-tab-label-active:nth-child(1)')),
-
+    MemberHistory:  element(by.cssContainingText('a.mat-tab-link.mat-focus-indicator', ' Member History ')),
     ScrollRight: element(by.xpath("//div[@class='mat-ripple mat-tab-header-pagination mat-tab-header-pagination-after mat-elevation-z4']//div[@class='mat-tab-header-pagination-chevron']")),
     OutstandingFines: element(by.css('[href*="/account/finances/fines"]')),
     Transaction: element(by.css('[href*="account/finances/transactions"]')),
     Statement: element(by.css('[href*="/account/finances/statements"]')),
-
+    UploadNewPhoto: element(by.cssContainingText('span.mat-button-wrapper', ' Upload a New Photo ')),
     TransactionDownArrow: element(by.css('div.arrow-container')),
+    Title: element(by.css('p.title')),
 
     PayFine: element(by.xpath("//div[@class='finances-body']//div[1]//div[2]//button[1]")),
     FineDueDate: element(by.xpath("//div[@class='fines']/div[1]/div[1]/h3[1]")),
@@ -76,7 +78,7 @@ export const Account = {
     ParticipantRole: element(by.css('div.account-data-item')),
     ExpiryDate: element(by.css('div.account-data-item')),
     ApplyToParticipate: element(by.xpath("//p[contains(text(),'Apply to Participate')]")),
-    RegistrationStatus: element(by.cssContainingText('div.mat-radio-label-content', 'Owner')),
+    RegistrationStatus: element(by.xpath("//p[contains(text(),'Registration Status')]")),
     BreederRegistration: element(by.cssContainingText('div.mat-radio-label-content', 'Owner Trainer')),
     WatchDog: element(by.cssContainingText('div.mat-radio-label-content', 'Catcher')),
     LogOut: element(by.cssContainingText('div.mat-radio-label-content', 'Public Trainer')),

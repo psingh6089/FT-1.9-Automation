@@ -28,6 +28,7 @@ function writeScreenShot(png: string, filename: string) {
 }
 export class webUtils {
     static DogEarbrand: string;
+    static attach: any;
     static
         logIn(User: string) {
         if (User == "Paul Westerveld") {
@@ -73,6 +74,7 @@ export class webUtils {
             webUtils.clickOn(Home.LoginContinue);
         }
         browser.driver.sleep(5000).then(function(){})
+        webUtils.SkipOverlay();
     }
 
     static
@@ -219,13 +221,15 @@ ValidateDog(){
     })
 }
     static
-        Navigate(menu: string, tab: string, button: string) {           
+        async Navigate(menu: string, tab: string, button: string) {           
         if (menu == "My Dogs") {                
            webUtils.clickOn(Racing.MyDogs);
            browser.driver.sleep(10000).then(function () { });
            webUtils.SkipOverlay();
            if (tab == "Non Racing") {
                 webUtils.clickOn(NonRacing.NonRacing);
+                browser.wait(EC.elementToBeClickable(Racing.Interstate), 2000).then(function () { });
+                webUtils.SkipOverlay()
                 if (button == "UnNamed Dog") {
                     //  browser.wait(EC.elementToBeClickable(Racing.Dog2), 5000).then(function () { });
                     webUtils.clickOn(Racing.Dog2);
@@ -244,9 +248,13 @@ ValidateDog(){
                 } */
             else if (tab == "Dog Details") {
                 webUtils.clickOn(Racing.DogDetails);
+                browser.wait(EC.elementToBeClickable(DogDetails.GreyHoundRecord), 2000).then(function () { });
+                webUtils.SkipOverlay()
                 if (button == "GreyHound Record") {
                     browser.executeScript('window.scrollTo(0,2000);').then(function () { });
                     webUtils.clickOn(DogDetails.GreyHoundRecord);
+                    browser.driver.sleep(2000).then(function () { });
+                    webUtils.SkipOverlay()
                 }
                 else if (button == "Form") {
                     webUtils.clickOn(DogDetails.Form);
@@ -419,11 +427,20 @@ ValidateDog(){
                     browser.executeScript('window.scrollTo(0,5000)');
                     webUtils.clickOn(Account.UpdateAccountDetails);
                 }
+                else if (button == "Request a New Card") {
+                  //  browser.wait(EC.elementToBeClickable(Account.RequestNewCard), 2000).then(function () { });
+                    browser.executeScript('window.scrollTo(0,5000)');
+                    webUtils.clickOn(Account.RequestNewCard);
+                }
             }
             else if (tab == "Setting") {
                 browser.wait(EC.elementToBeClickable(Account.ApplyToParticipate), 5000).then(function () { });
                 if (button == "Apply To Participate") {
                     webUtils.clickOn(Account.ApplyToParticipate);
+                    browser.driver.sleep(3000).then(function () { });
+                }
+                else if (button == "Registration Status") {
+                    webUtils.clickOn(Account.RegistrationStatus);
                     browser.driver.sleep(3000).then(function () { });
                 }
             }
@@ -463,9 +480,13 @@ ValidateDog(){
                 else if (button = 'Create a new syndicate')
                     webUtils.clickOn(Account.CreateSyndicate);
             }
-            else if (tab == "Member History") { }
-        }
+            
+            else if (tab == "Member History") 
+                webUtils.clickOn(Account.MemberHistory);    
+        }            
         else if (menu == "View Health Record") {
+            browser.driver.sleep(2000).then(function () { });
+                    webUtils.SkipOverlay()
             webUtils.clickOn(COP.ViewHealthRecord);
             if (tab == "Injury") {
                 browser.wait(EC.elementToBeClickable(COP.Injury), 5000).then(function () { });

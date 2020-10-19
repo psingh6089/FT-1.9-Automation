@@ -3,7 +3,7 @@ import { browser, ElementFinder, protractor } from "protractor";
 import { Racing } from "../Specs/ui/Racing";
 import { NonRacing } from "../Specs/ui/Non-Racing";
 import { Home } from "../Specs/ui/Home";
-import { webUtils as _w } from '../utils/webUtils';
+import { webUtils as _w, webUtils } from '../utils/webUtils';
 import { Account } from "../Specs/ui/Account";
 import { IWantTo } from "../Specs/ui/IWantTo";
 
@@ -58,9 +58,35 @@ Given('user navigates to {string} -> {string} tab and clicks {string} tab button
 
 Given('user selects the dog for the Dog activity', async () => {
   DogLocation.Doglist.getSize().then(function(size: any){
-    console.log(size)
-    DogLocation.Doglist.click()
+  console.log(size)
+  DogLocation.Doglist.click()
   })
+  })
+
+  Given('A participant logs in with {string} and {string}', async (user, pwd) => {
+    await browser.driver.sleep(1000);
+    Home.Login.isPresent().then(async (result)=> {
+      if (result) {
+        await Home.Login.click()
+      }
+      else {  }
+    });
+    //webUtils.clickOn(Home.Login);
+  await browser.driver.sleep(1000);
+  switch(user) {
+    case "correct email":  Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.correct_email)}); break;
+    case "wrong email": Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.wrong_email)}); break;
+    case "correct memberid":  Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.correct_memberid)}); break;
+    case "wrong memberid": Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.wrong_memberid)}); break;
+    default: user === undefined? console.log("user '" + user + "' doesn't match "): null;
+    }
+    await browser.driver.sleep(2000);
+    switch(pwd) {
+    case "correct password":  Home.Password.clear().then(function(){ Home.Password.sendKeys(testData.data.Password)}); break;
+    case "wrong password":  Home.Password.clear().then(function(){ Home.Password.sendKeys(testData.data.wrong_pwd)}); break;
+    default: user === undefined? console.log("user '" + user + "' doesn't match "): null;
+  }
+  await browser.driver.sleep(2000);
   })
 
 
