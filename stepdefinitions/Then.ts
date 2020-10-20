@@ -206,6 +206,14 @@ Then('user is able to land on {string} Page', function (landPage) {
       console.log(text)
     })).to.be.equal(landPage);
   }
+  else if (landPage == 'Home') {
+    browser.driver.sleep(5000);
+    expect(Home.HomeSelected.isSelected()).toBe(true);
+  }
+  else if (landPage == ' My Dogs ') {
+    browser.driver.sleep(5000);
+    expect(Home.MyDogsSelected.isSelected()).toBe(true);
+  }
 });
 
 

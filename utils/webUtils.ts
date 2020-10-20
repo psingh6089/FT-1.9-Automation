@@ -31,50 +31,26 @@ export class webUtils {
     static attach: any;
     static
         logIn(User: string) {
-        if (User == "Paul Westerveld") {
             webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.Paul_User);
-            Home.Password.sendKeys(testData.data.Password);
+        if (User == "Paul Westerveld")             
+            Home.UserName.sendKeys(testData.data.Paul_User); 
+        else if (User == "William Mcmahon")
+            Home.UserName.sendKeys(testData.data.William_User)
+        else if (User == "David Long")
+            Home.UserName.sendKeys(testData.data.David_user)
+        else if (User == "Andrea Daily")
+            Home.UserName.sendKeys(testData.data.Andrea_user)
+        else if (User == "Glenn Campbell")
+            Home.UserName.sendKeys(testData.data.Glenn_user)
+        else if (User == "Peter Walsh")
+            Home.UserName.sendKeys(testData.data.Peter_user)
+        else if (User == "Janet")
+            Home.UserName.sendKeys(testData.data.Janet)
+
+           Home.Password.sendKeys(testData.data.Password);
             webUtils.clickOn(Home.LoginContinue);
-        }
-        else if (User == "William Mcmahon") {
-            webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.William_User);
-            Home.Password.sendKeys(testData.data.Password);
-            webUtils.clickOn(Home.LoginContinue);
-        }
-        else if (User == "David Long") {
-            webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.David_user);
-            Home.Password.sendKeys(testData.data.Password);
-            webUtils.clickOn(Home.LoginContinue);
-        }
-        else if (User == "Andrea Daily") {
-            webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.Andrea_user);
-            Home.Password.sendKeys(testData.data.Password);
-            webUtils.clickOn(Home.LoginContinue);
-        }
-        else if (User == "Glenn Campbell") {
-            webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.Glenn_user);
-            Home.Password.sendKeys(testData.data.Password);
-            webUtils.clickOn(Home.LoginContinue);
-        }
-        else if (User == "Peter Walsh") {
-            webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.Peter_user);
-            Home.Password.sendKeys(testData.data.Password);
-            webUtils.clickOn(Home.LoginContinue);
-        }
-        else if (User == "Janet") {
-            webUtils.clickOn(Home.Login);
-            Home.UserName.sendKeys(testData.data.Janet);
-            Home.Password.sendKeys(testData.data.Password);
-            webUtils.clickOn(Home.LoginContinue);
-        }
-        browser.driver.sleep(5000).then(function(){})
-        webUtils.SkipOverlay();
+       // browser.driver.sleep(5000).then(function(){})
+     //   webUtils.SkipOverlay();
     }
 
     static
@@ -175,7 +151,6 @@ export class webUtils {
         })
         Racing.InputPostCode.sendKeys('3006');
     }
-
     static
         clickOn(obj) {
         webUtils.waitForObj(obj);

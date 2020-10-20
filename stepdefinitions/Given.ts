@@ -21,11 +21,7 @@ Given('User navigates to the Home page of FT1.9 application', async () => {
 Given('A participant {string} logged in to FastTrack application', async (user) => {
   _w.logIn(user);
   await browser.driver.sleep(2000);
-  Home.SkipOverlay.isPresent().then(function (result) {
-    if (result) {
-      Home.SkipOverlay.click().then(function () { });
-    } else { console.error }
-  });
+  //_w.SkipOverlay
 });
 
 /*

@@ -875,7 +875,6 @@ When('user enters the {string} -> {string} and selects dog activity as {string}'
   await browser.driver.sleep(5000);
 })
 
-
 When('user selects the dog and clicks agree to remove dog from kennel', async () => {
   browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 10000).then(function () { })
    await Home.SkipOverlay.click()
@@ -931,8 +930,103 @@ else if (page == 'Registration status'){
         });
       }
       else
-      {
-           console.log(" no selection")
-           DogLocation.Search.sendKeys("FABRIOLA CITRUS")
-      }
+        console.error();      
 })
+
+When('user views the overlay at {string} Page and clicks at {string}', async (page, action) => {
+ if(page=='Home'){
+  browser.wait(EC.elementToBeClickable(Home.GotIt), 10000).then(function () { })
+  Home.Home1Menu.getText().then(function (text) {
+  expect(text).to.equal('Manage Greyhound Activities\n1/5')
+})
+ Home.Home1Description.getText().then(function (text) {
+    expect(text).to.equal('Navigate here to do actions related to do greyhound racing, trials, health records, greyhound transfers, breeding and welfare.')
+  })
+  await w.clickOn(Home.GotIt)
+   browser.wait(EC.elementToBeClickable(Home.Gotit2), 1000).then(function () { })
+   Home.Home2Menu.getText().then(function (text) {
+    expect(text).to.equal('View Activity Logs\n2/5')
+  })
+   Home.Home2Description.getText().then(function (text) {
+    expect(text).to.equal('Alerts related to account activities such as greyhound notifications, registration updates, and invoices can be viewed here.')
+  })
+  browser.executeScript('window.scrollTo(321,40)').then(async () => { });
+  await w.clickOn(Home.Gotit2)
+   browser.wait(EC.elementToBeClickable(Home.Gotit3), 1000).then(function () { })
+   Home.Home3Menu.getText().then(function (text) {
+    expect(text).to.equal('Announcements\n3/5')
+  })
+   Home.Home3Description.getText().then(function (text) {
+    console.log(text)
+    expect(text).to.equal('GRV announcements will be mentioned here. More can be search here by date range to view past announcements.')
+  })  
+  browser.executeScript('window.scrollTo(320,100)').then(async () => { });
+  await w.clickOn(Home.Gotit3)
+  browser.wait(EC.elementToBeClickable(Home.Gotit4), 1000).then(function () { })
+   Home.Home4Menu.getText().then(function (text) {
+    expect(text).to.equal('Calendar and Meeting updates\n4/5')
+  })
+   Home.Home4Description.getText().then(function (text) {
+    expect(text).to.equal('Calendar and meeting updates can be checked here.')
+  })
+  browser.executeScript('window.scrollTo(321,40)').then(async () => { });
+  await w.clickOn(Home.Gotit4)
+   browser.wait(EC.elementToBeClickable(Home.Gotit5), 1000).then(function () { })
+   Home.Home5Menu.getText().then(function (text) {
+    expect(text).to.equal('Search\n5/5')
+  })
+   Home.Home5Description.getText().then(function (text) {
+    expect(text).to.equal('Type the keyword(s) that you want to search for such as greyhound name, trainer name, etc.')
+  })
+  browser.executeScript('window.scrollTo(321,40)').then(async () => { });
+  await w.clickOn(Home.Gotit5)
+ }
+  else if(page=='My Dogs'){
+  await w.clickOn(Home.MyDogs)
+   browser.wait(EC.elementToBeClickable(Home.GotIt), 10000).then(function () { })
+   Home.MyDogs1Menu.getText().then(function (text) {
+    expect(text).to.equal('Greyhounds classified\n1/5')
+  })
+   Home.MyDogs1Description.getText().then(function (text) {
+      expect(text).to.equal('Unnamed and racing statuses greyhounds will appear in Active tab. Retired status greyhounds will appear in Non Active tab. Litters whose litter registration is in progress will appear in Litters page.')
+    })
+    await w.clickOn(Home.GotIt)
+     browser.wait(EC.elementToBeClickable(Home.Gotit2), 1000).then(function () { })
+     Home.MyDogs2Menu.getText().then(function (text) {
+      expect(text).to.equal('Sort a list\n2/5')
+    })
+     Home.MyDogs2Description.getText().then(function (text) {
+      expect(text).to.equal('Below list can be sorted by:\nKennel name A - Z\nKennel name Z - A\nRacing name A - Z\nRacing name Z - A\nWhelp date - Youngest\nWhelp date - Oldest\nDog - Bitch\nBitch - Dog')
+    })
+    browser.executeScript('window.scrollTo(321,40)').then(async () => { });
+    await w.clickOn(Home.Gotit2)
+     browser.wait(EC.elementToBeClickable(Home.Gotit3), 1000).then(function () { })
+     Home.MyDogs3Menu.getText().then(function (text) {
+      expect(text).to.equal('Add or Remove filter\n3/5')
+    })
+     Home.MyDogs3Description.getText().then(function (text) {
+      console.log(text)
+      expect(text).to.equal('Filter or reset the activities filter to display specific greyhounds.')
+    })  
+    browser.executeScript('window.scrollTo(320,100)').then(async () => { });
+    await w.clickOn(Home.Gotit3)
+    browser.wait(EC.elementToBeClickable(Home.Gotit4), 1000).then(function () { })
+     Home.MyDogs4Menu.getText().then(function (text) {
+      expect(text).to.equal('Greyhound details\n4/5')
+    })
+     Home.MyDogs4Description.getText().then(function (text) {
+      expect(text).to.equal('Key details such as racing name, ear brand, activity, owner and actions can be checked here.')
+    })
+    browser.executeScript('window.scrollTo(321,40)').then(async () => { });
+    await w.clickOn(Home.Gotit4)
+     browser.wait(EC.elementToBeClickable(Home.Gotit5), 1000).then(function () { })
+     Home.MyDogs5Menu.getText().then(function (text) {
+      expect(text).to.equal('Actions on the greyhound\n5/5')
+    })
+     Home.MyDogs5Description.getText().then(function (text) {
+      expect(text).to.equal('Specific actions on the greyhound can be done here.')
+    })
+    browser.executeScript('window.scrollTo(321,40)').then(async () => { });
+    await w.clickOn(Home.Gotit5)
+  }
+  })
