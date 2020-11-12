@@ -3,28 +3,57 @@ Feature: FT2-689 Existing owner initiates ownership transfer
   Scenario: Verify Existing owner initiates ownership transfer
     Given  A participant "William Mcmahon" logged in to FastTrack application
     And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Transfer Ownership' tab
-    When user enters the Name details of the new person to be transferred
+    When user enters the Name details of the new person to be transferred and 'proceeds'
     And User clicks on 'continue' button
     Then  User should be able to confirm the transfer ownership of dog to another user
     And user copies the Key and dog earbrand details
 
-
-  @test
+  
+@testp
+  Scenario: QA-317 Verify the field validations on Transfer Ownership page
+    Given  A participant "William Mcmahon" logged in to FastTrack application
+    And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Transfer Ownership' tab
+    When user enters the Name details of the new person to be transferred and 'validate'
+    Then  User should be able to confirm the transfer ownership of dog to another user
+ 
+  @testp
   Scenario: Verify Existing owner initiates ownership transfer and cancels the request
     Given  A participant "William Mcmahon" logged in to FastTrack application
     And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Transfer Ownership' tab
-    When user enters the Name details of the new person to be transferred
+    When user enters the Name details of the new person to be transferred 'proceeds'
     And User clicks on 'cancel' button
     Then User is redirected to the list of racing dogs
 
 
-  @test
+  @testp
   Scenario: FT 669 Verify New owner accepts ownership transfer
     Given  A participant "Paul Westerveld" logged in to FastTrack application
     And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Accept Transfer of Ownership' tab
-    When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership'
+    When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership' and 'proceeds'
+    Then user should be navigated to the confirmation page
+
+    @testp
+  Scenario: QA-327Verify the New Owner accepts Ownership Transfer via Credit Card successfully
+    Given  A participant "Paul Westerveld" logged in to FastTrack application
+    And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Accept Transfer of Ownership' tab
+    When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership' and 'proceeds'
     And  user proceeds with the payment option
     Then user should be navigated to the confirmation page
+
+    @test
+  Scenario: QA-325Verify the field validations on Accept Transfer of Ownership page
+    Given  A participant "Paul Westerveld" logged in to FastTrack application
+    And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Accept Transfer of Ownership' tab
+    When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership' and 'validates'
+    Then user should be navigated to the confirmation page
+
+      @testp
+  Scenario: QA-198Verify the functionality of Cancel button in Accept ownership transfer page
+    Given  A participant "Paul Westerveld" logged in to FastTrack application
+    And   user navigates to 'I Want To' -> 'Manage Greyhound' tab and clicks 'Accept Transfer of Ownership' tab
+    When user enters the Authority Key and Ear brand details of dog for 'Transfer Ownership'
+    And User clicks on 'cancel' button
+    Then user is able to land on ' My Dogs ' Page
 
   @pending
   Scenario: FT2-789	Participant can view an active transfer key on their dogs
@@ -32,5 +61,4 @@ Feature: FT2-689 Existing owner initiates ownership transfer
     And user navigates to 'MyDog' menu
     When  user selects the 'dog' for which 'Issue transfer ownership' is completed
     Then User verifies the transfer Key for the dog
-
 

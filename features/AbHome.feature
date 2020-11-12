@@ -7,8 +7,8 @@ and should be able to login using valid credentials only
 Scenario: Login to the Ft1.9 application with valid credentials
 
 Given User navigates to the Home page of FT1.9 application
-When User logs in as User
-Then user should be able to land on 'Home' page and should see 'Welcome to Fast Track'
+When User navigates 'Home' and verifies 'WELCOME TO MYFASTTRACK'
+Then user should be able to validate 'WELCOME TO MYFASTTRACK'
 
 @testp
 Scenario: Verify the Home Page with Activities tab of the participant 44472

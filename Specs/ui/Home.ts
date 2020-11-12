@@ -1,12 +1,15 @@
 import { by, element } from 'protractor';
 export const Home = {
 
-    Login: element(by.cssContainingText('span.mat-button-wrapper', 'Log In')),
+    Login: element(by.cssContainingText('span.mat-button-wrapper', ' Login ')),
     UserName: element(by.id('username')),
     Password: element(by.id('password')),
     LoginContinue: element(by.cssContainingText('button', 'Continue')),
     ForgotPassword: element(by.cssContainingText('p.c66aeac53.c1eb4fc59', 'Forgot password?')),
-    WelcomeText: element(by.css('h2')),
+    WelcomeText: element(by.css('h3.welcome-header')),
+    IntroText: element(by.css('p.intro-text')),
+    IntroCol1: element(by.css('div.col1')),
+    IntroCol2: element(by.css('div.col2')),
     LoginError: element(by.css('li.cc58a9ba3')),
     EmailError: element(by.css('ul.cf754da02')),
     BackToFT :  element(by.cssContainingText('a','Back to FastTrack')),
@@ -14,20 +17,21 @@ export const Home = {
     Home: element(by.cssContainingText('div.nav-item.landing', ' Home')),
     HomeSelected: element(by.cssContainingText('div.nav-item.landing.selected', ' Home')),
     HomeActivities: element(by.cssContainingText('h4.task-list-title', 'Activities')),
-    MyDogs: element(by.cssContainingText('div.nav-item mydogs', ' My Dogs')),
-    MyDogsSelected: element(by.cssContainingText('div.nav-item mydogs.selected', ' My Dogs')),
+    MyDogs: element(by.xpath("//html/body/app-root/nav/app-navbar/div[2]")),
+    MyDogsSelected: element(by.cssContainingText('div.nav-item.mydogs.selected', ' My Dogs')),
     NonRacing: element(by.cssContainingText('a.mat-tab-link.mat-focus-indicator.ng-star-inserted', ' Non Racing Dogs ')),
     Breeding: element(by.cssContainingText('a.mat-tab-label-active', ' Breeding & Litters ')),
     BlackBook: element(by.cssContainingText('a.mat-tab-label-active', ' Blackbook ')),
     Racing: element(by.cssContainingText('a.mat-tab-label-active', ' Racing Dogs ')),
     Dog: element(by.css('app-dog-card:nth-child(1)')).element(by.css('app-dog-card-header')).element(by.css('div.right')).element(by.css('button')).element(by.css('span.mat-button-wrapper')).element(by.css('mat-icon')),
+    Calendar: element(by.cssContainingText('div.nav-item.calendar', ' Calendar')),
 
     GotIt: element(by.cssContainingText('button.next-button.shepherd-button ', 'Got it!')),
     Gotit2: element(by.xpath("/html/body/div[3]/div[2]/footer/button[2]")),
     Gotit3: element(by.xpath("/html/body/div[4]/div[2]/footer/button[2]")),
     Gotit4: element(by.xpath("/html/body/div[5]/div[2]/footer/button[2]")),
     Gotit5: element(by.xpath("/html/body/div[6]/div[2]/footer/button[2]")),
-    SkipOverlay: element(by.cssContainingText('button.cancel-button.shepherd-button.shepherd-button-secondary', 'Done? Click here to skip')),
+    SkipOverlay: element(by.cssContainingText('button', 'Done? Click here to skip')),
 
     Home1Menu: element(by.id('landing-menu-label')),
     Home1Description: element(by.id('landing-menu-description')),
@@ -51,4 +55,16 @@ export const Home = {
     MyDogs5Menu: element(by.id('mydogs-actions-label')),
     MyDogs5Description: element(by.id('mydogs-actions-description')),
     
+    DogDetails1Menu: element(by.id('dog-details-header-label')),
+    DogDetails1Description: element(by.id('dog-details-header-description')),
+    DogDetails2Menu: element(by.id('dog-details-nav-label')),
+    DogDetails2Description: element(by.id('dog-details-nav-description')),
+     
+    IWantTo1Menu: element(by.id('iwantto-nominate-label')),
+    IWantTo1Description: element(by.id('iwantto-nominate-description')),
+
+    Calendar1Menu: element(by.id('calendar-acronyms-label')),
+    Calendar1Description: element(by.id('calendar-acronyms-description')),
+    Calendar2Menu: element(by.id('calendar-week-label')),
+    Calendar2Description: element(by.id('calendar-week-description')),
 };

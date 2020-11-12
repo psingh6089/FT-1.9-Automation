@@ -17,6 +17,7 @@ import { BreedingAndLitters } from "../Specs/ui/BreedingAndLitters";
 import { DogDetails } from "../Specs/ui/DogDetails";
 import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 import { DogLocation } from "../Specs/ui/DogLocation";
+import { ActiveDogs } from "../Specs/ui/ActiveDogs";
 var expect = require('chai').expect;
 let EC = protractor.ExpectedConditions;
 var DogEarbrand: string;
@@ -31,26 +32,22 @@ export class webUtils {
     static attach: any;
     static
         logIn(User: string) {
-            webUtils.clickOn(Home.Login);
-        if (User == "Paul Westerveld")             
-            Home.UserName.sendKeys(testData.data.Paul_User); 
-        else if (User == "William Mcmahon")
-            Home.UserName.sendKeys(testData.data.William_User)
-        else if (User == "David Long")
-            Home.UserName.sendKeys(testData.data.David_user)
-        else if (User == "Andrea Daily")
-            Home.UserName.sendKeys(testData.data.Andrea_user)
-        else if (User == "Glenn Campbell")
-            Home.UserName.sendKeys(testData.data.Glenn_user)
-        else if (User == "Peter Walsh")
-            Home.UserName.sendKeys(testData.data.Peter_user)
-        else if (User == "Janet")
-            Home.UserName.sendKeys(testData.data.Janet)
-
+           webUtils.clickOn(Home.Login);
+            browser.driver.sleep(1000).then(function () { })
+            switch(User) {
+                case "Paul Westerveld": Home.UserName.sendKeys(testData.data.Paul_User); break;
+                case "William Mcmahon": Home.UserName.sendKeys(testData.data.William_User); break;
+                case "David Long": Home.UserName.sendKeys(testData.data.David_user); break;
+                case "Andrea Daily":  Home.UserName.sendKeys(testData.data.Andrea_user); break;
+                case "Glenn Campbell": Home.UserName.sendKeys(testData.data.Glenn_user); break;
+                case "Peter Walsh": Home.UserName.sendKeys(testData.data.Peter_user); break;
+                case "Janet": Home.UserName.sendKeys(testData.data.Janet); break;
+                default :  console.log("undefined user")
+            }
            Home.Password.sendKeys(testData.data.Password);
             webUtils.clickOn(Home.LoginContinue);
        // browser.driver.sleep(5000).then(function(){})
-     //   webUtils.SkipOverlay();
+     //   webUtils.SkipOverlay();     
     }
 
     static
@@ -178,12 +175,12 @@ export class webUtils {
     }
 
     static
-    SkipOverlay(){
+    SkipOverlay(){       
         Home.SkipOverlay.isPresent().then(function (result) {
             if (result) {
               webUtils.clickOn(Home.SkipOverlay)
             } else {  }
-          });
+          });         
 }
 
 static
@@ -197,10 +194,11 @@ ValidateDog(){
 }
     static
         async Navigate(menu: string, tab: string, button: string) {           
-        if (menu == "My Dogs") {                
+        if (menu == "My Dogs") {         
+            webUtils.SkipOverlay()       
            webUtils.clickOn(Racing.MyDogs);
-           browser.driver.sleep(10000).then(function () { });
-           webUtils.SkipOverlay();
+           browser.driver.sleep(20000).then(function () { });
+           webUtils.SkipOverlay()
            if (tab == "Non Racing") {
                 webUtils.clickOn(NonRacing.NonRacing);
                 browser.wait(EC.elementToBeClickable(Racing.Interstate), 2000).then(function () { });
@@ -307,6 +305,12 @@ ValidateDog(){
             }
         }
         else if (menu == "I Want To") {
+            browser.driver.sleep(1000).then(function () { });
+            Home.SkipOverlay.isPresent().then(function (result) {
+                if (result) {
+                  webUtils.clickOn(Home.SkipOverlay)
+                } else {  }
+              });   
             browser.wait(EC.elementToBeClickable(IWantTo.IWantTo), 5000).then(function () { });
             webUtils.clickOn(IWantTo.IWantTo);
             browser.driver.sleep(1000).then(function () { });
@@ -374,8 +378,13 @@ ValidateDog(){
                     browser.executeScript('window.scrollTo(211,28);').then(function () { });
                     browser.wait(EC.elementToBeClickable(IWantTo.TransferOwnership), 5000).then(function () { });
                     webUtils.clickOn(IWantTo.TransferOwnership);
+                    browser.driver.sleep(3000).then(function () { });
+                    webUtils.clickOn(Home.SkipOverlay)                      
                     browser.wait(EC.elementToBeClickable(Racing.Dog1), 5000).then(function () { });
                     webUtils.clickOn(Racing.Dog1);
+                    browser.executeScript('window.scrollTo(200, 10000);').then(function () { }); 
+                    browser.driver.sleep(2000).then(function () { });
+                    webUtils.clickOn(Racing.Submit);
                 }
                 else if (button == "Accept Transfer of Ownership") {
                     webUtils.clickOn(IWantTo.TransferManagement);
@@ -388,6 +397,10 @@ ValidateDog(){
                 else if (button == "Notice of Intent Euthanase") {
                     browser.executeScript('window.scrollTo(600,600);').then(function () { });
                     webUtils.clickOn(IWantTo.NoticeOfIntent);
+                }
+                else if (button == "Apply for Dog Names") {
+                    browser.executeScript('window.scrollTo(0,800);').then(function () { });
+                    webUtils.clickOn(IWantTo.ApplyfroDogNAmes);
                 }
             }
         }
@@ -633,4 +646,30 @@ ValidateDog(){
 
     }
 }
+
+static
+    async validatePhone(obj: { sendKeys: (arg0: string) => void; clear: () => Promise<any>; }) {
+    obj.sendKeys("abc");
+    browser.actions().sendKeys(protractor.Key.TAB).perform();
+            expect(await Racing.PhoneError.isDisplayed()).to.be.equal(true);
+    obj.clear().then(async function(){
+        obj.sendKeys("1");
+        browser.actions().sendKeys(protractor.Key.TAB).perform();
+        expect(await Racing.PhoneError.isDisplayed()).to.be.equal(true);
+    }),
+    obj.clear().then(async function(){
+        obj.sendKeys("11111111111");
+        browser.actions().sendKeys(protractor.Key.TAB).perform();
+        expect(await Racing.PhoneError.isDisplayed()).to.be.equal(true);
+    })
+}
+
+static
+    setCheckBox(chkBox, bool){
+        return chkBox.isSelected().then(status => {
+            if(status !== bool){
+                chkBox.click();
+            }
+        });
+    }
 }

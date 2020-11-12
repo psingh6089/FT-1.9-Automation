@@ -4,7 +4,7 @@
     As a Participant receiving a dog from another Participant, I need to select the address at which the dog is physically located so that the location of the dog is known
 
 
-   @test
+   @testp
     Scenario: QA-410: Verify the field validations on Add dog to kennel page for Breeding
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Add dog to Kennel' tab
@@ -12,7 +12,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
         
-    @testp
+    @test
     Scenario: QA-443: Verify the Breeder can able to Remove the dog from kennel 
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Remove from Kennel' tab
@@ -20,7 +20,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: Add dog to kennel page for Whelping
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Add dog to Kennel' tab
@@ -28,7 +28,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-433: Verify the Person in Charge can able to Remove the dog from kennel from Whelping activity
         Given A participant "William Mcmahon" logged in to FastTrack application
          And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Remove from Kennel' tab
@@ -36,7 +36,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
         
-    @testp
+    @test
     Scenario: Add dog to kennel page for Rearing
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Add dog to Kennel' tab
@@ -44,7 +44,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
                 
-    @testp
+    @test
     Scenario: QA-434: Verify the Person in Charge can able to Remove the dog from kennel from Rearing activity
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Remove from Kennel' tab
@@ -52,7 +52,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: Add dog to kennel page for Spelling
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Add dog to Kennel' tab
@@ -60,7 +60,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
                 
-    @testp
+    @test
     Scenario: QA-435: VVerify the Person in Charge can able to Remove the dog from kennel from Spelling activity
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Remove from Kennel' tab
@@ -68,7 +68,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: Add dog to kennel page for Educating
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Add dog to Kennel' tab
@@ -76,7 +76,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details                
         
-    @testp
+    @test
     Scenario: QA-436: Verify the Person in Charge can able to Remove the dog from kennel from Educating activity
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Remove from Kennel' tab
@@ -84,7 +84,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: Add dog to kennel page for Training
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Add dog to Kennel' tab
@@ -92,7 +92,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details               
         
-    @testp
+    @test
     Scenario: QA-441: Verify the Person in Charge can able to Remove the dog from kennel from Training activity
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Kennel' tab and clicks 'Remove from Kennel' tab
@@ -107,14 +107,14 @@
         When user navigates the Dog Content details 
         Then  user should be able to verify the dog details
 
-        @testp
+        @test
     Scenario: QA-450: Verify the field validations on Remove dog from kennel page
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Dog Details' tab and clicks 'Nothing' tab
         When user navigates the Dog Content details 
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-401: Verify the Person in Charge can able to Change Dog activity to Breeding
        Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -122,7 +122,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-402: Verify the Person in Charge can able to Change Dog activity to Whelping 
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -130,7 +130,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-403: Verify the Person in Charge can able to Change Dog activity to Educating
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -138,7 +138,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-404: Verify the Person in Charge can able to Change Dog activity to Rearing
        Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -146,7 +146,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-405: Verify the Person in Charge can able to Change Dog activity to Spelling
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -154,7 +154,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-411: Verify the field validations on Change dog activity page
         Given A participant "Glenn Campbell" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -162,7 +162,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-412: Verify the Owner/Person in Charge can able to Update Interstate Location of a dog for Breeding Activity
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -170,7 +170,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-413: Verify the Owner/Person in Charge can able to Update Interstate Location of a dog for Educating Activity
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -178,7 +178,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-414: Verify the Owner/Person in Charge can able to Update Interstate Location of a dog for Rearing Activity
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -186,7 +186,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
 
-    @testp
+    @test
     Scenario: QA-415: Verify the Owner/Person in Charge can able to Update Interstate Location of a dog for Spelling Activity
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -194,7 +194,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
     
-    @testp
+    @test
     Scenario: QA-416: Verify the Owner/Person in Charge can able to Update Interstate Location of a dog for Whelping Activity
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab
@@ -202,7 +202,7 @@
         And User clicks on 'submit' button
         Then  user should be able to verify the dog details
         
-    @testp
+    @test
     Scenario: QA-418: Verify the field validations on Update Interstate Location page
         Given A participant "Glenn Campbell" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Select Dog Action' tab and clicks 'Change Dog Activity' tab

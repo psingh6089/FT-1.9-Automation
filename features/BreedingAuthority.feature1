@@ -59,58 +59,61 @@ Feature: FT2-590 Breeding Registration - An owner can initiate breeding lease an
         And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
         Then User verifies the Breeding Key for the dog
 
-    @test
-    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'whelped'
-        Given A participant "Peter Walsh" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
-        When  User selects the parent Dog and enters the details for 'Whelped'
-        And  User clicks on 'submit' button
-        And user proceeds with the payment option
-            And  User clicks on 'c' button
-        Then User verifies the record
+   
+    @pending
+    Scenario:  Verify Payment for the 'Accept breeding authority'
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog
 
         
-    @test
-    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'whelped' and returns back on confirmation page
-        Given A participant "Peter Walsh" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
-        When  User selects the parent Dog and enters the details for 'Whelped'
-        And  User clicks on 'submit' button
-        And user proceeds with the payment option
-        And  User clicks on 'back' button
-         Then User verifies the record
+    @pending
+    Scenario: Verify the field validations on 'Issue Breeding Authority' for Victorian
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog
 
-    @test
-    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'Missed'
-        Given A participant "Peter Walsh" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
-        When  User selects the parent Dog and enters the details for 'Missed'
-        And  User clicks on 's' button
-        Then User verifies the record
+        
+    @pending
+    Scenario: Verify the field validations on 'Issue Breeding Authority' for Interstate
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog
 
-    @test
-    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'Missed' and clicks 'Cancel' button
-        Given A participant "Peter Walsh" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
-        When  User selects the parent Dog and enters the details for 'Missed'
-        And  User clicks on 'cancel' button
-        Then User navigates to 'Breeding and Litter'
+        
+    @pending
+    Scenario: Verify the field validations on 'Accept Breeding Authority' for Victorian
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog
 
-    @test
-    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'No Live Pups'
-        Given A participant "Peter Walsh" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
-        When  User selects the parent Dog and enters the details for 'No Live Pups'
-        And  User clicks on 's' button
-        Then User verifies the record
+        
+    @pending
+    Scenario: Verify the field validations on 'End Breeding Authority' for Victorian
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog
 
-          @test
-  Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'No Live Pups' and clicks 'Cancel' button
-        Given A participant "Peter Walsh" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
-        When  User selects the parent Dog and enters the details for 'No Live Pups'
-        And  User clicks on 'cancel' button
-        Then User navigates to 'Breeding And Litter'
+        
+    @pending
+    Scenario: Verify cancel button for 'Issue Breeding Authority' for Victorian
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog
+
+        
+    @pending
+    Scenario: Verify cancel button for 'Issue Breeding Authority' for Interstate
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
+        Then User verifies the Breeding Key for the dog 
+
+
+
+   
+
+
+
 
 
 

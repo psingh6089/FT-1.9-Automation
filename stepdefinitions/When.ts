@@ -17,6 +17,7 @@ import { S_IFSOCK } from "constants";
 import { Menu } from "../Specs/ui/Menu";
 import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 import { DogLocation } from "../Specs/ui/DogLocation";
+import { ActiveDogs } from "../Specs/ui/ActiveDogs";
 let EC = protractor.ExpectedConditions;
 
 var expect = require('chai').expect;
@@ -27,13 +28,15 @@ function writeScreenShot(png, filename) {
   stream.end();
 }
 
-When('User logs in as User', async () => {
-  browser.driver.sleep(1000);
-});
+When('User navigates {string} and verifies {string}', async (string, string2) => {
+  Home.WelcomeText.getText().then(function (val) {
+    expect(val).to.equal(string2)
+})
+})
 
 When('User clicks on {string} button', function (button) {
   // w.confirmButton(button);
-  if (button == 'cancel') {
+  if (button == "cancel") {
     browser.driver.sleep(2000).then(function () { })
     Racing.Cancel.isPresent().then(function (boolean) {
       if (boolean) {
@@ -56,8 +59,10 @@ When('User clicks on {string} button', function (button) {
     })
   }
   else if (button == "continue") {
-    browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { })
-    Racing.Continue.click().then(function () { })
+    browser.driver.sleep(5000).then(function () { })
+  //  w.clickOn(Racing.Continue)
+    //browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { })
+   Racing.Continue.click().then(function () { })
   }
   else if (button == "confirm") {
     browser.wait(EC.elementToBeClickable(Racing.Confirmation), 5000).then(function () { })
@@ -115,13 +120,28 @@ When('Studmaster clicks X button to cancel the register service', async () => {
   await Racing.Cancel.click();
 })
 
-When('user enters the Name details of the new person to be transferred', async () => {
+When('user enters the Name details of the new person to be transferred and {string}', async (action) => {
+  if(action=='proceeds'){
+  browser.wait(EC.elementToBeClickable(Racing.IAgree), 5000).then(function () { });
+  await Racing.IAgree.click();
   await browser.driver.sleep(2000);
-  browser.executeScript('window.scrollTo(0,5000);');
-  await Racing.TransferIAgree.click();
+  await browser.executeScript('window.scrollTo(0,5000);');
   Racing.FirstName.sendKeys(testData.data.TransferServiceToFirstName);
   Racing.LastName.sendKeys(testData.data.TransferServiceToLastName);
+  await browser.driver.sleep(1000);
   Racing.PhoneNo.sendKeys(testData.data.PhoneNo);
+  await browser.driver.sleep(1000);
+}
+if(action=='validate'){
+  await browser.driver.sleep(2000);
+  await browser.executeScript('window.scrollTo(81, 745);');
+  browser.wait(EC.elementToBeClickable(Racing.IAgree), 5000).then(function () { });
+  expect(await Racing.FirstName.getAttribute("required")).to.be.equal('true');;
+  expect(await Racing.LastName.getAttribute("required")).to.be.equal('true');
+  expect(await Racing.PhoneNo.getAttribute("required")).to.be.equal('true');
+  w.validatePhone(await Racing.PhoneNo)
+  expect(await Racing.Continue.getAttribute("disabled")).to.be.equal(null);
+  }
 });
 
 When('user navigates view details link of a syndicate', async () => {
@@ -160,8 +180,11 @@ When('user is able to add or update the address details', async () => {
   // await browser.driver.sleep(10000);
 });
 
-When('user clicks Apply for a Dog name page with valid name', async () => {
+When('user clicks Apply for a Dog name page with valid name and {string}', async (action) => {
   //  w.applyDogName();
+  await browser.driver.sleep(2000);
+  w.SkipOverlay()
+  Racing.Dog
   browser.wait(EC.elementToBeClickable(NonRacing.EnterName1), 5000).then(function () { });
   NonRacing.EnterName1.sendKeys(testData.data.Dog1);
   NonRacing.AddDog.click();
@@ -229,15 +252,29 @@ When('User is redirected to Breeding Authority Confirmation page with Send via E
   await browser.driver.sleep(2000);
 })
 
-When('user enters the Authority Key and Ear brand details of dog for {string}', async (option) => {
-  Racing.AddAuthorityKey.sendKeys('5501751542');
-  Racing.AddEarBrand.sendKeys('VHTLJ');
+When('user enters the Authority Key and Ear brand details of dog for {string} and {string}', async (option, action) => {
+ if(action=='proceeds'){
+  Racing.AddAuthorityKey.sendKeys('6034309557');
+  Racing.AddEarBrand.sendKeys('VIRHD');
   browser.wait(EC.elementToBeClickable(Racing.Validate), 5000).then(function () { });
   await Racing.Validate.click();
-  browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { });
+  await browser.driver.sleep(3000);
   await browser.executeScript('window.scrollTo(0,5000);');
-  // await Racing.Continue.click();
-})
+  browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { });
+   //  await Racing.Continue.click();
+ }
+ if(action=='validates'){
+  expect(await Racing.AddAuthorityKey.getAttribute("required")).to.be.equal('true');
+  Racing.AddAuthorityKey.sendKeys('test');
+  expect(await Racing.AddEarBrand.getAttribute("required")).to.be.equal('true');
+  Racing.AddEarBrand.sendKeys('VIRHD');
+  browser.wait(EC.elementToBeClickable(Racing.Validate), 5000).then(function () { });
+  await Racing.Validate.click();
+  await browser.driver.sleep(1000);
+  expect(await Racing.validateError.isDisplayed()).to.be.equal(true)
+
+ }
+ })
 
 When('user proceeds with the payment option', async () => {
   await browser.driver.sleep(1000);
@@ -292,7 +329,6 @@ When('user is able to view,add,update the bank details', async () => {
   await browser.driver.sleep(1000);
   var isClickable = protractor.ExpectedConditions.elementToBeClickable(Account.EnterBSB);
   await browser.wait(isClickable, 43);
-
   Account.EnterBSB.clear().then(function () {
     Account.EnterBSB.sendKeys(testData.data.BSB);
   })
@@ -325,12 +361,12 @@ When('user selects filter for the transaction history', async () => {
 });
 
 When('user clicks {string} button to login', async (action) => {
-  if(action=="continue")
- await Home.LoginContinue.click()
- if(action=="forgot password")
- await Home.ForgotPassword.click()
- if(action=="Back to Fast Track")
- await Home.BackToFT.click()
+  switch(action) {
+    case 'continue': await Home.LoginContinue.click(); break;
+    case 'forgot password': await Home.ForgotPassword.click(); break;
+    case 'Back to Fast Track': await Home.BackToFT.click(); break;
+    default :  console.log("undefined user")   
+  }
 });
 
 When('user selects {string} and {string} for the statement', function (string, string2) {
@@ -383,23 +419,13 @@ When('user selects the role as {string}', async (role) => {
   Account.RoleList.getText().then(function (text) {
   console.log(text)
   })
-  if (role == 'owner') { }
-  else if (role == 'Attendant') {
-    Account.SelectAttendant.click();
-    // await browser.driver.sleep(10000);
-  }
-  else if (role == 'Catcher') {
-    Account.SelectCatcher.click();
-    await browser.driver.sleep(1000);
-  }
-  else if (role == 'Owner Trainer') {
-    Account.SelectOwnerTrainer.click();
-  }
-  else if (role == 'Public Trainer') {
-    Account.SelectPublicTrainer.click();
-  }
-  else {
-    console.error
+  switch(role) {
+    case 'owner': break;
+    case 'Attendant': w.clickOn(Account.SelectAttendant); break;
+    case 'Catcher': w.clickOn(Account.SelectCatcher); await browser.driver.sleep(1000); break;
+    case 'Owner Trainer': w.clickOn(Account.SelectOwnerTrainer); break;
+    case 'Public Trainer': w.clickOn(Account.SelectPublicTrainer); break;
+    default :  console.log("undefined user")   
   }
   await browser.executeScript('window.scrollTo(0,5000);')
   await Racing.Begin.click();
@@ -643,7 +669,6 @@ When('user see the details of a dog with toggle to table view', async () => {
   })
 })
 
-
 When('user accepts the declarations on the Term Page', async () => {
   browser.wait(EC.elementToBeClickable(Account.AcceptDeclaration), 1000).then(function () { });
   await browser.executeScript('window.scrollTo(188, 788);')
@@ -677,8 +702,7 @@ When('user enters the Questions for Criminal History, Racing, Spouse or Domestic
    });
      Account.Declaration.getText().then(function (text) {
     console.log(text)
-   });
-  
+   });  
    Account.NationalPoliceCheck.getText().then(function (text) {
     console.log(text)
    });
@@ -830,7 +854,7 @@ if(action=='submit'){
 
 When('user enters the {string} -> {string} and selects dog activity as {string}', async (dogAction, activity, location) => {
   if(dogAction== "Dog details"){
-    browser.wait(EC.elementToBeClickable(DogLocation.DogName), 2000).then(function () { })
+  browser.wait(EC.elementToBeClickable(DogLocation.DogName), 2000).then(function () { })
   DogLocation.DogName.sendKeys('FABRIOLA CITRUS')
   browser.wait(EC.elementToBeClickable(DogLocation.EarBrand), 2000).then(function () { })
   DogLocation.EarBrand.sendKeys('VHNWC')
@@ -843,18 +867,15 @@ When('user enters the {string} -> {string} and selects dog activity as {string}'
   w.clickOn(DogLocation.DogActivity)
   await browser.executeScript('window.scrollTo(187, 900);')
   await browser.driver.sleep(1000);
-  if(activity == 'Breeding')
-  w.clickOn(DogLocation.SelectActivityAsBreeding)
-  else if(activity == 'Educating') 
-  w.clickOn(DogLocation.SelectActivityAsEducating)
-  else if(activity == 'Rearing')
-  w.clickOn(DogLocation.SelectActivityAsRearing)
-  else if(activity == 'Spelling')
-  w.clickOn(DogLocation.SelectActivityAsSpelling)
-  else if(activity == 'Training') 
-  w.clickOn(DogLocation.SelectActivityAsTraining)
-  else if(activity == 'Whelping') 
-  w.clickOn(DogLocation.SelectActivityAsWhelping)
+  switch(activity) {
+  case 'Breeding': w.clickOn(DogLocation.SelectActivityAsBreeding); break;
+  case 'Educating': w.clickOn(DogLocation.SelectActivityAsEducating); break;
+  case 'Rearing': w.clickOn(DogLocation.SelectActivityAsRearing); break;
+  case 'Spelling': w.clickOn(DogLocation.SelectActivityAsSpelling); break;
+  case 'Training': w.clickOn(DogLocation.SelectActivityAsTraining); break;
+  case 'Whelping': w.clickOn(DogLocation.SelectActivityAsWhelping); break;
+  default :  console.log("undefined user")   
+  }
   await browser.driver.sleep(1000);
   w.clickOn(DogLocation.DogLocation)
   if(location == 'Same Location')
@@ -876,61 +897,32 @@ When('user enters the {string} -> {string} and selects dog activity as {string}'
 })
 
 When('user selects the dog and clicks agree to remove dog from kennel', async () => {
-  browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 10000).then(function () { })
-   await Home.SkipOverlay.click()
+  w.SkipOverlay()
  // await w.clickOn(DogLocation.SelectDog)
  await browser.driver.sleep(1000);
 DogLocation.Search.sendKeys("FABRIOLA CITRUS")
 await DogLocation.FindDogFabriolaCitrus.click()
-await w.clickOn(Racing.IAgree)
+//await w.clickOn(Racing.IAgree)
 })
   
 When('user views the {string} details', async (page) => {
   await browser.driver.sleep(1000);
-  if (page == 'Registration History'){
-    browser.takeScreenshot().then(function (png) {
-      writeScreenShot(png, 'MemHistoryRegistration.png');
-    });
-}
-else if (page == 'Competencies held'){
-  browser.takeScreenshot().then(function (png) {
-    writeScreenShot(png, 'MemHisgtoryCompetencies.png');
-  });
-}
-else if (page == 'Request New Card'){
-  browser.takeScreenshot().then(function (png) {
-    writeScreenShot(png, 'RequestNewCard.png');
-  });
-  var path = require('path');
-  var fileToUpload = "C://Users//psingh//Desktop//Priti//Automation1.9//TestAutomationFramework-FT1.9//images.jpg";
-  var absolutePath = path.resolve(__dirname, fileToUpload);
-    await Account.UploadNewPhoto.click();
-  //  element(by.css('input[type="file"]')).sendKeys(absolutePath);  --click->upload->select image->open- check the console and goto Event->Target->File
-}
-else if (page == 'Registration status'){
-  browser.takeScreenshot().then(function (png) {
-    writeScreenShot(png, 'RegistrationStatus.png');
-  });
-}
-  else if (page == 'Activities'){
-    browser.takeScreenshot().then(function (png) {
-      writeScreenShot(png, 'Activities.png');
-    });
+  switch(page) {
+    case 'Registration History': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'MemHistoryRegistration.png');}); break;
+    case 'Competencies held': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'MemHisgtoryCompetencies.png');}); break;
+    case 'Request New Card': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'RequestNewCard.png');}); break;
+    var path = require('path');
+    var fileToUpload = "C://Users//psingh//Desktop//Priti//Automation1.9//TestAutomationFramework-FT1.9//images.jpg";
+    var absolutePath = path.resolve(__dirname, fileToUpload);
+      await Account.UploadNewPhoto.click();
+    //  element(by.css('input[type="file"]')).sendKeys(absolutePath);  --click->upload->select image->open- check the console and goto Event->Target->File
+    break;
+    case 'Registration status':  browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'RegistrationStatus.png');}); break;
+    case 'Activities': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'Activities.png');}); break;
+    case 'Calender & Meeting': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'CalenderMeeting.png');}); break;
+    case 'Important Announcements': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'ImportantAnnouncements.png');}); break;
+    default :  console.log("wrong Page details")   
   }
-    else if (page == 'Calender & Meeting'){
-      await browser.executeScript('window.scrollTo(187, 900);')
-      browser.takeScreenshot().then(function (png) {
-        writeScreenShot(png, 'CalenderMeeting.png');
-      });
-    }
-      else if (page == 'Important Announcements'){
-        await browser.executeScript('window.scrollTo(0, 5000);')
-        browser.takeScreenshot().then(function (png) {
-          writeScreenShot(png, 'ImportantAnnouncements.png');
-        });
-      }
-      else
-        console.error();      
 })
 
 When('user views the overlay at {string} Page and clicks at {string}', async (page, action) => {
@@ -982,8 +974,9 @@ When('user views the overlay at {string} Page and clicks at {string}', async (pa
   await w.clickOn(Home.Gotit5)
  }
   else if(page=='My Dogs'){
+  browser.wait(EC.elementToBeClickable(Home.MyDogs), 5000).then(function () { })
   await w.clickOn(Home.MyDogs)
-   browser.wait(EC.elementToBeClickable(Home.GotIt), 10000).then(function () { })
+   browser.wait(EC.elementToBeClickable(Home.MyDogs1Menu), 10000).then(function () { })
    Home.MyDogs1Menu.getText().then(function (text) {
     expect(text).to.equal('Greyhounds classified\n1/5')
   })
@@ -991,7 +984,7 @@ When('user views the overlay at {string} Page and clicks at {string}', async (pa
       expect(text).to.equal('Unnamed and racing statuses greyhounds will appear in Active tab. Retired status greyhounds will appear in Non Active tab. Litters whose litter registration is in progress will appear in Litters page.')
     })
     await w.clickOn(Home.GotIt)
-     browser.wait(EC.elementToBeClickable(Home.Gotit2), 1000).then(function () { })
+     browser.wait(EC.elementToBeClickable(Home.MyDogs2Menu), 1000).then(function () { })
      Home.MyDogs2Menu.getText().then(function (text) {
       expect(text).to.equal('Sort a list\n2/5')
     })
@@ -1028,5 +1021,98 @@ When('user views the overlay at {string} Page and clicks at {string}', async (pa
     })
     browser.executeScript('window.scrollTo(321,40)').then(async () => { });
     await w.clickOn(Home.Gotit5)
+  }
+
+  else if(page=='Dog Details'){
+    w.SkipOverlay()
+    browser.wait(EC.elementToBeClickable(Home.MyDogs), 5000).then(function () { })
+  await w.clickOn(Home.MyDogs)
+ // browser.wait(EC.elementToBeClickable(Racing.DogDetailsClick), 40000).then(function () { })
+ browser.driver.sleep(30000);
+ await w.clickOn(Racing.DogDetailsClick)
+    browser.wait(EC.elementToBeClickable(Home.GotIt), 10000).then(function () { })
+    Home.DogDetails1Menu.getText().then(function (text) {
+    expect(text).to.equal('Greyhound details\n1/2')
+  })
+   Home.DogDetails1Description.getText().then(function (text) {
+      expect(text).to.equal('Key details such as racing name, ear brand, activity, owner and actions can be checked here.')
+    })
+    await w.clickOn(Home.GotIt)
+     browser.wait(EC.elementToBeClickable(Home.Gotit2), 1000).then(function () { })
+     Home.DogDetails2Menu.getText().then(function (text) {
+      expect(text).to.equal('Greyhound data\n2/2')
+    })
+    Home.DogDetails2Description.getText().then(function (text) {
+      expect(text).to.equal('Greyhound details such as its stats about box wins/starts, form details, history and pedigree can be seen here.')
+    })
+    await w.clickOn(Home.Gotit2)
+  }
+
+  else if(page=='I Want To'){
+    browser.driver.sleep(1000);
+    w.SkipOverlay()
+    browser.wait(EC.elementToBeClickable(IWantTo.IWantTo), 5000).then(function () { })
+  await w.clickOn(IWantTo.IWantTo)
+    browser.wait(EC.elementToBeClickable(Home.IWantTo1Menu), 10000).then(function () { })
+    Home.IWantTo1Menu.getText().then(function (text) {
+    expect(text).to.equal('Actions on your greyhound\n1/1')
+  })
+   Home.IWantTo1Description.getText().then(function (text) {
+      expect(text).to.equal('Go here to do actions against your racing greyhound.')
+    })
+    await w.clickOn(Home.GotIt)
+  }
+
+  else if(page=='Calendar'){
+    browser.driver.sleep(1000);
+    // w.SkipOverlay()
+    browser.wait(EC.elementToBeClickable(Home.Calendar), 5000).then(function () { })
+  await w.clickOn(Home.Calendar)
+    browser.wait(EC.elementToBeClickable(Home.Calendar1Menu), 10000).then(function () { })
+    Home.Calendar1Menu.getText().then(function (text) {
+    expect(text).to.equal('Race Meeting acronyms\n1/2')
+  })
+   Home.Calendar1Description.getText().then(function (text) {
+      expect(text).to.equal('Metro: Metropolitan Meeting\nPFS: Provincial Full Stakes\nTier3: Half Stakes\nRLM: Rank Limit Meeting - Half Stakes\nAPM: Aged Prizemoney Meeting\nHSM: Half Stakes Meeting')
+    })
+    await w.clickOn(Home.GotIt)
+    browser.wait(EC.elementToBeClickable(Home.Calendar2Menu), 1000).then(function () { })
+    Home.Calendar2Menu.getText().then(function (text) {
+     expect(text).to.equal('View Victorian Races\n2/2')
+   })
+   Home.Calendar2Description.getText().then(function (text) {
+     expect(text).to.equal('Navigate through weekly/monthly race meetings.')
+   })
+   await w.clickOn(Home.Gotit2)
+  }
+  })
+
+  When('user views the {string} page and filters by {string}', async (page, filter) => {
+    await browser.driver.sleep(1000);
+    w.SkipOverlay()
+    if(page == 'My Dogs->Active'){
+      browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'MyDogsActive.png');});
+      await w.clickOn(ActiveDogs.Filter);     
+     await browser.driver.sleep(1000);
+     w.setCheckBox(ActiveDogs.FilterRacing, true)
+     w.setCheckBox(ActiveDogs.FilterNominate, true)
+     w.setCheckBox(ActiveDogs.FilterWarning, true)
+     w.setCheckBox(ActiveDogs.FilterIssue, true)
+     w.setCheckBox(ActiveDogs.FilterOwned, true)
+     w.setCheckBox(ActiveDogs.FilterTraining, true)
+     w.setCheckBox(ActiveDogs.FilterSpelling, true)
+     w.setCheckBox(ActiveDogs.FilterEducating, true)
+     w.setCheckBox(ActiveDogs.FilterBreeding, true)
+     w.setCheckBox(ActiveDogs.FilterWhelping, true)
+     w.setCheckBox(ActiveDogs.FilterRearing, true)
+     w.setCheckBox(ActiveDogs.FilterDefault, true)
+      switch(filter) {
+        case 'All': break;
+        case 'Reset': break;
+        case 'Racing': await  w.setCheckBox(ActiveDogs.FilterRacing, false); break;
+        case 'My Dogs->Non Active': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'MyDogsNonActive.png');}); break;
+        case 'My Dogs->Litter': browser.takeScreenshot().then(function (png) {writeScreenShot(png, 'MyDogsLitter.png');});
+      }
+      await ActiveDogs.Close.click()
   }
   })

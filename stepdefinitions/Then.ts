@@ -11,13 +11,21 @@ import { Alert } from 'selenium-webdriver';
 import { protractor } from "protractor/built/ptor";
 import { DogDetails } from "../Specs/ui/DogDetails";
 import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
+import { ActiveDogs } from "../Specs/ui/ActiveDogs";
 var expect = require('chai').expect;
+var chaiAsPromised = require("chai-as-promised");
 let EC = protractor.ExpectedConditions;
-Then('user should be able to land on {string} page and should see {string}', async (string, string2) => {
-  Home.WelcomeText.getText().then(function (val) {
-    expect(val).to.equal('Welcome to Fast Track')
+Then('user should be able to validate {string}', async (text) => {
+  Home.IntroText.getText().then(function (text) {
+    expect(text).to.equal('MyFastTrack is an easy way to manage your greyhound business on the go. Specifically designed to be user friendly on mobile devices, MyFastTrack has all the features of FastTrack plus some special features only available through the MyFastTrack application.')
+  })
+    Home.IntroCol1.getText().then(function (text) {
+      expect(text).to.equal('- Account Management\n- Apply to Participate\n- Financial details\n- Notices\n- Racing Management\n- Nominations\n- Scratchings\n- Litter Management\n- Service Notification\n- Result of Mating')
+    })
+      Home.IntroCol2.getText().then(function (text) {
+        expect(text).to.equal('- Greyhound Management\n- Ownership\n- Training\n- Location changes\n- Greyhound Health Records\n- Illness, Injury, Health\n- Apply a treatment to multiple dogs')
+      })
   });
-});
 
 Then(/^Studmaster should be able to record a service/, async () => {
   console.log("Register service is succesful");
@@ -32,10 +40,11 @@ Then('User is redirected to the list of racing dogs', async () => {
 })
 
 Then('User should be able to confirm the transfer ownership of dog to another user', async () => {
-  await Racing.IAgree.click();
+ await browser.driver.sleep(5000);
+//await Racing.IAgree.click();
   // await Racing.Submit.click();
-  browser.driver.sleep(1000);
-})
+ await browser.driver.sleep(10000);
+  })
 
 Then('User should be able to complete the transfer ownership of dog', async () => {
   // Write code here that turns the phrase above into concrete actions
@@ -208,12 +217,29 @@ Then('user is able to land on {string} Page', function (landPage) {
   }
   else if (landPage == 'Home') {
     browser.driver.sleep(5000);
-    expect(Home.HomeSelected.isSelected()).toBe(true);
+    Home.Home.getText().then(function (text) {
+      expect(text).to.equal('home-line\nHome')
+    });
   }
   else if (landPage == ' My Dogs ') {
     browser.driver.sleep(5000);
-    expect(Home.MyDogsSelected.isSelected()).toBe(true);
+    expect(Home.Racing.toString()).to.be.equal('[object Object]')
   }
+  else if (landPage == ' Dog Details ') {
+    browser.driver.sleep(5000);
+
+  }
+  else if (landPage == 'I Want To') {
+    browser.driver.sleep(2000).then(function () { })
+  //  IWantTo.TitleCheck.getText().then(function (text) {
+   //   expect(text).to.equal('I WANT TO...')
+ //})
+}
+  else if (landPage == 'Calendar') {
+    browser.driver.sleep(5000);
+}
+
+  else(console.log('no land page selected'))
 });
 
 
@@ -370,4 +396,34 @@ if(page=='Registration status'){
 }
 else if(page=='Member history'){}
 });
+
+Then('User verifies the no of dogs displayed with filter {string}', async (filter) => {
+  switch(filter) {
+    case 'Reset': 
+        ActiveDogs.NoOfDogs. getText().then(function(no){
+        ActiveDogs.DogDetails.count().then(function(count){
+         expect(no).to.contain(count)
+        })  }); break;
+    case 'Racing': 
+        ActiveDogs.NoOfDogs. getText().then(function(no){
+        console.log(no)
+        var numsStr = no.replace(/[^0-9]/g,'');
+        console.log(parseInt(numsStr);
+      
+      }); break;
+  }
+})
+
+Then('User verifies the list of filters and its detail', async () => {
+await ActiveDogs.Filter.click()
+await browser.driver.sleep(1000);
+ActiveDogs.FilterNames.getSize().then(function(size){
+  expect(size).to.be.equal(12)
+  })
+  })  
+
+
+  
+
+
 

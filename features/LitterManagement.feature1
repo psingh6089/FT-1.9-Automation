@@ -1,0 +1,176 @@
+@test
+    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'whelped'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'Whelped'
+        And  User clicks on 'submit' button
+        And user proceeds with the payment option
+            And  User clicks on 'c' button
+        Then User verifies the record
+
+        @Pending
+    Scenario: Verify the field validations on 'Result of Mating' as 'whelped' Page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'Whelped'
+        And  User clicks on 'submit' button
+        And user proceeds with the payment option
+            And  User clicks on 'c' button
+        Then User verifies the record
+
+        
+    @test
+    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'whelped' and returns back on confirmation page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'Whelped'
+        And  User clicks on 'submit' button
+        And user proceeds with the payment option
+        And  User clicks on 'back' button
+         Then User verifies the record
+
+    @test
+    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'Missed'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'Missed'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+
+    @Pending
+    Scenario: Verify the field validations on 'Result of Mating' as 'Missed' Page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'Missed'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+
+    @test
+    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'Missed' and clicks 'Cancel' button
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'Missed'
+        And  User clicks on 'cancel' button
+        Then User navigates to 'Breeding and Litter'
+
+    @test
+    Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'No Live Pups'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+    @Pending
+    Scenario: Verify the field validations on 'Result of Mating' as 'No Live Pups' Page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+          @test
+  Scenario: FT2-581	Litter Management - A breeder can record the result of mating as 'No Live Pups' and clicks 'Cancel' button
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 'cancel' button
+        Then User navigates to 'Breeding And Litter'
+
+    @Pending
+    Scenario: Verify the field validations on 'Result of Mating' as 'No Live Pups' Page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-500Verify that the participant can able to see MyLitters Page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-499Verify that the participant can able to see his litter registration when the status of the litter registration is 'Pending'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-498Verify that the participant can able to see his litters when the status of the litter registration is 'Completed'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-497Verify that the participant can able to see his litters when the status of the litter registration is 'Awaiting Earbrands'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-496Verify that the participant can able to see his litters when the status of the litter registration is 'Awaiting Microchip'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-495Verify that the participant can able to see his litters when the status of the litter registration is 'Awaiting Vaccination'
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+            @Pending
+    Scenario: QA-494Verify that Filter functionality on MyLitters page
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+                    @Pending
+    Scenario: QA-80Verify if the participant is able to view the progress of his litter registration when the status is "Awaiting Microchipping".
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+                    @Pending
+    Scenario: QA-79Verify if the participant is able to view the progress of his litter registration when the status is "Awaiting Vaccination".
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Whelping Results' tab
+        When  User selects the parent Dog and enters the details for 'No Live Pups'
+        And  User clicks on 's' button
+        Then User verifies the record
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,10 +3,10 @@ import { spawn } from 'child_process';
 export const Racing = {
     MyDogs: element(by.cssContainingText('div.nav-item', ' My Dogs')),
     DogDetails: element(by.xpath("//app-dog-card-header[@class='dog-card-header']")),
-
+    DogDetailsClick: element(by.css('div.dog-card.ng-star-inserted')),
     Breeding: element(by.cssContainingText('a.mat-tab-label-active', ' Breeding & Litters ')),
     Racing: element(by.css('a.mat-tab-label-active')),
-    Dog1: element(by.xpath('//app-dog-card[1]//app-dog-card-header[1]')),
+    Dog1: element(by.css('div.dog-selection-card.ng-star-inserted')),
     DogAcceptBreeding: element(by.xpath('//app-dog-card[7]//app-dog-card-header[1]//div[1]//button[1]//span[1]//mat-icon[1]')),
     DogCheckTransferKey: element(by.xpath("//app-dog-card[3]/div[1]/div[2]/app-dog-card-tooltip[1]/h6[1]")),
     Dog: element(by.xpath('//app-dog-card-header[1]//div[1]//button[1]//span[1]//mat-icon[1]')),
@@ -53,21 +53,21 @@ export const Racing = {
     Begin: element(by.cssContainingText('span.mat-button-wrapper', ' Begin ')),
     Yes: element(by.cssContainingText('span.mat-button-wrapper', ' Yes ')),
 
-
-
     AcceptBreeding: element(by.cssContainingText('span.mat-button-wrapper', ' Accept breeding authority ')),
     AddAuthorityKey: element(by.id('mat-input-0')),
     AddEarBrand: element(by.id('mat-input-1')),
+    validateError: element(by.css('div.validation.issue.ng-star-inserted')),
     SelfOwnership: element(by.cssContainingText('div.mat-radio-label-content', ' Self Ownership ')),
     SyndicateOwnership: element(by.cssContainingText('div.mat-radio-label-content', ' Self Ownership ')),
 
     AcceptTransferOwnership: element(by.cssContainingText('span.mat-button-wrapper', ' Accept breeding authority ')),
     // AcceptOwnership: element(by.xpath('//button[2]')),
     Transfer: element(by.cssContainingText('span.mat-button-wrapper', ' Transfer ownership ')),
-    TransferIAgree: element(by.css('div.mat-checkbox-inner-container')),
-    FirstName: element(by.id('mat-input-0')),
-    LastName: element(by.id('mat-input-1')),
-    PhoneNo: element(by.id('mat-input-2')),
+    
+    FirstName: element(by.id('mat-input-1')),
+    LastName: element(by.id('mat-input-2')),
+    PhoneNo: element(by.id('mat-input-3')),
+    PhoneError: element(by.css('mat-error.mat-error.ng-star-inserted')),
 
     // Confirm:          element(by.id('mat-checkbox-2')),
     //Register service

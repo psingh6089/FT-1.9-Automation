@@ -1,12 +1,13 @@
 import { by, element } from 'protractor';
 import { spawn } from 'child_process';
 export const IWantTo = {
-
+    TitleCheck: element(by.css('div.title-container-iwantto')),
     IWantTo: element(by.cssContainingText('div.nav-item', ' I Want To')),
     BreedGreyhound: element(by.cssContainingText('div.level-one-title', 'BREED GREYHOUND')),
     ManageGreyhound: element(by.cssContainingText('div.level-one-title', 'MANAGE GREYHOUND')),
+   ApplyfroDogNAmes: element(by.cssContainingText('div.level-two-title', ' Apply for Dog Names ')),
     NoticeOfIntent: element(by.cssContainingText('div.level-two-title', ' Notice of Intent to Euthanase ')),
-    TransferManagement: element(by.cssContainingText('div.level-two-title', ' Transfer Management ')),
+    TransferManagement: element(by.cssContainingText('div.level-two-title', ' Transfer Ownership ')),
     TransferOwnership: element(by.cssContainingText('div.level-three-title', 'Transfer Ownership')),
     AcceptTransferOfOwnership: element(by.cssContainingText('div.level-three-title', 'Accept transfer of Ownership')),
     TransferDogToBreeder: element(by.cssContainingText('div.level-two-title', ' Transfer dog to a breeder ')),
