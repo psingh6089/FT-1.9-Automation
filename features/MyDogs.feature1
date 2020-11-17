@@ -1,0 +1,342 @@
+Feature: User virifies the Active, Non Active and Litters Page for the My Dog
+
+    @testp
+    Scenario: My Dogs - Verify that user can view the 'My Dog'-> Active page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Reset'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Reset'
+
+    @testp
+    Scenario: My Dogs - User verifies the list of filters on 'Active' Dog page and its detail
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'All'
+        Then User verifies the list of filters on 'Active' page and its detail
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Racing' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Racing'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Racing'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Nominated' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Nominated'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Nominated'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Warning' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Warning'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Warning'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Issue' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Issue'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Issue'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Owned' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Owned'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Owned'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Training' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Training'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Training'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Spelling' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Spelling'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Spelling'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Educating' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Educating'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Educating'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Breeding' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Breeding'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Breeding'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Whelping' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Whelping'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Whelping'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Rearing' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Rearing'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Rearing'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Default' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'Default'
+        Then User verifies the no of 'Active' dogs displayed with filter 'Default'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Kennel name A - Z' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Kennel name A - Z'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Kennel name A - Z'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Kennel name Z - A' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Kennel name Z - A'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Kennel name Z - A'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Racing name A - Z' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Racing name A - Z'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Racing name A - Z'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Racing name Z - A' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Racing name Z - A'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Racing name Z - A'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Whelp date - Youngest' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'help date - Youngest'
+        Then User verifies the no of 'Active' dogs displayed with sort 'help date - Youngest'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Whelp date - Oldest' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Whelp date - Oldest'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Whelp date - Oldest'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Dog Sex - Bitch first' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Dog Sex - Bitch first'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Dog Sex - Bitch first'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Dog Sex - Dog first' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Dog Sex - Dog first'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Dog Sex - Dog first'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Reset' on Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and sorts by 'Reset'
+        Then User verifies the no of 'Active' dogs displayed with sort 'Reset'
+
+    @testp
+    Scenario: My Dogs - Verify that user can view the 'My Dog'-> on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'All'
+        Then User verifies the no of 'Active' dogs displayed with filter 'All'
+
+    @testp
+    Scenario: My Dogs - User verifies the list of filters on 'Non Active' Dog page and its detail
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Active' page and filters by 'All'
+        Then User verifies the list of filters on 'Non Active' page and its detail
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Pet' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Pet'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Pet'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Breeding' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Breeding'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Breeding'
+
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Gap' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Gap'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Gap'
+
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Euthanised' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Euthanised'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Euthanised'
+
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Exported' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Exported'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Exported'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Deceased' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Deceased'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Deceased'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Pet-Third-Party' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Pet-Third-Party'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Pet-Third-Party'
+
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Default' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Default'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Default'
+
+
+    @testp
+    Scenario: My Dogs - Verify that user can do filter by 'Reset' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and filters by 'Reset'
+        Then User verifies the no of 'Non Active' dogs displayed with filter 'Reset'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Kennel name A - Z' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Kennel name A - Z'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Kennel name A - Z'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Kennel name Z - A' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Kennel name Z - A'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'kennel name Z - A'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Racing name A - Z' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Racing name A - Z'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Racing name A - Z'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Racing name Z - A' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Racing name Z - A'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Racing name Z - A'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Whelp date - Youngest' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Whelp date - Youngest'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Whelp date - Youngest'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Whelp date - Oldest' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Whelp date - Oldest'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Whelp date - Oldest'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Dog Sex - Bitch first' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Dog Sex - Bitch first'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Dog Sex - Bitch first'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Dog Sex - Dog first' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Dog Sex - Dog first'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Dog Sex - Dog first'
+
+    @testp
+    Scenario: My Dogs - Verify that user can do Sort by 'Reset' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Non Active' page and sorts by 'Reset'
+        Then User verifies the no of 'Non Active' dogs displayed with sort 'Reset'
+
+    @test
+    Scenario: My Dogs - Verify that user can do filter by 'All' on Non Active Dogs Pag
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Litters' page and filters by 'All'
+        Then User verifies the no of 'Litters' dogs displayed with filter 'All'
+
+
+    @test
+    Scenario: My Dogs - Verify that user can do filter by 'Past Year' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Litters' page and filters by 'Past Year'
+        Then User verifies the no of 'Litters' dogs displayed with filter 'Past Year'
+
+
+    @test
+    Scenario: My Dogs - Verify that user can do filter by 'Past 5 Years' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Litters' page and filters by 'Past 5 Years'
+        Then User verifies the no of 'Litters' dogs displayed with filter 'Past 5 Years'
+
+
+    @test
+    Scenario: My Dogs - Verify that user can do filter by 'Cancel' on Non Active Dogs Page
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
+        When user views the 'My Dogs->Litters' page and filters by 'Cancel'
+        Then User verifies the no of 'Litters' dogs displayed with filter 'Cancel'
+
+
+
+

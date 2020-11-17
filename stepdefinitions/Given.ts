@@ -15,18 +15,20 @@ import { DogLocation } from "../Specs/ui/DogLocation";
 let EC = protractor.ExpectedConditions;
 
 Given('User navigates to the Home page of FT1.9 application', async () => {
-await browser.waitForAngularEnabled(false)
+  //await browser.waitForAngularEnabled(false)
+  browser.ignoreSynchronization = true
   await browser.get('https://test-ft19.devgrv.org.au/');
 });
 
 Given('A participant {string} logged in to FastTrack application', async (user) => {
-  _w.logIn(user); 
+  _w.logIn(user);
   await browser.driver.sleep(2000);
   //_w.SkipOverlay
 });
 
 Given('user navigates to {string} -> {string} tab and clicks {string} tab', async (menu, tab, button) => {
   _w.Navigate(menu, tab, button)
+  //await browser.waitForAngularEnabled(true)
   await browser.driver.sleep(1000);
 })
 
@@ -37,31 +39,31 @@ Given('user navigates to {string} -> {string} tab and clicks {string} tab', asyn
   })
   })*/
 
-  Given('A participant logs in with {string} and {string}', async (user, pwd) => {
-    await browser.driver.sleep(1000);
-    Home.Login.isPresent().then(async (result)=> {
-      if (result) {
-        await Home.Login.click()
-      }
-      else {  }
-    });
-    //webUtils.clickOn(Home.Login);
+Given('A participant logs in with {string} and {string}', async (user, pwd) => {
   await browser.driver.sleep(1000);
-  switch(user) {
-    case "correct email":  Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.correct_email)}); break;
-    case "wrong email": Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.wrong_email)}); break;
-    case "correct memberid":  Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.correct_memberid)}); break;
-    case "wrong memberid": Home.UserName.clear().then(function (){ Home.UserName.sendKeys(testData.data.wrong_memberid)}); break;
-    default: user === undefined? console.log("user '" + user + "' doesn't match "): null;
+  Home.Login.isPresent().then(async (result) => {
+    if (result) {
+      await Home.Login.click()
     }
-    await browser.driver.sleep(2000);
-    switch(pwd) {
-    case "correct password":  Home.Password.clear().then(function(){ Home.Password.sendKeys(testData.data.Password)}); break;
-    case "wrong password":  Home.Password.clear().then(function(){ Home.Password.sendKeys(testData.data.wrong_pwd)}); break;
-    default: user === undefined? console.log("user '" + user + "' doesn't match "): null;
+    else { }
+  });
+  //webUtils.clickOn(Home.Login);
+  await browser.driver.sleep(1000);
+  switch (user) {
+    case "correct email": Home.UserName.clear().then(function () { Home.UserName.sendKeys(testData.data.correct_email) }); break;
+    case "wrong email": Home.UserName.clear().then(function () { Home.UserName.sendKeys(testData.data.wrong_email) }); break;
+    case "correct memberid": Home.UserName.clear().then(function () { Home.UserName.sendKeys(testData.data.correct_memberid) }); break;
+    case "wrong memberid": Home.UserName.clear().then(function () { Home.UserName.sendKeys(testData.data.wrong_memberid) }); break;
+    default: user === undefined ? console.log("user '" + user + "' doesn't match ") : null;
   }
   await browser.driver.sleep(2000);
-  })
+  switch (pwd) {
+    case "correct password": Home.Password.clear().then(function () { Home.Password.sendKeys(testData.data.Password) }); break;
+    case "wrong password": Home.Password.clear().then(function () { Home.Password.sendKeys(testData.data.wrong_pwd) }); break;
+    default: user === undefined ? console.log("user '" + user + "' doesn't match ") : null;
+  }
+  await browser.driver.sleep(2000);
+})
 
 
 

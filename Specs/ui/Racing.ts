@@ -2,6 +2,7 @@ import { by, element } from 'protractor';
 import { spawn } from 'child_process';
 export const Racing = {
     MyDogs: element(by.cssContainingText('div.nav-item', ' My Dogs')),
+    Calendar: element(by.cssContainingText('div.nav-item.calendar', ' Calendar')),
     DogDetails: element(by.xpath("//app-dog-card-header[@class='dog-card-header']")),
     DogDetailsClick: element(by.css('div.dog-card.ng-star-inserted')),
     Breeding: element(by.cssContainingText('a.mat-tab-label-active', ' Breeding & Litters ')),

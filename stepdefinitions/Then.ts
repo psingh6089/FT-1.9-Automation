@@ -11,21 +11,29 @@ import { Alert } from 'selenium-webdriver';
 import { protractor } from "protractor/built/ptor";
 import { DogDetails } from "../Specs/ui/DogDetails";
 import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
-import { ActiveDogs } from "../Specs/ui/ActiveDogs";
+import { MyDogs } from "../Specs/ui/MyDogs";
+import { Calendar } from "../Specs/ui/Calendar";
 var expect = require('chai').expect;
 var chaiAsPromised = require("chai-as-promised");
 let EC = protractor.ExpectedConditions;
+var fs = require('fs');
+function writeScreenShot(png, filename) {
+  var stream = fs.createWriteStream(filename);
+  stream.write(new Buffer(png, 'base64'));
+  stream.end();
+}
+
 Then('user should be able to validate {string}', async (text) => {
   Home.IntroText.getText().then(function (text) {
     expect(text).to.equal('MyFastTrack is an easy way to manage your greyhound business on the go. Specifically designed to be user friendly on mobile devices, MyFastTrack has all the features of FastTrack plus some special features only available through the MyFastTrack application.')
   })
-    Home.IntroCol1.getText().then(function (text) {
-      expect(text).to.equal('- Account Management\n- Apply to Participate\n- Financial details\n- Notices\n- Racing Management\n- Nominations\n- Scratchings\n- Litter Management\n- Service Notification\n- Result of Mating')
-    })
-      Home.IntroCol2.getText().then(function (text) {
-        expect(text).to.equal('- Greyhound Management\n- Ownership\n- Training\n- Location changes\n- Greyhound Health Records\n- Illness, Injury, Health\n- Apply a treatment to multiple dogs')
-      })
-  });
+  Home.IntroCol1.getText().then(function (text) {
+    expect(text).to.equal('- Account Management\n- Apply to Participate\n- Financial details\n- Notices\n- Racing Management\n- Nominations\n- Scratchings\n- Litter Management\n- Service Notification\n- Result of Mating')
+  })
+  Home.IntroCol2.getText().then(function (text) {
+    expect(text).to.equal('- Greyhound Management\n- Ownership\n- Training\n- Location changes\n- Greyhound Health Records\n- Illness, Injury, Health\n- Apply a treatment to multiple dogs')
+  })
+});
 
 Then(/^Studmaster should be able to record a service/, async () => {
   console.log("Register service is succesful");
@@ -40,11 +48,11 @@ Then('User is redirected to the list of racing dogs', async () => {
 })
 
 Then('User should be able to confirm the transfer ownership of dog to another user', async () => {
- await browser.driver.sleep(5000);
-//await Racing.IAgree.click();
+  await browser.driver.sleep(5000);
+  //await Racing.IAgree.click();
   // await Racing.Submit.click();
- await browser.driver.sleep(10000);
-  })
+  await browser.driver.sleep(10000);
+})
 
 Then('User should be able to complete the transfer ownership of dog', async () => {
   // Write code here that turns the phrase above into concrete actions
@@ -198,50 +206,32 @@ Then('user should get a popup for the payment confirmation', function () {
 });
 
 
-Then('user is able to land on {string} Page', function (landPage) {
+Then('user is able to land on {string} Page', async (landPage)=> {
   /* if(landPage=='Bank Details'){
    expect(Account.BankDetails.getText().then(async(text)=>{
       console.log(text)
     })).to.be.equal(landPage); 
    }*/
-   browser.driver.sleep(2000).then(function () { })
-  if (landPage == 'My Account') {
-    expect(Account.MyAccount.getText().then(async (text) => {
-      console.log(text)
-    })).to.be.equal(landPage);
+  browser.driver.sleep(2000).then(function () { })
+  switch(landPage){
+    case 'My Account':  expect(Account.MyAccount.getText().then(async (text) => {console.log(text)})).to.be.equal(landPage); break;
+    case ' My Dogs->Racing ': expect(Racing.Racing.getText().then(async (text) => {console.log(text)})).to.be.equal(landPage); break;
+    case 'Home':  browser.driver.sleep(5000); Home.Home.getText().then(function (text) {expect(text).to.equal('home-line\nHome')}); break;
+    case 'My Dogs ': browser.driver.sleep(5000); expect(Home.Racing.toString()).to.be.equal('[object Object]'); break;
+    case 'Calendar': browser.driver.sleep(5000); var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var d = new Date(); 
+    var monthName = months[d.getMonth()];  
+    await browser.driver.sleep(1000);
+    Calendar.PageHeading.getText().then(function (text) {expect(text).to.contain(monthName)});; break;
+    case ' Dog Details ': browser.driver.sleep(5000); break;
+    case 'I Want To':    browser.driver.sleep(2000).then(function () { })
+    //  IWantTo.TitleCheck.getText().then(function (text) {
+    //   expect(text).to.equal('I WANT TO...')
+    //})
+     break;
+    default: console.log("undefined landing page")
   }
-  else if (landPage == ' My Dogs->Racing ') {
-    expect(Racing.Racing.getText().then(async (text) => {
-      console.log(text)
-    })).to.be.equal(landPage);
-  }
-  else if (landPage == 'Home') {
-    browser.driver.sleep(5000);
-    Home.Home.getText().then(function (text) {
-      expect(text).to.equal('home-line\nHome')
-    });
-  }
-  else if (landPage == ' My Dogs ') {
-    browser.driver.sleep(5000);
-    expect(Home.Racing.toString()).to.be.equal('[object Object]')
-  }
-  else if (landPage == ' Dog Details ') {
-    browser.driver.sleep(5000);
-
-  }
-  else if (landPage == 'I Want To') {
-    browser.driver.sleep(2000).then(function () { })
-  //  IWantTo.TitleCheck.getText().then(function (text) {
-   //   expect(text).to.equal('I WANT TO...')
- //})
-}
-  else if (landPage == 'Calendar') {
-    browser.driver.sleep(5000);
-}
-
-  else(console.log('no land page selected'))
-});
-
+})
 
 Then('user should be able to the transaction as per filter', function () {
 });
@@ -286,9 +276,9 @@ Then('user should be able to see himself as owner', function (string) {
 Then('user should be able to validate the injury event added by him ', async () => {
   var EC = protractor.ExpectedConditions;
   browser.wait(EC.alertIsPresent(), 5000);
-  let ale:Alert = browser.switchTo().alert();
-ale.accept();
- 
+  let ale: Alert = browser.switchTo().alert();
+  ale.accept();
+
   /* COP.VerifyInjuryList.getText().then(function (val) {
     console.log("list of injuries:" + val)
   })
@@ -344,22 +334,22 @@ Then('user should be able to verify the dog details', async () => {
 Then('user is able to verify the dog on on {string} -> {string} Page', async (NonRacing, History) => {
   //w.ValidateDog();
   browser.wait(EC.elementToBeClickable(Racing.MyDogs), 5000).then(function () { })
-await Racing.MyDogs.click();
-browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 10000).then(function () { })
-Home.SkipOverlay.isPresent().then(function (result) {
-  if (result) {
-    Home.SkipOverlay.click().then(function () { });
-  } else {  }
-});
-browser.wait(EC.elementToBeClickable(Home.NonRacing), 10000).then(function () { })
-await Home.NonRacing.click();
-await browser.driver.sleep(10000);
-console.log(w.DogEarbrand)
+  await Racing.MyDogs.click();
+  browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 10000).then(function () { })
+  Home.SkipOverlay.isPresent().then(function (result) {
+    if (result) {
+      Home.SkipOverlay.click().then(function () { });
+    } else { }
+  });
+  browser.wait(EC.elementToBeClickable(Home.NonRacing), 10000).then(function () { })
+  await Home.NonRacing.click();
+  await browser.driver.sleep(10000);
+  console.log(w.DogEarbrand)
 
- /* RetireGreyhound.DogEarbrand.getText().then(function(DogList) {
-    console.log("list is"+DogList) 
-    expect(DogList).toContain(w.DogEarbrand);    
-  })*/
+  /* RetireGreyhound.DogEarbrand.getText().then(function(DogList) {
+     console.log("list is"+DogList) 
+     expect(DogList).toContain(w.DogEarbrand);    
+   })*/
 })
 
 Then('user is able to verify the dog on', async () => {
@@ -376,54 +366,104 @@ Then('user should be able to land on Home page', async () => {
 })
 
 Then('user should be able to land on {string} error', async (text) => {
-  if(text == 'login'){
-Home.LoginError.getText().then(function (text) {
-  expect(text).to.equal('Wrong email or password.')
-});
-}
-else  if(text == 'email'){
-Home.EmailError.getText().then(function (text) {
-  expect(text).to.equal('Email is not valid.')
-});
-}
-})
-
-Then('user should be able to see the {string} details', async (page) => {
-if(page=='Registration status'){
-  Account.Title.getText().then(function (text) {
-    expect(text).to.equal('Registration: Public Trainer')
-})
-}
-else if(page=='Member history'){}
-});
-
-Then('User verifies the no of dogs displayed with filter {string}', async (filter) => {
-  switch(filter) {
-    case 'Reset': 
-        ActiveDogs.NoOfDogs. getText().then(function(no){
-        ActiveDogs.DogDetails.count().then(function(count){
-         expect(no).to.contain(count)
-        })  }); break;
-    case 'Racing': 
-        ActiveDogs.NoOfDogs. getText().then(function(no){
-        console.log(no)
-        var numsStr = no.replace(/[^0-9]/g,'');
-        console.log(parseInt(numsStr);
-      
-      }); break;
+  if (text == 'login') {
+    Home.LoginError.getText().then(function (text) {
+      expect(text).to.equal('Wrong email or password.')
+    });
+  }
+  else if (text == 'email') {
+    Home.EmailError.getText().then(function (text) {
+      expect(text).to.equal('Email is not valid.')
+    });
   }
 })
 
-Then('User verifies the list of filters and its detail', async () => {
-await ActiveDogs.Filter.click()
-await browser.driver.sleep(1000);
-ActiveDogs.FilterNames.getSize().then(function(size){
-  expect(size).to.be.equal(12)
+Then('user should be able to see the {string} details', async (page) => {
+  if (page == 'Registration status') {
+    Account.Title.getText().then(function (text) {
+      expect(text).to.equal('Registration: Public Trainer')
+    })
+  }
+  else if (page == 'Member history') { }
+});
+
+Then('User verifies the no of {string} dogs displayed with filter {string}', async (Dog, filter) => {
+  if (filter == 'Reset') {
+    await browser.driver.sleep(3000);
+    if (Dog == 'Active') {
+      MyDogs.NoOfActiveDogs.getText().then(function (no) {
+        MyDogs.DogDetails.count().then(function (count) {
+          expect(no).to.contain(count)
+        })
+      });
+      w.verifyFilter(Dog, filter)
+    }
+    else if (Dog == 'Non Active') {
+      MyDogs.NoOfNonActiveDogs.getText().then(function (no) {
+        MyDogs.DogDetails.getSize().then(function (count) {
+          expect(no).to.contain(count)
+        })
+      });
+      w.verifyFilter(Dog, filter)
+    }
+  }
+})
+
+Then('User verifies the list of filters on {string} page and its detail', async (page) => {
+   await browser.driver.sleep(1000);
+  if (page == 'Active') {
+    MyDogs.FilterNames.getSize().then(function (size) {
+      expect(size).to.be.equal(12)
+    })
+  }
+  else if (page == 'Non Active') {
+    MyDogs.FilterNames.getSize().then(function (size) {
+      expect(size).to.be.equal(8)
+    })
+  }
+  else if (page == 'Calendar') {
+    await browser.driver.sleep(10000);
+    Calendar.FilterOptions.count().then(function (size) {
+      expect(size).to.be.equal(6)
+    })
+  }
+})
+
+Then('User verifies the no of {string} dogs displayed with sort {string}', async (Dog, sort) => {
+  switch (sort) {
+    case 'Kennel name A - Z': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByKennelA_Z.png'); }); break;
+    case 'Kennel name Z - A': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByKennelZ_A.png'); }); break;
+    case 'Racing name A - Z': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByRacingA_Z.opng'); }); break;
+    case 'Racing name Z - A': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByRacingZ_A.png'); }); break;
+    case 'Whelp date - Youngest': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByYoungest.png'); }); break;
+    case 'Whelp date - Oldest': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByOldest.png'); }); break;
+    case 'Dog Sex - Bitch first': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveSortByBitchFirst.png'); }); break;
+    case 'Dog Sex - Dog first': await browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MyDogsActiveDogFirst.png'); }); break;
+    case 'Reset': await browser.driver.sleep(1000); MyDogs.SortByRacingA_Z.getText().then(function (text) {
+      expect(text).to.be.equal('Racing name A - Z')
+    })
+    default: console.log("undefined Sorting")
+  }
+})
+
+Then('User verifies the list displayed with filter {string}', async (filter) => {
+  switch (filter) {
+    case 'Metro': w.verifyCalendarFilter(Calendar.FilterMetro); break;
+    case 'PFS': w.verifyCalendarFilter(Calendar.FilterPFS); break;
+    case 'Tier 3': w.verifyCalendarFilter(Calendar.FilterTier3); break;
+    case 'RLM': w.verifyCalendarFilter(Calendar.FilterRLM); break;
+    case 'HSM': w.verifyCalendarFilter(Calendar.DogFilterHSM); break;
+    case 'CS': w.verifyCalendarFilter(Calendar.DogFilterCS); break;
+  }
   })
-  })  
-
-
   
+Then('User verifies information details on Calendar page', async () => {
+  await browser.driver.sleep(1000);
+  Calendar.RacingKeys.getText().then(async(text)=>{
+  expect(text).to.be.equal("RACING KEYS\nMetro\nMetropolitan Full Stakes\nPFS\nProvincial Full Stakes\nTier 3\nProvincial Non-Penalty - Tier 3\nRLM\nRank Limit\nAPM\nAzed prizemoney Meeting (APM)\nHSM\nProvincial Half Stakes\nRacing\nNominated (NOM)\nOpen for nominations\nCoursing")
+ })
+ })
 
-
-
+Then('User verifies the details with filter {string}', async (filter) => {
+  await browser.driver.sleep(1000);  
+})
