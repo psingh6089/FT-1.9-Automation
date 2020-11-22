@@ -402,7 +402,7 @@ export class webUtils {
             }
         }
         else if (menu == "Account") {
-           // webUtils.SkipOverlay()
+           webUtils.SkipOverlay()
             webUtils.clickOn(Account.Account);
             webUtils.SkipOverlay()
             if (tab == "MyAccount") {

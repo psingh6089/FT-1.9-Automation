@@ -1,20 +1,20 @@
 Feature: User virifies the the Calender page
 
-    @testp
+    @test
     Scenario: Verify that user can view the 'Calendar' page
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Calendar' -> 'Nothing' tab and clicks 'Nothing' tab
         When user views the 'Calendar' details
         Then user is able to land on 'Calendar' Page
 
-    @testp
+    @test
     Scenario: Verify that user can view the 'Calendar' page
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Calendar' -> 'Filter' tab and clicks 'Nothing' tab
         When user views the 'Calendar' page with 'filter'
         Then User verifies the list of filters on 'Calendar' page and its detail
 
-    @testp
+    @test
     Scenario: Verify that user can view the 'Calendar' page filter by 'Metro'
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Calendar' -> 'Filter' tab and clicks 'Metro' tab
