@@ -8,6 +8,7 @@ export const MyDogs = {
     DogDetails: element(by.css('section.header')),
     DogName: element(by.css('h3.racing-name')),
     NoOfActiveDogs: element(by.xpath("//app-racing-page/section/header/h3[2]")),
+    DogList: element(by.css('app-dog-card-new')),
     NoOfNonActiveDogs: element(by.xpath("//app-retired-page/section/header/h3[2]")),
     NoDogText: element(by.xpath("//app-my-dogs/app-racing-page/p")),
     SelectedFilter: element(by.xpath("//app-my-dogs/app-racing-page/app-grouped-dog-list[1]/header/h3")),

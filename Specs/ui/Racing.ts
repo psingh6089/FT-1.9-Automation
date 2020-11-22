@@ -7,6 +7,7 @@ export const Racing = {
     DogDetailsClick: element(by.css('div.dog-card.ng-star-inserted')),
     Breeding: element(by.cssContainingText('a.mat-tab-label-active', ' Breeding & Litters ')),
     Racing: element(by.css('a.mat-tab-label-active')),
+    ActiveDogPage: element(by.xpath("//app-my-dogs/app-racing-page/section/header/h3[1]")),
     Dog1: element(by.css('div.dog-selection-card.ng-star-inserted')),
     DogAcceptBreeding: element(by.xpath('//app-dog-card[7]//app-dog-card-header[1]//div[1]//button[1]//span[1]//mat-icon[1]')),
     DogCheckTransferKey: element(by.xpath("//app-dog-card[3]/div[1]/div[2]/app-dog-card-tooltip[1]/h6[1]")),
@@ -45,7 +46,8 @@ export const Racing = {
     Back: element(by.cssContainingText('span.mat-button-wrapper', ' Back ')),
     Submit: element(by.cssContainingText('span.mat-button-wrapper', ' Submit ')),
     Cancel: element(by.cssContainingText('span.mat-button-wrapper', ' Cancel ')),
-    Continue: element(by.cssContainingText('span.mat-button-wrapper', ' Continue ')),
+    Continue: element(by.cssContainingText('span.mat-button-wrapper', 'Continue')),
+    Confirm: element(by.cssContainingText('span.mat-button-wrapper', ' Confirm ')),
     Confirmation: element(by.css('div.confirmation-heading')),
     Next: element(by.cssContainingText('span.mat-button-wrapper', ' Next ')),
     Save: element(by.cssContainingText('span.mat-button-wrapper', ' Save ')),
@@ -53,6 +55,8 @@ export const Racing = {
     SaveChanges: element(by.cssContainingText('span.mat-button-wrapper', ' Save Changes ')),
     Begin: element(by.cssContainingText('span.mat-button-wrapper', ' Begin ')),
     Yes: element(by.cssContainingText('span.mat-button-wrapper', ' Yes ')),
+    Ok: element(by.cssContainingText('span.mat-button-wrapper', ' OK ')),
+
 
     AcceptBreeding: element(by.cssContainingText('span.mat-button-wrapper', ' Accept breeding authority ')),
     AddAuthorityKey: element(by.id('mat-input-0')),
@@ -91,6 +95,7 @@ export const Racing = {
     DepartedDateSelection: element(by.xpath("//mat-month-view[1]/table[1]/tbody[1]/tr[4]/td[2]")),
     // Add:                   element(by.cssContainingText('button.form-submit-button', 'Add')),
     AddDam: element(by.cssContainingText('span.mat-button-wrapper', ' Add another dam ')),
+    ConfirmRegisterService: element(by.xpath("//app-register-a-service/div/div[2]/app-confirmation/div/p")),
 
     // Payment
     switchframe: element(by.xpath("//iframe[@id='payway-credit-card-iframe0']")),
@@ -99,7 +104,7 @@ export const Racing = {
     ExpMonth: element(by.css('.payway-month')),
     ExpYr: element(by.css('.payway-year')),
     SecCode: element(by.cssContainingText('label.payway-csc', 'Security Code')).element(by.css('.payway-csc')),
-    PayNow: element(by.css('.with-submit')),
+    PayNow: element(by.cssContainingText('span.mat-button-wrapper', ' Pay Now ')),
     ValidateAmount: element(by.xpath('//app-payment-invoice/div/table/tr/td[2]')),
     ValidatePayment: element(by.css('div.invoice-total-container')),
     //*[@id="payway-creditcard-form"]/div/fieldset/select[1]/option[2]

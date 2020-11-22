@@ -35,53 +35,21 @@ When('User navigates {string} and verifies {string}', async (string, string2) =>
   })
 })
 
-When('User clicks on {string} button', function (button) {
+When('User clicks on {string} button', async (button)=> {
   // w.confirmButton(button);
-  if (button == "cancel") {
-    browser.driver.sleep(2000).then(function () { })
-    Racing.Cancel.isPresent().then(function (boolean) {
-      if (boolean) {
-        Racing.Cancel.click().then(function () { })
-      } else {
-        browser.executeScript('window.scrollTo(0,5000)').then(async () => { });
-        Racing.Cancel.click().then(function () { })
-      }
-    })
+  browser.driver.sleep(2000).then(function () { })
+  switch (button) {
+    case 'cancel': await w.click(Racing.Cancel); break;
+    case 'submit': await w.click(Racing.Submit); break;
+    case 'continue': await w.click(Racing.Continue); break;
+    case 'confirm': await w.click(Racing.Confirm); break;
+    case 'back': await w.click(Racing.Back); break;
+    case 'save': await w.click(Racing.Save); break;
+    case 'yes': await w.click(Racing.Yes); break;
+    case 'ok': await w.click(Racing.Ok); break;
+    default: console.log("Wrong click")
   }
-  else if (button == "submit") {
-    browser.driver.sleep(2000).then(function () { })
-    Racing.Submit.isPresent().then(function (boolean) {
-      if (boolean) {
-        Racing.Submit.click().then(function () { })
-      } else {
-        browser.executeScript('window.scrollTo(0,5000)').then(async () => { });
-        Racing.Submit.click().then(function () { })
-      }
-    })
-  }
-  else if (button == "continue") {
-    browser.driver.sleep(5000).then(function () { })
-    //  w.clickOn(Racing.Continue)
-    //browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { })
-    Racing.Continue.click().then(function () { })
-  }
-  else if (button == "confirm") {
-    browser.wait(EC.elementToBeClickable(Racing.Confirmation), 5000).then(function () { })
-    Racing.Confirmation.click().then(function () { })
-  }
-  else if (button == "back") {
-    browser.wait(EC.elementToBeClickable(Racing.Back), 5000).then(function () { })
-    Racing.Back.click().then(function () { })
-  }
-  else if (button == "save") {
-    browser.wait(EC.elementToBeClickable(Racing.Back), 5000).then(function () { })
-    Racing.SaveChanges.click().then(function () { })
-  }
-  else if (button == "yes") {
-    browser.driver.sleep(2000).then(function () { })
-    Racing.Yes.click().then(function () { })
-  }
-});
+})
 
 When('Bitch details are entered and validated', async () => {
   browser.wait(EC.elementToBeClickable(Racing.Earbrand), 5000).then(function () { });
@@ -278,7 +246,7 @@ When('user enters the Authority Key and Ear brand details of dog for {string} an
 })
 
 When('user proceeds with the payment option', async () => {
-  await browser.driver.sleep(1000);
+  await browser.driver.sleep(5000);
   await browser.switchTo().frame(Racing.switchframe.getWebElement());
   Racing.NameOnCard.sendKeys(testData.data.NameOnCard);
   Racing.CardNo.sendKeys(testData.data.CardNo);
@@ -290,10 +258,12 @@ When('user proceeds with the payment option', async () => {
   Racing.ExpYr.sendKeys(testData.data.ExpYear);
   browser.wait(EC.elementToBeClickable(Racing.SecCode), 1000).then(function () { });
   Racing.SecCode.sendKeys(testData.data.SecCode);
-  // browser.wait(EC.elementToBeClickable(Racing.PayNow), 5000).then(function () { });
-  //await Racing.PayNow.click();  
-  //  browser.wait(EC.elementToBeClickable(Racing.Continue), 5000).then(function () { }); 
-  await Racing.Back.click();
+  browser.switchTo().defaultContent();
+ browser.wait(EC.elementToBeClickable(Racing.PayNow), 5000).then(function () { });
+ await Racing.PayNow.click();  
+ await browser.driver.sleep(5000);
+ browser.wait(EC.elementToBeClickable(Racing.Continue), 10000).then(function () { }); 
+  await Racing.Continue.click();
 })
 
 When('Click on the track to select the track', async () => {
@@ -908,6 +878,7 @@ When('user selects the dog and clicks agree to remove dog from kennel', async ()
 
 When('user views the {string} details', async (page) => {
   await browser.driver.sleep(1000);
+  await w.SkipOverlay()
   switch (page) {
     case 'Calendar': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'Calendar.png'); }); break;
     case 'Registration History': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'MemHistoryRegistration.png'); }); break;
@@ -923,12 +894,13 @@ When('user views the {string} details', async (page) => {
     case 'Activities': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'Activities.png'); }); break;
     case 'Calender & Meeting': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'CalenderMeeting.png'); }); break;
     case 'Important Announcements': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'ImportantAnnouncements.png'); }); break;
+    case 'Litters': browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'Litters.png'); }); break;
     default: console.log("wrong Page details")
   }
 })
 
 When('user views the overlay at {string} Page and clicks at {string}', async (page, action) => {
-  if (page == 'Home') {
+  if (page == 'Home') {  
     browser.wait(EC.elementToBeClickable(Home.GotIt), 10000).then(function () { })
     Home.Home1Menu.getText().then(function (text) {
       expect(text).to.equal('Manage Greyhound Activities\n1/5')
@@ -1161,12 +1133,12 @@ When('user views the {string} page and filters by {string}', async (page, filter
   }
   else if (page == 'My Dogs->Litters') {
     await w.clickOn(MyDogs.Litters)
-    await browser.driver.sleep(2000);
+    await browser.driver.sleep(5000);
     w.SkipOverlay()
     browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'Litter.png'); });
     await w.clickOn(MyDogs.FilterOnLitters);
     w.SkipOverlay()
-    await browser.driver.sleep(1000);
+    await browser.driver.sleep(5000);
     browser.executeScript('window.scrollTo(0,5000)').then(async () => { });
     switch (filter) {
       case 'All': await w.clickOn(MyDogs.FilterAll); break;
@@ -1188,6 +1160,7 @@ else if (page == 'Calendar') {
     case 'RLM': await w.filter(Calendar.FilterRLM, true); break;
     case 'HSM': await w.filter(Calendar.DogFilterHSM, true); break;
     case 'CS': await w.filter(Calendar.DogFilterCS, true); break;
+    default: console.log("Wrong filter")
   }
 }
 })
@@ -1222,19 +1195,29 @@ When('user clicks the {string} on Calendar Page', async (option) => {
     case 'i': await w.clickOn(Calendar.i); break;
   case 'Next Month': await w.clickOn(Calendar.Filter); break;
     case 'Previous Month': await w.clickOn(Calendar.Filter); break;
+    default: console.log("Wrong click")
    }
   })
 
   When('user views the {string} page with {string}', async (page, option) => {
     await browser.driver.sleep(1000);
-    if(option =='filter')
-    w.filter(Calendar.Filter, true)
-    else if(option == 'i')
-    await w.clickOn(Calendar.i)
-    browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'Calendar.png'); })
+    if(page=='Calendar'){
+      if(option =='filter')
+        w.filter(Calendar.Filter, true)
+      else if(option == 'i')
+       await w.clickOn(Calendar.i)
+       browser.takeScreenshot().then(function (png) { writeScreenShot(png, 'Calendar.png'); })
+    }
+    else if(page=='Litter'){
+      if(option =='filter')
+      w.SkipOverlay()
+      browser.wait(EC.elementToBeClickable(BreedingAndLitters.LitterFilter), 2000).then(function () { });
+       await w.clickOn(BreedingAndLitters.LitterFilter)
+    }
   })
 
   When('user views the {string} page and filters by {string} option', async (page, option) => {
+    if(page=='Calendar'){
     await browser.driver.sleep(1000);
     w.filter(Calendar.Filter, true)
     await w.clickOn(Calendar.FilterMetro)
@@ -1250,5 +1233,15 @@ When('user clicks the {string} on Calendar Page', async (option) => {
     case 'RLM': await w.filter(Calendar.FilterRLM, true); break;
     case 'HSM': await w.filter(Calendar.DogFilterHSM, true); break;
     case 'CS': await w.filter(Calendar.DogFilterCS, true);   await browser.driver.sleep(1000); break;
+    default: console.log("Wrong click")
   }
+}
+})
+
+When('user views the status for the {string} with litter registration as {string}', async (registration, status) => {
+  BreedingAndLitters.LitterServiceLodged.getText().then(function(text){
+    expect(text).to.be.equal('STUDMASTER\n9 weeks\nCompleted')})
+    if(registration == 'Earbrand' || 'Microchip' ){
+      browser.executeScript('window.scrollTo(0,500)').then(async () => { });
+    }
 })

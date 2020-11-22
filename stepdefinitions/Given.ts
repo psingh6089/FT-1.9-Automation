@@ -16,7 +16,7 @@ let EC = protractor.ExpectedConditions;
 
 Given('User navigates to the Home page of FT1.9 application', async () => {
   //await browser.waitForAngularEnabled(false)
-  browser.ignoreSynchronization = true
+  //browser.ignoreSynchronization = true
   await browser.get('https://test-ft19.devgrv.org.au/');
 });
 

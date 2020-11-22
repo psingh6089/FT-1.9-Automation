@@ -5,7 +5,7 @@ export const IWantTo = {
     IWantTo: element(by.cssContainingText('div.nav-item', ' I Want To')),
     BreedGreyhound: element(by.cssContainingText('div.level-one-title', 'BREED GREYHOUND')),
     ManageGreyhound: element(by.cssContainingText('div.level-one-title', 'MANAGE GREYHOUND')),
-   ApplyfroDogNAmes: element(by.cssContainingText('div.level-two-title', ' Apply for Dog Names ')),
+    ApplyfroDogNAmes: element(by.cssContainingText('div.level-two-title', ' Apply for Dog Names ')),
     NoticeOfIntent: element(by.cssContainingText('div.level-two-title', ' Notice of Intent to Euthanase ')),
     TransferManagement: element(by.cssContainingText('div.level-two-title', ' Transfer Ownership ')),
     TransferOwnership: element(by.cssContainingText('div.level-three-title', 'Transfer Ownership')),
@@ -36,7 +36,7 @@ export const IWantTo = {
     NOICheckbox1: element(by.cssContainingText('span.mat-checkbox-label', 'Confirm: Yes')),
     OptionACheckBox: element(by.cssContainingText('span.Textmat-radio-label-content', 'Confirm: Yes')),
 
-    BreedingService: element(by.cssContainingText('div.level-two-title', ' Breeding Service ')),
+    BreedingService: element(by.cssContainingText('div.level-two-title', ' Litter Management ')),
     RegisterAService: element(by.cssContainingText('div.level-three-title', 'Register A Service')),
 
     RetireGreyhound: element(by.cssContainingText('div.level-one-title', 'RETIRE GREYHOUND')),

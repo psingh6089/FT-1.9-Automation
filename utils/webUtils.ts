@@ -198,7 +198,7 @@ export class webUtils {
         if (menu == "My Dogs") {
             webUtils.SkipOverlay()
             webUtils.clickOn(Racing.MyDogs);
-            browser.driver.sleep(20000).then(function () { });
+           // browser.wait(EC.elementToBeClickable(MyDogs.DogList), 20000).then(function () { });
             webUtils.SkipOverlay()
             if (tab == "Non Racing") {
                 webUtils.clickOn(NonRacing.NonRacing);
@@ -220,6 +220,12 @@ export class webUtils {
                         webUtils.clickOn(Racing.GreyHoundRecord);
                     }
                 } */
+                if (tab == "Litters") {
+                    webUtils.clickOn(BreedingAndLitters.Litters);
+                    webUtils.SkipOverlay()
+                    browser.driver.sleep(50000).then(function () { });
+                    browser.wait(EC.elementToBeClickable(BreedingAndLitters.LitterView), 5000).then(function () { });
+                }
             else if (tab == "Dog Details") {
                 webUtils.clickOn(Racing.DogDetails);
                 browser.wait(EC.elementToBeClickable(DogDetails.GreyHoundRecord), 2000).then(function () { });
@@ -261,18 +267,6 @@ export class webUtils {
             }
             else if (tab == "Select Dog Action") {
                 webUtils.clickOn(Racing.Dog)
-                /*     Racing.DogAction.count().then(function(size){
-                         console.log(size)  Change Dog Activity
-                         for (var i = 0; i <= size; i++) {
-                             Racing.DogAction.get(i).click();
-                             Racing.SelectActions.count().then(function(size2){
-                              //   console.log(size2)  
-                             for (var j = 0; j < size2; j++) {                                                
-                               Racing.SelectActions.get(j).getText().then(function (text) {
-                         //          console.log(text)
-                                 if(text == " Change Dog Activity ")  {
-                                 Racing.SelectActions.get(j).click().then(function (){});}
-                                 else{}})}})}})*/
                 if (button == "Change Dog Activity") {
                     browser.executeScript('window.scrollTo(0,5000);').then(function () { });
                     webUtils.clickOn(DogLocation.SelectActionAsChangeDogLocation)
@@ -311,11 +305,7 @@ export class webUtils {
         }
         else if (menu == "I Want To") {
             browser.driver.sleep(1000).then(function () { });
-            Home.SkipOverlay.isPresent().then(function (result) {
-                if (result) {
-                    webUtils.clickOn(Home.SkipOverlay)
-                } else { }
-            });
+            webUtils.SkipOverlay()
             browser.wait(EC.elementToBeClickable(IWantTo.IWantTo), 5000).then(function () { });
             webUtils.clickOn(IWantTo.IWantTo);
             browser.driver.sleep(1000).then(function () { });
@@ -348,6 +338,7 @@ export class webUtils {
             }
             if (tab == "Breed GreyHound") {
                 webUtils.clickOn(IWantTo.BreedGreyhound);
+                browser.driver.sleep(2000).then(function () { });
                 if (button == "Issue Breeding Authority") {
                     webUtils.clickOn(IWantTo.TransferDogToBreeder);
                     browser.executeScript('window.scrollTo(200,800);').then(function () { })
@@ -364,8 +355,11 @@ export class webUtils {
                     webUtils.clickOn(IWantTo.BreedingService);
                     browser.wait(EC.elementToBeClickable(IWantTo.RegisterAService), 5000).then(function () { });
                     webUtils.clickOn(IWantTo.RegisterAService);
+                    browser.driver.sleep(5000).then(function () { });
+                    webUtils.SkipOverlay()
                     browser.wait(EC.elementToBeClickable(Racing.Dog1), 5000).then(function () { });
                     webUtils.clickOn(Racing.Dog1);
+                    webUtils.clickOn(Racing.Submit)
                 }
                 else if (button == "Whelping Results") {
                     browser.executeScript('window.scrollTo(120, 900);').then(function () { });
@@ -396,9 +390,7 @@ export class webUtils {
                     browser.executeScript('window.scrollTo(211,28);').then(function () { });
                     browser.wait(EC.elementToBeClickable(IWantTo.AcceptTransferOfOwnership), 5000).then(function () { });
                     webUtils.clickOn(IWantTo.AcceptTransferOfOwnership);
-
                 }
-
                 else if (button == "Notice of Intent Euthanase") {
                     browser.executeScript('window.scrollTo(600,600);').then(function () { });
                     webUtils.clickOn(IWantTo.NoticeOfIntent);
@@ -410,6 +402,7 @@ export class webUtils {
             }
         }
         else if (menu == "Account") {
+           // webUtils.SkipOverlay()
             webUtils.clickOn(Account.Account);
             webUtils.SkipOverlay()
             if (tab == "MyAccount") {
@@ -473,7 +466,6 @@ export class webUtils {
                 else if (button = 'Create a new syndicate')
                     webUtils.clickOn(Account.CreateSyndicate);
             }
-
             else if (tab == "Member History")
                 webUtils.clickOn(Account.MemberHistory);
         }
@@ -680,12 +672,35 @@ export class webUtils {
     }
 
     static
+    click(button: ElementFinder) {
+        return button.isPresent().then(function (boolean) {
+            if (boolean) {
+              webUtils.clickOn(button)
+            } else {
+              browser.executeScript('window.scrollTo(0,5000)').then(async () => { });
+              webUtils.clickOn(button)
+            }
+          })
+    }
+
+    static
     filter(filter: ElementFinder, bool: boolean) {
         return filter.isEnabled().then(async(status)=> {
             if (status == bool) {
                await filter.click();
             }
         });
+    }
+
+    static
+    litterStatus(text: string | ElementFinder, status) {
+        if(status=='Pending'){
+                expect(text).to.contain('Pending')
+        }
+      else if(status=='Completed'){
+        expect(text).to.contain('Completed')
+    }
+    else(console.log("No status provided"))
     }
 
     static

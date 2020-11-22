@@ -1,9 +1,8 @@
 import { by, element } from 'protractor';
 import { spawn } from 'child_process';
 export const BreedingAndLitters = {
-
     WhelpingResult: element(by.cssContainingText('div.level-three-title', 'Whelping Results')),
-    SelectParentDog: element(by.css('div.dog-details')),
+    SelectParentDog: element(by.xpath("//app-iwantto-litter-selection/div/div[2]")),
     ResultOfMating: element(by.css('button.mat-focus-indicator.mat-button.mat-button-base')),
     SelectResultAsWhelped: element(by.cssContainingText('div.mat-button-toggle-label-content', 'Whelped')),
     SelectResultAsMissed: element(by.cssContainingText('div.mat-button-toggle-label-content', 'Missed')),
@@ -20,8 +19,18 @@ export const BreedingAndLitters = {
     GetAllDogColors: element.all(by.css('mat-button-toggle')),
     SelectDog2Color: element(by.cssContainingText('span.name', 'Dun')),
     VetClinic: element(by.cssContainingText('span.mat-button-wrapper', 'Select Vet Clinic')),
-    SelectVetClinic: element(by.id('mat-button-toggle-80')),
-
-
+    SelectVetClinic: element(by.css('div.mat-button-toggle-label-content')),
+    Litters: element(by.cssContainingText('a', ' Litters ')),
+    LitterView: element(by.css('app-litters-page')),
+    LittersList: element.all(by.css('div.litter.ng-star-inserted')),
+    LitterFilter: element(by.cssContainingText('span.selected-value-button', 'Filter:')),
+    FilterList: element.all(by.css('mat-button-toggle')),
+    DrAbbie: element(by.cssContainingText('h6.dog-name', 'DR. ABBIE')),
+    LitterServiceLodged: element(by.xpath("//app-litters-page/div[5]/app-litter-progress/div[1]/div[1]")),
+    LitterWhelpingResult: element(by.xpath("//app-litters-page/div[1]/app-litter-progress/div[2]/div[1]")),
+    LitterVaccination: element(by.xpath("//app-litters-page/div[1]/app-litter-progress/div[3]/div[1]")),
+    LitterVaccinMicro: element(by.xpath("//app-litters-page/div[1]/app-litter-progress/div[4]/div[1]")),
+    LitterEarBrand: element(by.xpath("//app-litters-page/div[1]/app-litter-progress/div[4]/div[1]")),
+    LitterComplete:element(by.xpath("//app-litters-page/div[1]/app-litter-progress/div[4]/div[1]")),
 }
 

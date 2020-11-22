@@ -13,6 +13,8 @@ import { DogDetails } from "../Specs/ui/DogDetails";
 import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 import { MyDogs } from "../Specs/ui/MyDogs";
 import { Calendar } from "../Specs/ui/Calendar";
+import { BreedingAndLitters } from "../Specs/ui/BreedingAndLitters";
+import { isExportDeclaration } from "typescript";
 var expect = require('chai').expect;
 var chaiAsPromised = require("chai-as-promised");
 let EC = protractor.ExpectedConditions;
@@ -35,9 +37,10 @@ Then('user should be able to validate {string}', async (text) => {
   })
 });
 
-Then(/^Studmaster should be able to record a service/, async () => {
-  console.log("Register service is succesful");
-  // expect(text).to.equal("Confirmed")
+Then('User verifies the payment confirmation', async () => {
+Racing.ConfirmRegisterService.getText().then(function(text){
+expect(text).to.equal("Thank you, your service registration has been completed. An invoice will be emailed to your registered email address shortly.")
+})
 })
 
 Then('User is redirected to the list of racing dogs', async () => {
@@ -212,10 +215,11 @@ Then('user is able to land on {string} Page', async (landPage)=> {
       console.log(text)
     })).to.be.equal(landPage); 
    }*/
-  browser.driver.sleep(2000).then(function () { })
+  browser.driver.sleep(2000).then(function () { })  
+  w.SkipOverlay()
   switch(landPage){
     case 'My Account':  expect(Account.MyAccount.getText().then(async (text) => {console.log(text)})).to.be.equal(landPage); break;
-    case ' My Dogs->Racing ': expect(Racing.Racing.getText().then(async (text) => {console.log(text)})).to.be.equal(landPage); break;
+    case 'Active': Racing.ActiveDogPage.getText().then(async (text) => {expect(text).to.contain(landPage)}); break;
     case 'Home':  browser.driver.sleep(5000); Home.Home.getText().then(function (text) {expect(text).to.equal('home-line\nHome')}); break;
     case 'My Dogs ': browser.driver.sleep(5000); expect(Home.Racing.toString()).to.be.equal('[object Object]'); break;
     case 'Calendar': browser.driver.sleep(5000); var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -224,11 +228,8 @@ Then('user is able to land on {string} Page', async (landPage)=> {
     await browser.driver.sleep(1000);
     Calendar.PageHeading.getText().then(function (text) {expect(text).to.contain(monthName)});; break;
     case ' Dog Details ': browser.driver.sleep(5000); break;
-    case 'I Want To':    browser.driver.sleep(2000).then(function () { })
-    //  IWantTo.TitleCheck.getText().then(function (text) {
-    //   expect(text).to.equal('I WANT TO...')
-    //})
-     break;
+    case 'I Want To':    browser.driver.sleep(2000).then(function () { })//  IWantTo.TitleCheck.getText().then(function (text) {    //   expect(text).to.equal('I WANT TO...')    //})
+         break;
     default: console.log("undefined landing page")
   }
 })
@@ -316,7 +317,10 @@ Then('user should be able to validate the illness event added by him test', asyn
         })*/
 })
 
-Then('User verifies the record', async () => {
+Then('User verifies the {string} details', async (Page) => {
+BreedingAndLitters.LittersList.count().then(function(count){
+  console.log(count)
+})
 })
 
 Then('User navigates to {string}', async (tab) => {
@@ -410,7 +414,7 @@ Then('User verifies the no of {string} dogs displayed with filter {string}', asy
 })
 
 Then('User verifies the list of filters on {string} page and its detail', async (page) => {
-   await browser.driver.sleep(1000);
+   await browser.driver.sleep(2000);
   if (page == 'Active') {
     MyDogs.FilterNames.getSize().then(function (size) {
       expect(size).to.be.equal(12)
@@ -419,6 +423,12 @@ Then('User verifies the list of filters on {string} page and its detail', async 
   else if (page == 'Non Active') {
     MyDogs.FilterNames.getSize().then(function (size) {
       expect(size).to.be.equal(8)
+    })
+  }
+  if (page == 'Litter') {
+    BreedingAndLitters.FilterList.count().then(async function (count) {
+      expect(count).to.be.equal(3)
+      await browser.driver.sleep(1000);
     })
   }
   else if (page == 'Calendar') {
@@ -464,6 +474,42 @@ Then('User verifies information details on Calendar page', async () => {
  })
  })
 
-Then('User verifies the details with filter {string}', async (filter) => {
-  await browser.driver.sleep(1000);  
+Then('User verifies the {string} page details with filter {string}', async (page, filter) => {
+  await browser.driver.sleep(5000);  
+  var total: number;
+  if(page=='Litter'){
+    BreedingAndLitters.FilterList.count().then(function (count){ console.log(count);total=count;})
+  switch (filter) {    
+    case 'All':  BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.equal(total)}); break;
+    case 'Past Year': BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.lessThan(total)}); break;
+    case 'Past 5 Years': BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.lessThan(total)}); break;
+    case 'Cancel': await BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.lessThan(total)}); break;
+  }
+}
 })
+
+Then('User verifies the confirmation for result of Mating', function () {
+});
+
+Then('User verifies the status of the {string} is {string}', function (litter, status) {
+switch (litter) {
+  case 'litter registration': w.litterStatus(BreedingAndLitters.WhelpingResult, status); break;
+  case 'Vaccination': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
+  case 'Earbrand': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
+  case 'Microchip': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
+}
+});
+
+Then('User verifies the {string} page for {string} details', async (page, result) => {
+ if(page== 'Litter'){
+   if(result == 'whelped'){
+    await browser.executeScript('window.scrollTo(0,5000);')
+    browser.wait(EC.elementToBeClickable(BreedingAndLitters.SelectResultAsWhelped), 1000).then(function () { });
+    await BreedingAndLitters.SelectResultAsWhelped.click();
+    await browser.executeScript('window.scrollTo(0,5000);')
+    expect(await Racing.Next.getAttribute("disabled")).to.be.equal('true');
+    await BreedingAndLitters.SelectNoOfFemalePups.click();
+    await Racing.Next.click();
+   }
+ }
+  })

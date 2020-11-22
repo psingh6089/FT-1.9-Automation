@@ -1,7 +1,7 @@
 Feature: To validate the Apply To Participate for user
  
 
-@p
+@test
 Scenario: Apply to Participate as owner
 Given  A participant "Peter Walsh" logged in to FastTrack application
 And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
@@ -9,7 +9,7 @@ When user selects the role as 'owner'
 And    work bench user confirms the request in FT 1.0 
 Then   user should be able t12o see himself as owner
 
-@testp
+@test
 Scenario: Apply to Participate as Attendant
 Given  A participant "Peter Walsh" logged in to FastTrack application
 And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
