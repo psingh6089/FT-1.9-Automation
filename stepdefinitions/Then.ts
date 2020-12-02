@@ -14,11 +14,14 @@ import { RetireGreyhound } from "../Specs/ui/RetireGreyhound";
 import { MyDogs } from "../Specs/ui/MyDogs";
 import { Calendar } from "../Specs/ui/Calendar";
 import { BreedingAndLitters } from "../Specs/ui/BreedingAndLitters";
-import { isExportDeclaration } from "typescript";
+import { isExportDeclaration, validateLocaleAndSetLanguage } from "typescript";
+import { Menu } from "../Specs/ui/Menu";
 var expect = require('chai').expect;
 var chaiAsPromised = require("chai-as-promised");
 let EC = protractor.ExpectedConditions;
 var fs = require('fs');
+var GetTransferKey: any;
+var GetEarbrnd: any;
 function writeScreenShot(png, filename) {
   var stream = fs.createWriteStream(filename);
   stream.write(new Buffer(png, 'base64'));
@@ -27,20 +30,33 @@ function writeScreenShot(png, filename) {
 
 Then('user should be able to validate {string}', async (text) => {
   Home.IntroText.getText().then(function (text) {
-    expect(text).to.equal('MyFastTrack is an easy way to manage your greyhound business on the go. Specifically designed to be user friendly on mobile devices, MyFastTrack has all the features of FastTrack plus some special features only available through the MyFastTrack application.')
+    expect(text).to.equal('MyFastTrack is an easy way to manage your greyhound business on the go. Specifically designed to be user friendly on mobile devices, MyFastTrack has all the features of FastTrack.')
   })
   Home.IntroCol1.getText().then(function (text) {
-    expect(text).to.equal('- Account Management\n- Apply to Participate\n- Financial details\n- Notices\n- Racing Management\n- Nominations\n- Scratchings\n- Litter Management\n- Service Notification\n- Result of Mating')
-  })
-  Home.IntroCol2.getText().then(function (text) {
-    expect(text).to.equal('- Greyhound Management\n- Ownership\n- Training\n- Location changes\n- Greyhound Health Records\n- Illness, Injury, Health\n- Apply a treatment to multiple dogs')
+    expect(text).to.equal('- Racing Management\n- Greyhound Management\n- Litter Management\n- Greyhound Health Records\n- Account Management')
   })
 });
 
-Then('User verifies the payment confirmation', async () => {
-Racing.ConfirmRegisterService.getText().then(function(text){
-expect(text).to.equal("Thank you, your service registration has been completed. An invoice will be emailed to your registered email address shortly.")
-})
+Then('user should be able to validate the {string} event added', function (event) {
+if(event=='injury'){
+
+}
+if(event=='illness'){
+  
+}
+if(event=='Health'){
+  
+}
+});
+
+Then('User verifies the confirmation for {string}', async (activity) => {
+ switch(activity){
+case 'Register a service' : Racing.ConfirmRegisterService.getText().then(function(text){expect(text).to.equal("Thank you, your service registration has been completed. An invoice will be emailed to your registered email address shortly.")}); break;
+case 'Missed' : Racing.ConfirmRegisterService.getText().then(function(text){expect(text).to.contain("confirmed")}); break;
+case 'No Live Pups' : Racing.ConfirmRegisterService.getText().then(function(text){expect(text).to.contain("confirmed")}); break;
+case 'Whelped' : Racing.ConfirmRegisterService.getText().then(function(text){expect(text).to.contain("Thank you, your result of mating registration has been completed. An invoice will be emailed to your registered email address shortly.")}); break;
+default: console.log("undefined confirmation")
+}
 })
 
 Then('User is redirected to the list of racing dogs', async () => {
@@ -51,24 +67,48 @@ Then('User is redirected to the list of racing dogs', async () => {
 })
 
 Then('User should be able to confirm the transfer ownership of dog to another user', async () => {
-  await browser.driver.sleep(5000);
-  //await Racing.IAgree.click();
-  // await Racing.Submit.click();
+  await Racing.IAgree.click();
+  await Racing.Submit.click();
   await browser.driver.sleep(10000);
+Racing.TransferKeyConfirmPara1.getText().then(function(text){
+//expect(text).to.contain("The transfer of greyhound ownership has been initiated successfully. Please forward the transfer key and earbrand code to the new owner so they can complete the transfer.")
+})
+Racing.TransferKeyConfirmPara2.getText().then(function(text){
+ // expect(text).to.be.equal(" The new owner must complete the transfer within 14 days. The greyhound will remain in your ownership until the transfer is completed. ")
+  }) 
 })
 
 Then('User should be able to complete the transfer ownership of dog', async () => {
   // Write code here that turns the phrase above into concrete actions
-
 });
 
 Then('user copies the Key and dog earbrand details', async () => {
-  await Racing.Confirmation.getText().then(function (confirm) {
-    console.log(confirm);
-    // expect(confirm).to.equal(' ');
-    browser.driver.sleep(1000);
-  })
+    Racing.GetTransferKey.getText().then(function (key){
+    GetTransferKey=key
+    console.log(GetTransferKey)
+    })
+    Racing.GetTransferEarBrand.getText().then(function (earbrand){
+      GetEarbrnd=earbrand
+      console.log(GetEarbrnd)
+      })
+      browser.executeScript('window.scrollTo(221, 1000);').then(function () { });  
+      await Racing.Continue.click();
 })
+Then('user verifies the dog in {string} list with Transfer key', async (string) => {
+  await Home.MyDogs.click()
+  await MyDogs.NonActiveDogs.click()
+  await browser.driver.sleep(10000);
+  console.log(Racing.ValidateTransfer.getText().then(function (text){
+ return text}))
+Racing.ValidateTransfer.getText().then(function (text){
+//expect(text).to.contain(GetEarbrnd);
+expect(text).to.contain(GetTransferKey);
+})
+})
+
+Then('User should validate the transfer ownership and confirmation', async () => {
+
+  })
 
 Then('User should be navigated to the syndicate details page', async () => {
   await browser.driver.sleep(8000);
@@ -84,9 +124,9 @@ Then('User should be able to view the financial details, members and greyhounds 
   Account.DisplayAcoountName.getText().then(function (name) {
     console.log("Financial Details with Account name is:", name);
   })
-  Account.Members.getText().then(async (text) => {
-    console.log("Member details of Syndicate:", text);
-  });
+  //Account.Members.getText().then(async (text) => {
+    //console.log("Member details of Syndicate:", text);
+  //});
   /*Account.greyhounds.getText().then(async (text) => {
     console.log("Greyhounds detail of Syndicate", text);
   })*/
@@ -122,7 +162,6 @@ Then('user is able to receive proper communications for cancellation from GRV', 
 });
 
 Then('Breeding authority key should be generated and user clicks continue', async () => {
-
   var auth = 'Greyhound Racing Victoria Breeding authority submitted. Your breeding authority key is 5501606267, please record it for future use.'
   var key = auth.match(/\d+/)[0];
   console.log(key)
@@ -210,15 +249,11 @@ Then('user should get a popup for the payment confirmation', function () {
 
 
 Then('user is able to land on {string} Page', async (landPage)=> {
-  /* if(landPage=='Bank Details'){
-   expect(Account.BankDetails.getText().then(async(text)=>{
-      console.log(text)
-    })).to.be.equal(landPage); 
-   }*/
   browser.driver.sleep(2000).then(function () { })  
   w.SkipOverlay()
   switch(landPage){
     case 'My Account':  expect(Account.MyAccount.getText().then(async (text) => {console.log(text)})).to.be.equal(landPage); break;
+    case 'Bank Details': expect(Account.BankDetails.getText().then(async(text)=>{console.log(text)})).to.be.equal(landPage);  break;
     case 'Active': Racing.ActiveDogPage.getText().then(async (text) => {expect(text).to.contain(landPage)}); break;
     case 'Home':  browser.driver.sleep(5000); Home.Home.getText().then(function (text) {expect(text).to.equal('home-line\nHome')}); break;
     case 'My Dogs ': browser.driver.sleep(5000); expect(Home.Racing.toString()).to.be.equal('[object Object]'); break;
@@ -230,6 +265,7 @@ Then('user is able to land on {string} Page', async (landPage)=> {
     case ' Dog Details ': browser.driver.sleep(5000); break;
     case 'I Want To':    browser.driver.sleep(2000).then(function () { })//  IWantTo.TitleCheck.getText().then(function (text) {    //   expect(text).to.equal('I WANT TO...')    //})
          break;
+    case 'Breeding And Litter': expect(Racing.Breeding).to.equal('Breeding & Litters'); break
     default: console.log("undefined landing page")
   }
 })
@@ -271,7 +307,15 @@ Then('verify that member is addeed to the {string} list', function (string) {
 })
 
 
-Then('user should be able to see himself as owner', function (string) {
+Then('user should be able to see himself as {string}', async function (role) {
+  switch (role) {
+    case 'Owner':  expect(await Menu.Owner.getAttribute("class")).to.contain('mat-radio-checked'); break;
+    case 'Attendant': expect(await Menu.Attendant.getAttribute("class")).to.contain('mat-radio-checked'); break;
+    case 'Catcher': expect(await Menu.Catcher.getAttribute("class")).to.contain('mat-radio-checked'); break;
+    case 'Owner Trainer': expect(await Menu.OwnerTrainer.getAttribute("class")).to.contain('mat-radio-checked'); break;
+    case 'Public Trainer': expect(await Menu.PublicTrainer.getAttribute("class")).to.contain('mat-radio-checked'); break;
+    default: console.log("undefined Sorting")
+  }
 })
 
 Then('user should be able to validate the injury event added by him ', async () => {
@@ -318,20 +362,15 @@ Then('user should be able to validate the illness event added by him test', asyn
 })
 
 Then('User verifies the {string} details', async (Page) => {
-BreedingAndLitters.LittersList.count().then(function(count){
-  console.log(count)
-})
-})
-
-Then('User navigates to {string}', async (tab) => {
-  if (tab == 'Breeding And Litter') {
-    expect(Racing.Breeding).to.equal('Breeding & Litters')
+  switch (Page) {
+    case 'Litters': BreedingAndLitters.LittersList.count().then(function(count){expect(count).not.equal(0)}); break;
+    case 'Greyhound Record': COP.FilterList.count().then(function(count){expect(count).to.be.equal(4)}); break;
+    default: console.log("undefined Sorting")
   }
 })
 
 Then('user should be able to verify the dog details', async () => {
-  // expect(DogDetails.DogName.to.not.be.null)   
-
+  // expect(DogDetails.DogName.to.not.be.null) 
   await browser.driver.sleep(10000);
 })
 
@@ -349,7 +388,6 @@ Then('user is able to verify the dog on on {string} -> {string} Page', async (No
   await Home.NonRacing.click();
   await browser.driver.sleep(10000);
   console.log(w.DogEarbrand)
-
   /* RetireGreyhound.DogEarbrand.getText().then(function(DogList) {
      console.log("list is"+DogList) 
      expect(DogList).toContain(w.DogEarbrand);    
@@ -357,16 +395,6 @@ Then('user is able to verify the dog on on {string} -> {string} Page', async (No
 })
 
 Then('user is able to verify the dog on', async () => {
-})
-
-Then('user should be able to land on Home page', async () => {
-  await browser.driver.sleep(20000);
-  //browser.wait(EC.elementToBeClickable(Home.SkipOverlay), 30000).then(function () { })
-  w.SkipOverlay()
-  await browser.driver.sleep(2000);
-  Home.Home.getText().then(function (text) {
-    expect(text).to.equal('home-line\nHome')
-  });
 })
 
 Then('user should be able to land on {string} error', async (text) => {
@@ -389,6 +417,9 @@ Then('user should be able to see the {string} details', async (page) => {
     })
   }
   else if (page == 'Member history') { }
+  else if (page == 'Activities') { }
+  else if (page == 'Calender & Meeting') { }
+  else if (page == 'Important Announcements') { }
 });
 
 Then('User verifies the no of {string} dogs displayed with filter {string}', async (Dog, filter) => {
@@ -464,6 +495,7 @@ Then('User verifies the list displayed with filter {string}', async (filter) => 
     case 'RLM': w.verifyCalendarFilter(Calendar.FilterRLM); break;
     case 'HSM': w.verifyCalendarFilter(Calendar.DogFilterHSM); break;
     case 'CS': w.verifyCalendarFilter(Calendar.DogFilterCS); break;
+    default: console.log("undefined filter")
   }
   })
   
@@ -484,19 +516,27 @@ Then('User verifies the {string} page details with filter {string}', async (page
     case 'Past Year': BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.lessThan(total)}); break;
     case 'Past 5 Years': BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.lessThan(total)}); break;
     case 'Cancel': await BreedingAndLitters.FilterList.count().then(function (count) {expect(count).to.be.lessThan(total)}); break;
+    default: console.log("undefined Sorting")
+  }
+}
+else if(page=='Greyhound Record'){
+  BreedingAndLitters.FilterList.count().then(function (count){ console.log(count);total=count;})
+switch (filter) {    
+    case 'All': expect(COP.FilterAll.getAttribute("aria-pressed")).to.be.equal("true"); break;
+    case 'Health': expect(COP.FilterHealth.getAttribute("aria-pressed")).to.be.equal("true"); break;
+    case 'Illness':expect(COP.FilterIllness.getAttribute("aria-pressed")).to.be.equal("true"); break;
+    case 'Injury': expect(COP.FilterInjury.getAttribute("aria-pressed")).to.be.equal("true"); break;
   }
 }
 })
 
-Then('User verifies the confirmation for result of Mating', function () {
-});
-
 Then('User verifies the status of the {string} is {string}', function (litter, status) {
 switch (litter) {
-  case 'litter registration': w.litterStatus(BreedingAndLitters.WhelpingResult, status); break;
-  case 'Vaccination': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
-  case 'Earbrand': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
-  case 'Microchip': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
+  case 'litter registration': w.litterStatus(BreedingAndLitters.LitterServiceLodged, status); break;
+  case 'Vaccination': w.litterStatus(BreedingAndLitters.LitterVaccination, status); break;
+  case 'Earbrand': w.litterStatus(BreedingAndLitters.LitterEarBrand, status); break;
+  case 'Microchip': w.litterStatus(BreedingAndLitters.LitterVaccinMicro, status); break;
+  default: console.log("undefined Sorting")
 }
 });
 
@@ -511,5 +551,58 @@ Then('User verifies the {string} page for {string} details', async (page, result
     await BreedingAndLitters.SelectNoOfFemalePups.click();
     await Racing.Next.click();
    }
+   if(result == 'whelped'){
+    await browser.executeScript('window.scrollTo(0,5000);')
+   }
+   if(result == 'Missed'){
+    await browser.executeScript('window.scrollTo(0,5000);')
  }
+}
+ else if(page== 'Mandate'){
+  if(result == 'Missed'){expect(await Racing.Submit.getAttribute("disabled")).to.be.equal('true');}
+  else if(result == 'No Live Pups'){expect(await Racing.Submit.getAttribute("disabled")).to.be.equal('true');}
+  else if(result == 'Whelped'){
+    expect(BreedingAndLitters.WhelpedDate.getAttribute("aria-required ")).to.be.equal('true');
+    expect(BreedingAndLitters.EnterDog1Kennel.getAttribute("aria-required ")).to.be.equal('true');
+    expect(BreedingAndLitters.EnterDog2Kennel.getAttribute("aria-required ")).to.be.equal('true');
+    expect(await Racing.Submit.getAttribute("disabled")).to.be.equal('false');
+    expect(await Racing.Cancel.getAttribute("disabled")).to.be.equal('false');
+  }
+  else if(result == 'No'){expect(await Racing.Submit.getAttribute("disabled")).to.be.equal('true');}
+  else(console.log('no selection'))
+}
   })
+
+  Then('User verifies the details with filter {string}', function(filter) {
+    // Write code here that turns the phrase above into concrete actions    
+  });
+
+  Then('User verifies the payment confirmation for {string}', function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    return 'pending';
+  });
+
+  Then('User verifies the field validations on {string} for {string}', async function (Action, string) {
+    switch (Action) {    
+      case 'Issue Breeding Authority':
+        if(string=='Interstate'){expect(Racing.InputFirstName.getAttribute('aria-required')).to.be.equal('true')
+        expect(Racing.InputFirstName.getAttribute('aria-required')).to.be.equal('true')
+        expect(Racing.InputLastName.getAttribute('aria-required')).to.be.equal('true')
+        expect(Racing.Inputstreet.getAttribute('aria-required')).to.be.equal('true')
+        expect(Racing.InputSuburb.getAttribute('aria-required')).to.be.equal('true')
+        expect(Racing.InputState.getAttribute('aria-required')).to.be.equal('true')
+        expect(Racing.InputPostCode.getAttribute('aria-required')).to.be.equal('true')
+    }
+        else if(string=='Victorian'){await Racing.IAgree.click();
+          expect(Racing.InputFirstName.getAttribute('aria-required')).to.be.equal('true')
+          expect(Racing.InputLastName.getAttribute('aria-required')).to.be.equal('true')
+          expect(await Racing.Submit.getAttribute('class')).to.contain('disabled')}; break;
+      case 'Accept Breeding Authority':
+         expect(Racing.AddAuthorityKey.getAttribute('aria-required')).to.be.equal('true')
+         expect(Racing.Earbrand.getAttribute('aria-required')).to.be.equal('true')
+         await Racing.AddAuthorityKey.clear();
+         expect(Racing.Validate.getAttribute('class')).to.contain('disabled'); break;
+      case 'End Breeding Authority': ; break;
+      default: console.log("undefined Sorting")
+    }
+  });

@@ -13,7 +13,6 @@ export const Home = {
     LoginError: element(by.css('li.cc58a9ba3')),
     EmailError: element(by.css('ul.cf754da02')),
     BackToFT :  element(by.cssContainingText('a','Back to FastTrack')),
-    Logout: element(by.cssContainingText('span.mat-button-wrapper', ' Log Out ')),
     Home: element(by.cssContainingText('div.nav-item.landing', ' Home')),
     HomeSelected: element(by.cssContainingText('div.nav-item.landing.selected', ' Home')),
     HomeActivities: element(by.cssContainingText('h4.task-list-title', 'Activities')),

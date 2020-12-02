@@ -6,6 +6,7 @@ export const BreedingAndLitters = {
     ResultOfMating: element(by.css('button.mat-focus-indicator.mat-button.mat-button-base')),
     SelectResultAsWhelped: element(by.cssContainingText('div.mat-button-toggle-label-content', 'Whelped')),
     SelectResultAsMissed: element(by.cssContainingText('div.mat-button-toggle-label-content', 'Missed')),
+    Total: element(by.xpath("//app-result-of-mating-form/div[2]")),
     SelectResultAsNoLivePUps: element(by.cssContainingText('div.mat-button-toggle-label-content', 'No Live Pups')),
     SelectNoOfFemalePups: element(by.cssContainingText('div.mat-button-toggle-label-content', '1')),
     SelectNoOfMalePups: element(by.xpath("//button[@id='mat-button-toggle-343-button']//div[@class='mat-button-toggle-label-content'][contains(text(),'1')]")),

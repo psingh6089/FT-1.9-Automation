@@ -2,9 +2,14 @@ import { by, element } from 'protractor';
 import { spawn } from 'child_process';
 export const COP = {
     ViewHealthRecord: element(by.cssContainingText('span.mat-button-wrapper', 'View health record ')),
-    Illness: element(by.cssContainingText('a', ' Illness ')),
-    Injury: element(by.cssContainingText('a', ' Injury ')),
-    Health: element(by.cssContainingText('a', ' Health ')),
+    FilterList: element.all(by.css('mat-button-toggle')),
+    FilterAll: element(by.id('mat-button-toggle-1')),
+    FilterHealth: element(by.id('mat-button-toggle-2')),
+    FilterIllness: element(by.id('mat-button-toggle-3')),
+    FilterInjury: element(by.id('mat-button-toggle-3')),
+    AddIllness: element(by.cssContainingText('span.mat-button-wrapper', ' Add Illness ')),
+    AddInjury: element(by.cssContainingText('span.mat-button-wrapper', ' Add Injury ')),
+    AddHealth: element(by.cssContainingText('span.mat-button-wrapper', ' Add Health ')),
     PrintRecord: element(by.cssContainingText('span.mat-button-wrapper', '  ')),
     AddInjuryEvent: element(by.cssContainingText('span.mat-button-wrapper', ' Add Injury Event ')),
     TrackOrNonTrack: element(by.id('mat-select-0')),

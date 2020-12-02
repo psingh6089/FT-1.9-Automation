@@ -1,0 +1,18 @@
+{
+    "window.menuBarVisibility": "default",
+    "editor.renderWhitespace": "all",
+    "git.autofetch": true,
+    "window.zoomLevel": 0,
+    
+    "cucumberautocomplete.steps": [
+        "./stepdefinitions/*.ts",
+    ],
+    "cucumberautocomplete.syncfeatures": "../features/*.feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    
+    "launch": {
+
+        "configurations": [],
+        "compounds": []
+    }
+}

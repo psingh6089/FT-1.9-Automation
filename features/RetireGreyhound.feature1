@@ -64,34 +64,34 @@ Scenario: QA-367 Verify that the dog can retire as Euthanised at Animal Crematio
 Given  A participant "Glenn Campbell" logged in to FastTrack application
 And    user navigates to 'I Want To' -> 'Retire Greyhound' tab and clicks 'Retire as a Pet' tab
 When   user selects retirement status as 'Euthanised' -> 'Animal Cremation' and clicks 'submit'
-Then   user is able to verify the dog on 
+Then   user is able to verify the dog on on ' Non Racing ' -> 'History' Page
 
 @test
 Scenario: QA-368 Verify that the dog can retire as Euthanised Other
 Given  A participant "Glenn Campbell" logged in to FastTrack application
 And    user navigates to 'I Want To' -> 'Retire Greyhound' tab and clicks 'Retire as a Pet' tab
 When   user selects retirement status as 'Euthanised' -> 'other' and clicks 'submit'
-Then   user is able to verify the dog on 
+Then   user is able to verify the dog on on ' Non Racing ' -> 'History' Page
 
 @test
 Scenario: QA-369 Verify that the dog can retire as Exported
 Given  A participant "Glenn Campbell" logged in to FastTrack application
 And    user navigates to 'I Want To' -> 'Retire Greyhound' tab and clicks 'Retire as a Pet' tab
 When   user selects retirement status as 'Exported' -> 'nothing' and clicks 'submit'
-Then  user is able to verify the dog on 
+Then  user is able to verify the dog on on ' Non Racing ' -> 'History' Page
 
 @test
 Scenario: QA-370 Verify that the dog can retire as Other
 Given  A participant "Glenn Campbell" logged in to FastTrack application
 And    user navigates to 'I Want To' -> 'Retire Greyhound' tab and clicks 'Retire as a Pet' tab
 When   user selects retirement status as 'Other' -> 'nothing' and clicks 'submit'
-Then   user is able to verify the dog on 
+Then   user is able to verify the dog on on ' Non Racing ' -> 'History' Page
 
 @testp
 Scenario: QA-371 Verify that only named dog can able to retire as Breeding Animal
 Given  A participant "Glenn Campbell" logged in to FastTrack application
 And    user navigates to 'I Want To' -> 'Retire Greyhound' tab and clicks 'Retire as a Pet' tab
 When   user selects retirement status as 'Euthanised' -> 'other' and clicks 'submit'
-Then   user is able to land on ' Bank Details ' Page
+Then   user is able to verify the dog on on ' Non Racing ' -> 'History' Page
 
 

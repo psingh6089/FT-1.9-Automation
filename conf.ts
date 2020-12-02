@@ -14,23 +14,14 @@ export let config: Config = {
       await browser.waitForAngularEnabled(false); 
   },
      specs:  ['../features/*.feature'], 
-    cucumberOpts: {
-          // require step definitions
-         
+     
+    cucumberOpts: {   
           tags:"@test",
           format: 'json:./cucumberreport.json',
         require: [
-                   './stepDefinitions/*.js',
+                   './stepdefinitions/*.js',
                  ]    
                   },
- /*capabilities: {
-        'browserName': 'firefox',
-        'moz:firefoxOptions': {
-            'mobileEmulation': {
-                'deviceName': 'iPhone X'
-            }
-        }
-    }*/
      capabilities: {
         'browserName': 'chrome',
         'chromeOptions': {
@@ -43,7 +34,7 @@ export let config: Config = {
         var options = {
             theme: 'bootstrap',
             jsonFile: './cucumberreport.json',
-            output: './cucumber_report.html',
+            output: './Automation_Ft1.9_report.html',
             reportSuiteAsScenarios: true,
             launchReport: true,
             metadata: {

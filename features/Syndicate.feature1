@@ -18,7 +18,7 @@ Feature: FT2-679 Owner can view a syndicate
         Then user should be able to see the added member with Incomplete status
      
 
-    @test
+    @testp
     Scenario: FT2-545 As a manager I want to remove new manager for syndicate members
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Account' -> 'Syndicates' tab and clicks 'View Details' tab
@@ -27,7 +27,7 @@ Feature: FT2-679 Owner can view a syndicate
         And User clicks on 'submit' button
         Then verify that removed memeber status is 'REMOVE (PENDING)'
 
-     @test
+     @testp
     Scenario: FT2-545 As a manager I want to change alternative manager for syndicate members
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Account' -> 'Syndicates' tab and clicks 'View Details' tab
@@ -37,7 +37,7 @@ Feature: FT2-679 Owner can view a syndicate
         Then verify that member is addeed to the 'alternate manager' list
 
 
-   @test
+   @testp
     Scenario: FT2-696	Owner can edit a syndicate's financial details
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Account' -> 'Syndicates' tab and clicks 'View Details' tab
@@ -47,7 +47,7 @@ Feature: FT2-679 Owner can view a syndicate
         Then User should be navigated to the confirmation page
      
 
-    @test
+    @testp
     Scenario:  FT2-678	Owner can view syndicate list
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Account' -> 'Syndicates' tab and clicks 'View Details' tab
@@ -55,7 +55,7 @@ Feature: FT2-679 Owner can view a syndicate
         Then  User should be navigated to the syndicate details page
 
         
-    @test
+    @testp
     Scenario: FT2-695 Owner can create a syndicate
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'Account' -> 'Syndicates' tab and clicks 'Create a new syndicate' tab

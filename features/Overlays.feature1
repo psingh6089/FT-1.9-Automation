@@ -1,6 +1,6 @@
 Feature: Login to the FT1.9 application and verify the overlays
 
-@test
+@testp
 Scenario: Verify Overlay at 'Home' Page
 Given  A participant "William Mcmahon" logged in to FastTrack application
 When   user views the overlay at 'Home' Page and clicks at 'Got it'
@@ -12,7 +12,7 @@ Given  A participant "William Mcmahon" logged in to FastTrack application
 When   user views the overlay at 'My Dogs' Page and clicks at 'Got it'
 Then    user is able to land on ' My Dogs ' Page
 
-@test
+@testp
 Scenario: Verify Overlay at 'My Dogs' -> 'Dog Details' Page
 Given  A participant "William Mcmahon" logged in to FastTrack application
 When   user views the overlay at 'Dog Details' Page and clicks at 'Got it'
@@ -24,7 +24,7 @@ Given  A participant "William Mcmahon" logged in to FastTrack application
 When   user views the overlay at 'I Want To' Page and clicks at 'Got it'
 Then    user is able to land on 'I Want To' Page
 
-@test
+@testp
 Scenario: Verify Overlay at 'Calendar' Page
 Given  A participant "William Mcmahon" logged in to FastTrack application
 When   user views the overlay at 'Calendar' Page and clicks at 'Got it'

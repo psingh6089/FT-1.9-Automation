@@ -6,37 +6,37 @@ Feature: Participants login credentials to the FT1.9
     When  user clicks 'continue' button to login
     Then  user should be able to land on Home page
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with correct memberid and wrong password
     Given A participant logs in with 'correct memberid' and 'wrong password'
     When  user clicks 'continue' button to login
     Then  user should be able to land on 'login' error
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with wrong memberid and correct password
     Given A participant logs in with 'wrong memberid' and 'correct password'
     When  user clicks 'continue' button to login
     Then  user should be able to land on 'login' error
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with wrong memberid and wrong password
     Given A participant logs in with 'wrong memberid' and 'wrong password'
     When  user clicks 'continue' button to login
     Then  user should be able to land on 'login' error
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with correct email and wrong password
     Given A participant logs in with 'correct email' and 'wrong password'
     When  user clicks 'continue' button to login
     Then  user should be able to land on 'login' error
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with wrong email and correct password
     Given A participant logs in with 'wrong email' and 'correct password'
     When  user clicks 'continue' button to login
     Then  user should be able to land on 'login' error
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with wrong email and wrong password
     Given A participant logs in with 'wrong email' and 'wrong password'
     When  user clicks 'continue' button to login
@@ -54,13 +54,13 @@ Feature: Participants login credentials to the FT1.9
     When  user clicks 'continue' button to login
     Then  user should be able to login successfully to FT1.9
 
-    @test
+    @testp
     Scenario: Verify if the participant can login with correct email and password
     Given A participant logs in with 'correct email' and 'correct password'
     When  user clicks 'continue' button to login
     Then   user should be able to land on Home page
 
-    @test
+    @testp
     Scenario: Verify if the inactive participant cannot login 
     Given A participant "Glenn Campbell" logged in to FastTrack application
     When  User logs in as User

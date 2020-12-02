@@ -1,35 +1,39 @@
 Feature: FT2-590 Breeding Registration - An owner can initiate breeding lease and FT2-590 Breeding Registration - An owner can accept breeding lease
-    @test
-    Scenario: QA-103 Verify if the owner can initiate issue breeding authority to a Interstate resident
-        Given  A participant "William Mcmahon" logged in to FastTrack application
+  
+      @test
+    Scenario: Verify cancel button for 'Issue Breeding Authority' for Victorian
+        Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab
         When user fills and submits the Interstate Authority to Breed form
         And User clicks on 'continue' button
-        And User is redirected to Breeding Authority Confirmation page with Send via Email or Continue buttons
-        Then Breeding authority key should be generated and user clicks continue
-        And  User is redirected to the list of racing dogs
-
-
+        Then user is able to land on 'My Dogs ' Page
+        
     @test
+    Scenario: Verify cancel button for 'Issue Breeding Authority' for Interstate
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        When user clicks on 'Victoria' Transfer tab and enter the Name details of the new person to be authorised
+        And User clicks on 'continue' button
+        Then user is able to land on 'My Dogs ' Page 
+  
+    @test
+    Scenario: QA-103 Verify if the owner can initiate issue breeding authority to a Interstate resident
+        Given A participant "William Mcmahon" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab
+        When user fills and submits the Interstate Authority to Breed form
+        And User clicks on 'continue' button
+        Then Breeding authority key should be generated and user clicks continue
+        And  user should be able to view the Dog with breeding key in the list of My dogs
+
+    @testp
     Scenario: QA-104 Verify if the owner can initiate the breeding lease to a Victorian resident
         Given  A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab
         When user clicks on 'Victoria' Transfer tab and enter the Name details of the new person to be authorised
         And User clicks on 'continue' button
-        And User is redirected to Breeding Authority Confirmation page with Send via Email or Continue buttons
         Then Breeding authority key should be generated and user clicks continue
-        And  User is redirected to the list of racing dogs
+        And  user should be able to view the Dog with breeding key in the list of My dogs
 
-
-    @test
-    Scenario: QA-73- Verify if the owner can accept breeding lease
-        Given  A participant "Paul Westerveld" logged in to FastTrack application
-        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Accept Breeding Authority' tab
-        When user enters the Authority Key and Ear brand details of dog for 'Breeding Authority'
-        And user proceeds with the payment option
-        Then user should be navigated to the confirmation page 
-        
-    @test
+    @testp
     Scenario: QA-84-Verify functionality of Cancel button in Accept breeding authority page
         Given  A participant "Paul Westerveld" logged in to FastTrack application
         And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Accept Breeding Authority' tab
@@ -37,76 +41,62 @@ Feature: FT2-590 Breeding Registration - An owner can initiate breeding lease an
         And User clicks on 'cancel' button
         Then User is redirected to the list of racing dogs
 
-
-    @test
+    @testp
+    Scenario: QA-73- Verify if the owner can accept breeding lease
+        Given  A participant "Paul Westerveld" logged in to FastTrack application
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Accept Breeding Authority' tab
+        When user enters the Authority Key and Ear brand details of dog for 'Breeding Authority'
+        And user proceeds with the payment option
+        Then user should be navigated to the confirmation page 
+        
+    @testp
     Scenario: QA-109 Verify the functionality of Cancel button in End Breeding Authority
         Given A participant "William Mcmahon" logged in to FastTrack application
          And user navigates to 'My Dogs' -> 'Dog to Accept Breeding' tab and clicks 'End Breeding Authority' tab
         When  User clicks on 'cancel' button
         Then User is redirected to the list of racing dogs
 
-
-    @test
+    @testp
     Scenario: QA-108 Verify if the owner/breeder can end a breeding lease
         Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to Accept Breeding' tab and clicks 'End Breeding Authority' tab
+        And user navigates to 'My Dogs' -> 'Dog to End Breeding' tab and clicks 'End Breeding Authority' tab
         When User clicks on 'submit' button
         Then User is redirected to the list of racing dogs
 
-    @test
+    @testp
     Scenario: FT2-789	Participant can view an active breeding authority key or transfer key on their dogs
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
         Then User verifies the Breeding Key for the dog
-
    
-    @pending
-    Scenario:  Verify Payment for the 'Accept breeding authority'
-        Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog
-
-        
     @pending
     Scenario: Verify the field validations on 'Issue Breeding Authority' for Victorian
         Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog
-
+        And  user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab 
+        When user clicks on 'Victoria' Transfer tab and enter the Name details of the new person to be authorised
+        Then User verifies the field validations on 'Issue Breeding Authority' for 'Victorian'
         
     @pending
     Scenario: Verify the field validations on 'Issue Breeding Authority' for Interstate
         Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog
-
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Issue Breeding Authority' tab
+        When user fills and submits the Interstate Authority to Breed form
+        Then User verifies the field validations on 'Issue Breeding Authority' for 'Interstate'
         
     @pending
     Scenario: Verify the field validations on 'Accept Breeding Authority' for Victorian
         Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog
-
+        And user navigates to 'I Want To' -> 'Breed GreyHound' tab and clicks 'Accept Breeding Authority' tab
+         When user enters the Authority Key and Ear brand details of dog for 'Breeding Authority'
+        Then User verifies the field validations on 'Accept Breeding Authority' for 'Breeding Authority'
         
     @pending
     Scenario: Verify the field validations on 'End Breeding Authority' for Victorian
         Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog
-
+        And user navigates to 'My Dogs' -> 'Dog to End Breeding' tab and clicks 'End Breeding Authority' tab
+         Then User verifies the field validations on 'End Breeding Authority' for 'Breeding Authority'
         
-    @pending
-    Scenario: Verify cancel button for 'Issue Breeding Authority' for Victorian
-        Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog
 
-        
-    @pending
-    Scenario: Verify cancel button for 'Issue Breeding Authority' for Interstate
-        Given A participant "William Mcmahon" logged in to FastTrack application
-        And user navigates to 'My Dogs' -> 'Dog to check active authority key' tab and clicks 'nothing' tab
-        Then User verifies the Breeding Key for the dog 
 
 
 

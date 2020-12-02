@@ -29,7 +29,7 @@ export const Account = {
     SyndicateName: element(by.css('div.syndicate-name')),
     //AccountName:element(by.xpath('//.*[.="Account Name"]')),
     DisplayAcoountName: element(by.cssContainingText('div.label', 'Account Name')).element(by.xpath('following-sibling::div')),
-    Members: element(by.css('app-syndicate-member-view-card[1]')),
+    Members: element(by.css('div.member-card-row')),
     greyhounds: element(by.css('syndicate-dog-cardng-star-inserted[1]')),
     UpdateAccountDetails: element(by.xpath('.//*[.="Update Account Details"]')),
 

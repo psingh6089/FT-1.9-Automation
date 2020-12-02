@@ -1,27 +1,27 @@
 Feature: User virifies the Active, Non Active and Litters Page for the My Dog
 
-    @testp
+    @test
     Scenario: My Dogs - Verify that user can view the 'My Dog'-> Active page
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
         When user views the 'My Dogs->Active' page and filters by 'Reset'
         Then User verifies the no of 'Active' dogs displayed with filter 'Reset'
 
-    @testp
+    @test
     Scenario: My Dogs - User verifies the list of filters on 'Active' Dog page and its detail
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
         When user views the 'My Dogs->Active' page and filters by 'All'
         Then User verifies the list of filters on 'Active' page and its detail
 
-    @testp
+    @test
     Scenario: My Dogs - Verify that user can do filter by 'Racing' on Active Dogs Page
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab
         When user views the 'My Dogs->Active' page and filters by 'Racing'
         Then User verifies the no of 'Active' dogs displayed with filter 'Racing'
 
-    @testp
+    @test
     Scenario: My Dogs - Verify that user can do filter by 'Nominated' on Active Dogs Page
         Given A participant "William Mcmahon" logged in to FastTrack application
         And user navigates to 'My Dogs' -> 'Nothing' tab and clicks 'Nothing' tab

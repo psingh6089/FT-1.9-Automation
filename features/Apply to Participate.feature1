@@ -1,68 +1,68 @@
 Feature: To validate the Apply To Participate for user
- 
 
-@test
-Scenario: Apply to Participate as owner
-Given  A participant "Peter Walsh" logged in to FastTrack application
-And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
-When user selects the role as 'owner' 
-And    work bench user confirms the request in FT 1.0 
-Then   user should be able t12o see himself as owner
 
-@test
-Scenario: Apply to Participate as Attendant
-Given  A participant "Peter Walsh" logged in to FastTrack application
-And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
-When user selects the role as 'Attendant' 
-And user accepts the declarations on the Term Page
-And  User clicks on 'continue' button
-And user enters the Contact details on Contact Page
-And User clicks on 'continue' button
-And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
-And User clicks on 'continue' button
-And  user proceeds with the payment option
-Then user should be able to see himself as owner
+    @test
+    Scenario: Apply to Participate as owner
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
+        When user selects the role as 'owner'
+        And  work bench user confirms the request in FT 1.0
+        Then user should be able to see himself as 'Owner'
 
-@testp
-Scenario: Apply to Participate as Catcher
-Given  A participant "Peter Walsh" logged in to FastTrack application
-And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
-When user selects the role as 'Catcher' 
-And user accepts the declarations on the Term Page
-And  User clicks on 'continue' button
-And user enters the Contact details on Contact Page
-And User clicks on 'continue' button
-And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
-And User clicks on 'continue' button
-And  user proceeds with the payment option
-Then user should be able to see himself as owner
+    @test
+    Scenario: Apply to Participate as Attendant
+        Given  A participant "Peter Walsh" logged in to FastTrack application
+        And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
+        When user selects the role as 'Attendant'
+        And user accepts the declarations on the Term Page
+        And User clicks on 'continue' button
+        And user enters the Contact details on Contact Page
+        And User clicks on 'continue' button
+        And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
+        And User clicks on 'continue' button
+        And user proceeds with the payment option
+        Then user should be able to see himself as 'Attendant'
 
-@test
-Scenario: Apply to Participate as owner Trainer
-Given  A participant "Peter Walsh" logged in to FastTrack application
-And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
-When user selects the role as 'Owner Trainer' 
-And user accepts the declarations on the Term Page
-And  User clicks on 'continue' button
-And user enters the Contact details on Contact Page
-And User clicks on 'continue' button
-And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
-And User clicks on 'continue' button
-And  user proceeds with the payment option
-Then user should be able to see himself as owner
+    @testp
+    Scenario: Apply to Participate as Catcher
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
+        When user selects the role as 'Catcher'
+        And user accepts the declarations on the Term Page
+        And User clicks on 'continue' button
+        And user enters the Contact details on Contact Page
+        And User clicks on 'continue' button
+        And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
+        And User clicks on 'continue' button
+        And user proceeds with the payment option
+        Then user should be able to see himself as 'Catcher'
 
-@test
-Scenario: Apply to Participate as Public Trainer
-Given  A participant "Peter Walsh" logged in to FastTrack application
-And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
-When user selects the role as 'Public Trainer' 
-And user accepts the declarations on the Term Page
-And  User clicks on 'continue' button
-And user enters the Contact details on Contact Page
-And User clicks on 'continue' button
-And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
-And User clicks on 'continue' button
-And  user proceeds with the payment option
-Then user should be able to see himself as owner
+    @test
+    Scenario: Apply to Participate as owner Trainer
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
+        When user selects the role as 'Owner Trainer'
+        And user accepts the declarations on the Term Page
+        And User clicks on 'continue' button
+        And user enters the Contact details on Contact Page
+        And User clicks on 'continue' button
+        And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
+        And User clicks on 'continue' button
+        And user proceeds with the payment option
+        Then user should be able to see himself as 'Owner Trainer'
+
+    @test
+    Scenario: Apply to Participate as Public Trainer
+        Given A participant "Peter Walsh" logged in to FastTrack application
+        And  user navigates to 'Account' -> 'Setting' tab and clicks 'Apply To Participate' tab
+        When user selects the role as 'Public Trainer'
+        And user accepts the declarations on the Term Page
+        And User clicks on 'continue' button
+        And user enters the Contact details on Contact Page
+        And User clicks on 'continue' button
+        And user enters the Questions for Criminal History, Racing, Spouse or Domestic partner and National Police Check on Question Page
+        And User clicks on 'continue' button
+        And user proceeds with the payment option
+        Then user should be able to see himself as 'Public Trainer'
 
 

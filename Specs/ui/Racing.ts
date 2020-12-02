@@ -3,7 +3,7 @@ import { spawn } from 'child_process';
 export const Racing = {
     MyDogs: element(by.cssContainingText('div.nav-item', ' My Dogs')),
     Calendar: element(by.cssContainingText('div.nav-item.calendar', ' Calendar')),
-    DogDetails: element(by.xpath("//app-dog-card-header[@class='dog-card-header']")),
+    DogDetails: element(by.css('div.dog-card')),
     DogDetailsClick: element(by.css('div.dog-card.ng-star-inserted')),
     Breeding: element(by.cssContainingText('a.mat-tab-label-active', ' Breeding & Litters ')),
     Racing: element(by.css('a.mat-tab-label-active')),
@@ -56,6 +56,7 @@ export const Racing = {
     Begin: element(by.cssContainingText('span.mat-button-wrapper', ' Begin ')),
     Yes: element(by.cssContainingText('span.mat-button-wrapper', ' Yes ')),
     Ok: element(by.cssContainingText('span.mat-button-wrapper', ' OK ')),
+    done: element(by.cssContainingText('span.mat-button-wrapper', 'done')),
 
 
     AcceptBreeding: element(by.cssContainingText('span.mat-button-wrapper', ' Accept breeding authority ')),
@@ -64,6 +65,7 @@ export const Racing = {
     validateError: element(by.css('div.validation.issue.ng-star-inserted')),
     SelfOwnership: element(by.cssContainingText('div.mat-radio-label-content', ' Self Ownership ')),
     SyndicateOwnership: element(by.cssContainingText('div.mat-radio-label-content', ' Self Ownership ')),
+    SelectedDogEarbrand: element(by.xpath("//app-dog-card-main-section[1]/div[1]/app-dog-ear-brand[1]")),
 
     AcceptTransferOwnership: element(by.cssContainingText('span.mat-button-wrapper', ' Accept breeding authority ')),
     // AcceptOwnership: element(by.xpath('//button[2]')),
@@ -73,6 +75,11 @@ export const Racing = {
     LastName: element(by.id('mat-input-2')),
     PhoneNo: element(by.id('mat-input-3')),
     PhoneError: element(by.css('mat-error.mat-error.ng-star-inserted')),
+    GetTransferKey: element(by.xpath("//mat-dialog-content/dl/dd[1]")),
+    GetTransferEarBrand: element(by.xpath("//mat-dialog-content/dl/dd[2]")),
+    TransferKeyConfirmPara1: element(by.xpath("//mat-dialog-content[1]/p[1]")),
+    TransferKeyConfirmPara2: element(by.xpath("//mat-dialog-content[1]/p[2]")),
+    ValidateTransfer:element(by.xpath("app-dog-card-raw/div[2]/section[2]/app-dog-card-section[2]")),
 
     // Confirm:          element(by.id('mat-checkbox-2')),
     //Register service
